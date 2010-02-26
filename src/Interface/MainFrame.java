@@ -4,13 +4,22 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 import java.io.*;
+import java.util.StringTokenizer;
 
 public class MainFrame extends javax.swing.JFrame {
+
+    //объявляем глобальные переменные
+    File optionFile;            //файл с настройками (путь)
+    String baseSource = null;   //путь  до базы
+    String baseUser = null;     //имя пользователя базы
+    String basePass = null;     //пароль пользователя базы
+    String ftpSource = null;   //путь до ftp
+    String ftpUser = null;     //имя пользователя ftp
+    String ftpPass = null;     //пароль пользователя ftp
 
     public MainFrame() {
         initComponents();
         checkingOptionFile();
-        loadOptions();
     }
 
     @SuppressWarnings("unchecked")
@@ -208,7 +217,7 @@ public class MainFrame extends javax.swing.JFrame {
                             .addGroup(jPanelOptionsLayout.createSequentialGroup()
                                 .addComponent(jTextFieldBaseUser, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldBasePass, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextFieldBasePass, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))
                             .addComponent(jTextFieldBaseSource, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -327,6 +336,7 @@ public class MainFrame extends javax.swing.JFrame {
         Apply();
 }//GEN-LAST:event_jButtonApplyActionPerformed
 
+    @SuppressWarnings("static-access")
     private void jButtonSelectOptionFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelectOptionFileActionPerformed
         // открыть диалог выбора файла; если файл выбран - присваиваем его имя в поле
         JFileChooser jFileChooserOptionFile = new JFileChooser();
@@ -405,25 +415,66 @@ public class MainFrame extends javax.swing.JFrame {
         File dir;
         dir = new File(userDir);
         if (!dir.exists()) {
-            jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nКаталог настроек не найден и будет создан.");
+            jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nКаталог настроек не найден и будет создан...");
             dir.mkdirs();
+        } else {
+            jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nКаталог настроек найден...");
         }
+
         //проверяем, есть ли файл настроек
         userDir = userDir + System.getProperty("file.separator") + "AvtoURIB.ini";
-        File optionFile;
+        //File optionFile;
         optionFile = new File(userDir);
         //если нет файла, то создаем
         if (!optionFile.exists()) {
             try {
-                jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nФайл настроек не найден и будет создан.");
+                jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nФайл настроек не найден и будет создан...");
                 optionFile.createNewFile();
             } catch (IOException ex) {
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } else {
+            jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nФайл настроек найден...");
+            loadOptions();
         }
     }
 
     private void loadOptions() {
-        //загружаем файл настроек
+        BufferedReader inoptionfile;
+        try {
+            inoptionfile = new BufferedReader(new InputStreamReader(new FileInputStream(optionFile)));
+            while (inoptionfile.ready()) {
+                String stroka = inoptionfile.readLine();
+                StringTokenizer st = new StringTokenizer(stroka, ";");
+                jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nЧитаю файл настроек...");
+                int tokencounter = 1;
+                while (st.hasMoreTokens()) {
+                    //System.out.println(st.nextToken());
+                    switch (tokencounter) {
+                        case 1:
+                            jTextFieldBaseSource.setText(st.nextToken());
+                            break;
+                        case 2:
+                            jTextFieldBaseUser.setText(st.nextToken());
+                            break;
+                        case 3:
+                            jTextFieldBasePass.setText(st.nextToken());
+                            break;
+                        case 4:
+                            jTextFieldFTPSource.setText(st.nextToken());
+                            break;
+                        case 5:
+                            jTextFieldFTPUser.setText(st.nextToken());
+                            break;
+                        case 6:
+                            jTextFieldFTPPass.setText(st.nextToken());
+                            break;
+                    }
+                    tokencounter++;
+                }
+            }
+        } catch (IOException e) {
+        }
+
     }
 }
