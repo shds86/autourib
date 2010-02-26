@@ -2,7 +2,6 @@ package Interface;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.*;
 import java.io.*;
 import java.util.StringTokenizer;
 
@@ -47,15 +46,15 @@ public class MainFrame extends javax.swing.JFrame {
         jTextFieldBaseUser = new javax.swing.JTextField();
         jTextFieldBaseSource = new javax.swing.JTextField();
         jButtonApply = new javax.swing.JButton();
-        jButtonSelectOptionFile = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
-        jTextFieldOptionFile = new javax.swing.JTextField();
         jLabelBaseUserAndPass = new javax.swing.JLabel();
         jLabelBaseSource = new javax.swing.JLabel();
-        jLabelOptionFile = new javax.swing.JLabel();
         jTextFieldFTPPass = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jButtonSelBaseSource = new javax.swing.JButton();
         jTextFieldBasePass = new javax.swing.JTextField();
+        jLabelPlatformSource = new javax.swing.JLabel();
+        jButtonSelPlatformSource = new javax.swing.JButton();
+        jTextFieldPlatformSource = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuFileExit = new javax.swing.JMenuItem();
@@ -93,11 +92,13 @@ public class MainFrame extends javax.swing.JFrame {
         jButtonRunOutfile.setText("Отправить файл");
 
         jTextAreaWorkLog.setColumns(1);
+        jTextAreaWorkLog.setEditable(false);
         jTextAreaWorkLog.setRows(1);
         jTextAreaWorkLog.setText("Рабочий лог...");
         jScrollPane1.setViewportView(jTextAreaWorkLog);
 
         jTextAreaSystemLog.setColumns(1);
+        jTextAreaSystemLog.setEditable(false);
         jTextAreaSystemLog.setRows(1);
         jTextAreaSystemLog.setText("Системный лог...");
         jScrollPane2.setViewportView(jTextAreaSystemLog);
@@ -106,7 +107,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanelMain.setLayout(jPanelMainLayout);
         jPanelMainLayout.setHorizontalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 589, Short.MAX_VALUE)
+            .addGap(0, 600, Short.MAX_VALUE)
             .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanelMainLayout.createSequentialGroup()
                     .addContainerGap()
@@ -123,7 +124,7 @@ public class MainFrame extends javax.swing.JFrame {
                             .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
                                 .addComponent(jScrollPane1))))
-                    .addContainerGap(30, Short.MAX_VALUE)))
+                    .addContainerGap(41, Short.MAX_VALUE)))
         );
         jPanelMainLayout.setVerticalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,13 +164,6 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jButtonSelectOptionFile.setText("...");
-        jButtonSelectOptionFile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSelectOptionFileActionPerformed(evt);
-            }
-        });
-
         jButtonCancel.setText("Отмена");
         jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,15 +175,17 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabelBaseSource.setText("Путь до базы");
 
-        jLabelOptionFile.setText("Файл настроек");
+        jButtonSelBaseSource.setText("...");
 
-        jButton1.setText("...");
+        jLabelPlatformSource.setText("Путь до папки 1С");
+
+        jButtonSelPlatformSource.setText("...");
 
         javax.swing.GroupLayout jPanelOptionsLayout = new javax.swing.GroupLayout(jPanelOptions);
         jPanelOptions.setLayout(jPanelOptionsLayout);
         jPanelOptionsLayout.setHorizontalGroup(
             jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelOptionsLayout.createSequentialGroup()
+            .addGroup(jPanelOptionsLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelOptionsLayout.createSequentialGroup()
@@ -200,44 +196,44 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addComponent(jButtonApply)
                                 .addGap(43, 43, 43)
                                 .addComponent(jButtonCancel))
-                            .addGroup(jPanelOptionsLayout.createSequentialGroup()
-                                .addComponent(jTextFieldFTPUser, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldFTPPass, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelOptionsLayout.createSequentialGroup()
+                                .addComponent(jTextFieldFTPUser, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextFieldFTPPass, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelOptionsLayout.createSequentialGroup()
                         .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelBaseUserAndPass)
                             .addComponent(jLabelBaseSource)
                             .addComponent(jLabelFTPSource)
-                            .addComponent(jLabelOptionFile))
+                            .addComponent(jLabelPlatformSource))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldOptionFile, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
-                            .addComponent(jTextFieldFTPSource, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
-                            .addGroup(jPanelOptionsLayout.createSequentialGroup()
-                                .addComponent(jTextFieldBaseUser, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldBasePass, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))
-                            .addComponent(jTextFieldBaseSource, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE))))
-                .addGap(18, 18, 18)
+                            .addComponent(jTextFieldPlatformSource, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                            .addComponent(jTextFieldFTPSource, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelOptionsLayout.createSequentialGroup()
+                                .addComponent(jTextFieldBaseUser, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextFieldBasePass, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldBaseSource, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE))))
+                .addGap(23, 23, 23)
                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonSelectOptionFile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonSelBaseSource, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonSelPlatformSource, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
         );
         jPanelOptionsLayout.setVerticalGroup(
             jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelOptionsLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(26, 26, 26)
                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldOptionFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelOptionFile)
-                    .addComponent(jButtonSelectOptionFile))
-                .addGap(27, 27, 27)
+                    .addComponent(jTextFieldPlatformSource, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonSelPlatformSource)
+                    .addComponent(jLabelPlatformSource))
+                .addGap(32, 32, 32)
                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelBaseSource)
                     .addComponent(jTextFieldBaseSource, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jButtonSelBaseSource))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelBaseUserAndPass)
@@ -257,7 +253,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonApply)
                     .addComponent(jButtonCancel))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Настройки", jPanelOptions);
@@ -302,7 +298,7 @@ public class MainFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -336,38 +332,20 @@ public class MainFrame extends javax.swing.JFrame {
         Apply();
 }//GEN-LAST:event_jButtonApplyActionPerformed
 
-    @SuppressWarnings("static-access")
-    private void jButtonSelectOptionFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelectOptionFileActionPerformed
-        // открыть диалог выбора файла; если файл выбран - присваиваем его имя в поле
-        JFileChooser jFileChooserOptionFile = new JFileChooser();
-        int result = jFileChooserOptionFile.showOpenDialog(null);
-        if (result == jFileChooserOptionFile.APPROVE_OPTION) {
-            jTextFieldOptionFile.setText(jFileChooserOptionFile.getSelectedFile().getAbsolutePath());
-            //далее проверить файл настроек на правильность
-            //далее прочитать файл настроек и выставить его содержимое в нужные поля
-            //...
-        }
-}//GEN-LAST:event_jButtonSelectOptionFileActionPerformed
-
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         dispose();
 }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void Apply() {
-        //проверяем, выбран ли файл
-        if (jTextFieldOptionFile.getText().equals("")) {
-            System.out.println("Файл не выбран!");
-        } else {
-            System.out.println(jTextFieldOptionFile.getText());
-        }
         //выгружаем в файл настроек и записываем его
+        jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nЗаписываю настройки в файл...");
+        saveOptions();
     }
 
     public static void main(String args[]) {
         new MainFrame().setVisible(true);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonApply;
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonRunAll;
@@ -375,13 +353,14 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonRunInfile;
     private javax.swing.JButton jButtonRunOutfile;
     private javax.swing.JButton jButtonRunUpload;
-    private javax.swing.JButton jButtonSelectOptionFile;
+    private javax.swing.JButton jButtonSelBaseSource;
+    private javax.swing.JButton jButtonSelPlatformSource;
     private javax.swing.JDialog jDialogYesNo;
     private javax.swing.JLabel jLabelBaseSource;
     private javax.swing.JLabel jLabelBaseUserAndPass;
     private javax.swing.JLabel jLabelFTPSource;
     private javax.swing.JLabel jLabelFTPUserAndPass;
-    private javax.swing.JLabel jLabelOptionFile;
+    private javax.swing.JLabel jLabelPlatformSource;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenuItem jMenuFileExit;
@@ -402,10 +381,14 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldFTPPass;
     private javax.swing.JTextField jTextFieldFTPSource;
     private javax.swing.JTextField jTextFieldFTPUser;
-    private javax.swing.JTextField jTextFieldOptionFile;
+    private javax.swing.JTextField jTextFieldPlatformSource;
     // End of variables declaration//GEN-END:variables
 
     private void checkingOptionFile() {
+        //очищаем информационные поля
+        jTextAreaSystemLog.setText("");
+        jTextAreaWorkLog.setText("");
+
         //получаем папку пользователя
         String userDir = new String();
         userDir = System.getProperty("user.dir");
@@ -415,15 +398,14 @@ public class MainFrame extends javax.swing.JFrame {
         File dir;
         dir = new File(userDir);
         if (!dir.exists()) {
-            jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nКаталог настроек не найден и будет создан...");
+            jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "Каталог настроек не найден и будет создан...");
             dir.mkdirs();
         } else {
-            jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nКаталог настроек найден...");
+            jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "Каталог настроек найден...");
         }
 
         //проверяем, есть ли файл настроек
         userDir = userDir + System.getProperty("file.separator") + "AvtoURIB.ini";
-        //File optionFile;
         optionFile = new File(userDir);
         //если нет файла, то создаем
         if (!optionFile.exists()) {
@@ -446,27 +428,33 @@ public class MainFrame extends javax.swing.JFrame {
             while (inoptionfile.ready()) {
                 String stroka = inoptionfile.readLine();
                 StringTokenizer st = new StringTokenizer(stroka, ";");
+                if(st.countTokens() < 7) {
+                    jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nНеверный файл настроек!..");
+                    break;
+                }
                 jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nЧитаю файл настроек...");
                 int tokencounter = 1;
                 while (st.hasMoreTokens()) {
-                    //System.out.println(st.nextToken());
                     switch (tokencounter) {
                         case 1:
-                            jTextFieldBaseSource.setText(st.nextToken());
+                            jTextFieldPlatformSource.setText(st.nextToken());
                             break;
                         case 2:
-                            jTextFieldBaseUser.setText(st.nextToken());
+                            jTextFieldBaseSource.setText(st.nextToken());
                             break;
                         case 3:
-                            jTextFieldBasePass.setText(st.nextToken());
+                            jTextFieldBaseUser.setText(st.nextToken());
                             break;
                         case 4:
-                            jTextFieldFTPSource.setText(st.nextToken());
+                            jTextFieldBasePass.setText(st.nextToken());
                             break;
                         case 5:
-                            jTextFieldFTPUser.setText(st.nextToken());
+                            jTextFieldFTPSource.setText(st.nextToken());
                             break;
                         case 6:
+                            jTextFieldFTPUser.setText(st.nextToken());
+                            break;
+                        case 7:
                             jTextFieldFTPPass.setText(st.nextToken());
                             break;
                     }
@@ -476,5 +464,22 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (IOException e) {
         }
 
+    }
+
+    private void saveOptions() {
+        //записываем настройки в файл
+        BufferedWriter outoptionfile;
+        try{
+            outoptionfile = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(optionFile)));
+            //формируем строку для записи
+            String optionString = jTextFieldPlatformSource.getText() + " " +
+                    jTextFieldBaseSource.getText() + ";" + jTextFieldBaseUser.getText() +
+                    ";" + jTextFieldBasePass.getText() + ";" + jTextFieldFTPSource.getText() + ";" +
+                    jTextFieldFTPUser.getText() + ";" + jTextFieldFTPPass.getText();
+            System.out.println(optionString);
+            outoptionfile.write(optionString);
+            outoptionfile.close();
+        } catch (IOException e) {
+        }
     }
 }

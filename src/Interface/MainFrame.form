@@ -85,7 +85,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" pref="594" max="32767" attributes="0"/>
+              <Component id="jTabbedPane1" pref="605" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -117,7 +117,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="589" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="600" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -138,7 +138,7 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="30" max="32767" attributes="0"/>
+                          <EmptySpace pref="41" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -215,6 +215,7 @@
                 <Component class="javax.swing.JTextArea" name="jTextAreaWorkLog">
                   <Properties>
                     <Property name="columns" type="int" value="1"/>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="rows" type="int" value="1"/>
                     <Property name="text" type="java.lang.String" value="&#x420;&#x430;&#x431;&#x43e;&#x447;&#x438;&#x439; &#x43b;&#x43e;&#x433;..."/>
                   </Properties>
@@ -231,6 +232,7 @@
                 <Component class="javax.swing.JTextArea" name="jTextAreaSystemLog">
                   <Properties>
                     <Property name="columns" type="int" value="1"/>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="rows" type="int" value="1"/>
                     <Property name="text" type="java.lang.String" value="&#x421;&#x438;&#x441;&#x442;&#x435;&#x43c;&#x43d;&#x44b;&#x439; &#x43b;&#x43e;&#x433;..."/>
                   </Properties>
@@ -251,7 +253,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
@@ -263,10 +265,10 @@
                                       <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                                       <Component id="jButtonCancel" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="1">
-                                      <Component id="jTextFieldFTPUser" min="-2" pref="87" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jTextFieldFTPPass" pref="251" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="jTextFieldFTPUser" pref="158" max="32767" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jTextFieldFTPPass" min="-2" pref="174" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -275,25 +277,25 @@
                                   <Component id="jLabelBaseUserAndPass" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabelBaseSource" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabelFTPSource" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabelOptionFile" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelPlatformSource" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextFieldOptionFile" alignment="0" pref="344" max="32767" attributes="0"/>
-                                  <Component id="jTextFieldFTPSource" alignment="0" pref="344" max="32767" attributes="1"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jTextFieldBaseUser" min="-2" pref="88" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jTextFieldBasePass" pref="250" max="32767" attributes="0"/>
+                                  <Component id="jTextFieldPlatformSource" alignment="0" pref="350" max="32767" attributes="1"/>
+                                  <Component id="jTextFieldFTPSource" alignment="0" pref="350" max="32767" attributes="1"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="jTextFieldBaseUser" pref="159" max="32767" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jTextFieldBasePass" min="-2" pref="173" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jTextFieldBaseSource" alignment="0" pref="344" max="32767" attributes="1"/>
+                                  <Component id="jTextFieldBaseSource" alignment="0" pref="350" max="32767" attributes="1"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jButton1" alignment="1" min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="jButtonSelectOptionFile" alignment="1" min="-2" pref="36" max="-2" attributes="0"/>
+                          <Component id="jButtonSelBaseSource" alignment="1" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="jButtonSelPlatformSource" alignment="1" min="-2" pref="37" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
@@ -302,17 +304,17 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextFieldOptionFile" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelOptionFile" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButtonSelectOptionFile" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldPlatformSource" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonSelPlatformSource" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelPlatformSource" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabelBaseSource" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextFieldBaseSource" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonSelBaseSource" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -338,7 +340,7 @@
                           <Component id="jButtonApply" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButtonCancel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="56" max="32767" attributes="0"/>
+                      <EmptySpace pref="65" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -370,14 +372,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonApplyActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButtonSelectOptionFile">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="..."/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSelectOptionFileActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JButton" name="jButtonCancel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x41e;&#x442;&#x43c;&#x435;&#x43d;&#x430;"/>
@@ -385,8 +379,6 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCancelActionPerformed"/>
               </Events>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldOptionFile">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelBaseUserAndPass">
               <Properties>
@@ -398,19 +390,26 @@
                 <Property name="text" type="java.lang.String" value="&#x41f;&#x443;&#x442;&#x44c; &#x434;&#x43e; &#x431;&#x430;&#x437;&#x44b;"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabelOptionFile">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="&#x424;&#x430;&#x439;&#x43b; &#x43d;&#x430;&#x441;&#x442;&#x440;&#x43e;&#x435;&#x43a;"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldFTPPass">
             </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="jButtonSelBaseSource">
               <Properties>
                 <Property name="text" type="java.lang.String" value="..."/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldBasePass">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabelPlatformSource">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x41f;&#x443;&#x442;&#x44c; &#x434;&#x43e; &#x43f;&#x430;&#x43f;&#x43a;&#x438; 1&#x421;"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonSelPlatformSource">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="..."/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextFieldPlatformSource">
             </Component>
           </SubComponents>
         </Container>
