@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Container class="javax.swing.JDialog" name="jDialogYesNo">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+    </Container>
+    <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
+      <SubComponents>
+        <Menu class="javax.swing.JMenu" name="jMenuFile">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#x424;&#x430;&#x439;&#x43b;"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuFileExit">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x412;&#x44b;&#x445;&#x43e;&#x434;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuFileExitActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenuQuestion">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="?"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuQuestionHelp">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x41f;&#x43e;&#x43c;&#x43e;&#x449;&#x44c;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuQuestionHelpActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuQustionAbout">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x41e; &#x43f;&#x440;&#x43e;&#x433;&#x440;&#x430;&#x43c;&#x43c;&#x435;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuQustionAboutActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+      </SubComponents>
+    </Menu>
+  </NonVisualComponents>
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="title" type="java.lang.String" value="&#x41a;&#x43b;&#x438;&#x435;&#x43d;&#x442; URBD1Slib"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jTabbedPane1" pref="594" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jTabbedPane1" pref="363" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="jPanelMain">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="&#x413;&#x43b;&#x430;&#x432;&#x43d;&#x430;&#x44f;">
+                <Property name="tabTitle" type="java.lang.String" value="&#x413;&#x43b;&#x430;&#x432;&#x43d;&#x430;&#x44f;"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="589" max="32767" attributes="0"/>
+                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jSeparator1" alignment="0" min="-2" pref="549" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="1">
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="jButtonRunInfile" alignment="0" max="32767" attributes="1"/>
+                                      <Component id="jButtonRunDownload" alignment="0" max="32767" attributes="1"/>
+                                      <Component id="jButtonRunUpload" alignment="0" max="32767" attributes="1"/>
+                                      <Component id="jButtonRunOutfile" alignment="0" max="32767" attributes="1"/>
+                                      <Component id="jButtonRunAll" alignment="0" min="-2" max="-2" attributes="1"/>
+                                  </Group>
+                                  <EmptySpace min="50" pref="50" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jScrollPane2" pref="378" max="32767" attributes="0"/>
+                                      <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <EmptySpace pref="30" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="338" max="32767" attributes="0"/>
+                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jButtonRunAll" min="-2" max="-2" attributes="0"/>
+                              <Component id="jScrollPane2" min="-2" pref="59" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="jButtonRunInfile" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                                  <Component id="jButtonRunDownload" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                                  <Component id="jButtonRunUpload" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                                  <Component id="jButtonRunOutfile" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jScrollPane1" pref="231" max="32767" attributes="1"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JButton" name="jButtonRunAll">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x417;&#x430;&#x43f;&#x443;&#x441;&#x442;&#x438;&#x442;&#x44c; &#x43e;&#x431;&#x43c;&#x435;&#x43d;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRunAllActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonRunInfile">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x41f;&#x440;&#x438;&#x43d;&#x44f;&#x442;&#x44c; &#x444;&#x430;&#x439;&#x43b;"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonRunDownload">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x417;&#x430;&#x433;&#x440;&#x443;&#x437;&#x438;&#x442;&#x44c; &#x444;&#x430;&#x439;&#x43b;"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonRunUpload">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x412;&#x44b;&#x433;&#x440;&#x443;&#x437;&#x438;&#x442;&#x44c; &#x444;&#x430;&#x439;&#x43b;"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonRunOutfile">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x41e;&#x442;&#x43f;&#x440;&#x430;&#x432;&#x438;&#x442;&#x44c; &#x444;&#x430;&#x439;&#x43b;"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JSeparator" name="jSeparator1">
+            </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="jTextAreaWorkLog">
+                  <Properties>
+                    <Property name="columns" type="int" value="1"/>
+                    <Property name="rows" type="int" value="1"/>
+                    <Property name="text" type="java.lang.String" value="&#x420;&#x430;&#x431;&#x43e;&#x447;&#x438;&#x439; &#x43b;&#x43e;&#x433;..."/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="jTextAreaSystemLog">
+                  <Properties>
+                    <Property name="columns" type="int" value="1"/>
+                    <Property name="rows" type="int" value="1"/>
+                    <Property name="text" type="java.lang.String" value="&#x421;&#x438;&#x441;&#x442;&#x435;&#x43c;&#x43d;&#x44b;&#x439; &#x43b;&#x43e;&#x433;..."/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanelOptions">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="&#x41d;&#x430;&#x441;&#x442;&#x440;&#x43e;&#x439;&#x43a;&#x438;">
+                <Property name="tabTitle" type="java.lang.String" value="&#x41d;&#x430;&#x441;&#x442;&#x440;&#x43e;&#x439;&#x43a;&#x438;"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabelFTPUserAndPass" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jButtonApply" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                                      <Component id="jButtonCancel" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="1">
+                                      <Component id="jTextFieldFTPUser" min="-2" pref="87" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jTextFieldFTPPass" pref="251" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabelBaseUserAndPass" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelBaseSource" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelFTPSource" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelOptionFile" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jTextFieldOptionFile" alignment="0" pref="344" max="32767" attributes="0"/>
+                                  <Component id="jTextFieldFTPSource" alignment="0" pref="344" max="32767" attributes="1"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jTextFieldBaseUser" min="-2" pref="88" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jTextFieldBasePass" min="-2" pref="88" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jTextFieldBaseSource" alignment="0" pref="344" max="32767" attributes="1"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jButton1" alignment="1" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="jButtonSelectOptionFile" alignment="1" min="-2" pref="36" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jTextFieldOptionFile" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelOptionFile" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonSelectOptionFile" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabelBaseSource" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldBaseSource" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabelBaseUserAndPass" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldBaseUser" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldBasePass" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabelFTPSource" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldFTPSource" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jLabelFTPUserAndPass" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                              <Component id="jTextFieldFTPUser" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTextFieldFTPPass" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jButtonApply" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonCancel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="56" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JTextField" name="jTextFieldFTPUser">
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextFieldFTPSource">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabelFTPUserAndPass">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x418;&#x43c;&#x44f; &#x43f;&#x43e;&#x43b;&#x44c;&#x437;&#x43e;&#x432;&#x430;&#x442;&#x435;&#x43b;&#x44f; &#x438; &#x43f;&#x430;&#x440;&#x43e;&#x43b;&#x44c;"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabelFTPSource">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x41f;&#x443;&#x442;&#x44c; &#x434;&#x43e; ftp"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextFieldBaseUser">
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextFieldBaseSource">
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonApply">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x41f;&#x440;&#x438;&#x43c;&#x435;&#x43d;&#x438;&#x442;&#x44c;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonApplyActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonSelectOptionFile">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="..."/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSelectOptionFileActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonCancel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x41e;&#x442;&#x43c;&#x435;&#x43d;&#x430;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCancelActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextFieldOptionFile">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabelBaseUserAndPass">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x418;&#x43c;&#x44f; &#x43f;&#x43e;&#x43b;&#x44c;&#x437;&#x43e;&#x432;&#x430;&#x442;&#x435;&#x43b;&#x44f; &#x438; &#x43f;&#x430;&#x440;&#x43e;&#x43b;&#x44c;"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabelBaseSource">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x41f;&#x443;&#x442;&#x44c; &#x434;&#x43e; &#x431;&#x430;&#x437;&#x44b;"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabelOptionFile">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x424;&#x430;&#x439;&#x43b; &#x43d;&#x430;&#x441;&#x442;&#x440;&#x43e;&#x435;&#x43a;"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextFieldFTPPass">
+            </Component>
+            <Component class="javax.swing.JButton" name="jButton1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="..."/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextFieldBasePass">
+            </Component>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>
