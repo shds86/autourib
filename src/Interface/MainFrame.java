@@ -4,7 +4,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.io.*;
 import java.sql.Time;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.StringTokenizer;
+import java.util.TimeZone;
 
 public class MainFrame extends javax.swing.JFrame {
 
@@ -20,6 +24,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         checkingOptionFile();
+        getDateAndTime();
     }
 
     @SuppressWarnings("unchecked")
@@ -454,5 +459,19 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (IOException e) {
         }
         jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nНастройки записаны...");
+    }
+
+    private void getDateAndTime() {
+        Date date = new Date(System.currentTimeMillis());
+        String customerDate = (1900 + date.getYear()) + "-" +
+                (1 + date.getMonth()) + "-" + date.getDate() +
+                " " + date.getHours() + ":" + date.getMinutes() +
+                ":" + date.getSeconds();
+//        return customerDate;
+//        jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\n" + customerDate);
+//        Calendar calend = Calendar.getInstance(Locale.getDefault()) ;
+//        customerDate = calend.YEAR + "-" + calend.MONTH + "-" + calend.DATE + " " +
+//                calend.HOUR_OF_DAY + ":" + calend.MINUTE + ":" + calend.SECOND;
+//        jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\n" + customerDate);
     }
 }
