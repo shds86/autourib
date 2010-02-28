@@ -3,12 +3,8 @@ package Interface;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.io.*;
-import java.sql.Time;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 import java.util.StringTokenizer;
-import java.util.TimeZone;
 
 public class MainFrame extends javax.swing.JFrame {
 
@@ -95,15 +91,16 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(jPanelMainLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonRunAll)
-                    .addGroup(jPanelMainLayout.createSequentialGroup()
-                        .addComponent(jButtonRunInfile, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                        .addGap(12, 12, 12))
                     .addGroup(jPanelMainLayout.createSequentialGroup()
                         .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButtonRunOutfile, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonRunUpload, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                            .addComponent(jButtonRunDownload, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
+                            .addComponent(jButtonRunOutfile, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                            .addComponent(jButtonRunUpload, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                            .addComponent(jButtonRunDownload, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
+                        .addGap(12, 12, 12))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMainLayout.createSequentialGroup()
+                        .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButtonRunAll, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                            .addComponent(jButtonRunInfile, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
                         .addGap(12, 12, 12)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -183,26 +180,23 @@ public class MainFrame extends javax.swing.JFrame {
                                     .addComponent(jTextFieldFTPPass))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelOptionsLayout.createSequentialGroup()
                                     .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabelBaseUserAndPass)
                                         .addComponent(jLabelPlatformSource)
                                         .addComponent(jLabelBaseSource))
-                                    .addGap(55, 55, 55)
-                                    .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jTextFieldPlatformSource)
-                                        .addComponent(jTextFieldBaseSource, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelOptionsLayout.createSequentialGroup()
-                                    .addComponent(jLabelBaseUserAndPass)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTextFieldBaseSource, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
                                         .addComponent(jTextFieldFTPSource, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
                                         .addGroup(jPanelOptionsLayout.createSequentialGroup()
                                             .addComponent(jTextFieldBaseUser, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jTextFieldBasePass, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)))))
+                                            .addComponent(jTextFieldBasePass, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
+                                        .addComponent(jTextFieldPlatformSource, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE))))
                             .addGap(18, 18, 18)
                             .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jButtonSelBaseSource, 0, 0, Short.MAX_VALUE)
-                                .addComponent(jButtonSelPlatformSource, javax.swing.GroupLayout.PREFERRED_SIZE, 31, Short.MAX_VALUE)))))
-                .addContainerGap(78, Short.MAX_VALUE))
+                                .addComponent(jButtonSelPlatformSource, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)))))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         jPanelOptionsLayout.setVerticalGroup(
             jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,8 +209,8 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelBaseSource)
-                    .addComponent(jTextFieldBaseSource, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonSelBaseSource))
+                    .addComponent(jButtonSelBaseSource)
+                    .addComponent(jTextFieldBaseSource, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelBaseUserAndPass)
@@ -235,7 +229,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonApply)
                     .addComponent(jButtonCancel))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Настройки", jPanelOptions);
@@ -467,11 +461,5 @@ public class MainFrame extends javax.swing.JFrame {
                 (1 + date.getMonth()) + "-" + date.getDate() +
                 " " + date.getHours() + ":" + date.getMinutes() +
                 ":" + date.getSeconds();
-//        return customerDate;
-//        jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\n" + customerDate);
-//        Calendar calend = Calendar.getInstance(Locale.getDefault()) ;
-//        customerDate = calend.YEAR + "-" + calend.MONTH + "-" + calend.DATE + " " +
-//                calend.HOUR_OF_DAY + ":" + calend.MINUTE + ":" + calend.SECOND;
-//        jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\n" + customerDate);
     }
 }
