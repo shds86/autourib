@@ -1,11 +1,10 @@
 package Interface;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.*;
+import javax.swing.*;
 import java.io.*;
-import java.util.Date;
-import java.util.StringTokenizer;
 import URBD1SLib.ftp.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class MainFrame extends javax.swing.JFrame {
 
@@ -149,6 +148,11 @@ public class MainFrame extends javax.swing.JFrame {
         jLabelPlatformSource.setText("Путь до папки 1С");
 
         jButtonSelPlatformSource.setText("...");
+        jButtonSelPlatformSource.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSelPlatformSourceActionPerformed(evt);
+            }
+        });
 
         jButtonSelBaseSource.setText("...");
 
@@ -312,6 +316,21 @@ public class MainFrame extends javax.swing.JFrame {
         dispose();
 }//GEN-LAST:event_jButtonCancelActionPerformed
 
+    private void jButtonSelPlatformSourceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelPlatformSourceActionPerformed
+        // указываем папку с запускалкой 1С
+        // открыть диалог выбора файла; если файл выбран - присваиваем его имя в поле
+        JFileChooser jFileChooserPlatformSource = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("ZIP Archive", "zip");
+        jFileChooserPlatformSource.setFileFilter(filter);
+        int result = jFileChooserPlatformSource.showOpenDialog(null);
+        if (result == jFileChooserPlatformSource.APPROVE_OPTION) {
+            jTextFieldPlatformSource.setText(jFileChooserPlatformSource.getParent());
+            //jTextFieldPlatformSource.setText(jFileChooserPlatformSource.getParent())
+        }
+            //далее проверить файл настроек на правильность
+            //далее прочитать файл настроек и выставить его содержимое в нужные поля
+    }//GEN-LAST:event_jButtonSelPlatformSourceActionPerformed
+
     private void Apply() {
         //выгружаем в файл настроек и записываем его
         jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nЗаписываю настройки в файл...");
@@ -384,7 +403,7 @@ public class MainFrame extends javax.swing.JFrame {
                 jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nФайл настроек не найден и будет создан...");
                 optionFile.createNewFile();
             } catch (IOException ex) {
-                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                //Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nФайл настроек найден...");
