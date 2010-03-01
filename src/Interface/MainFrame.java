@@ -394,6 +394,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void loadOptions() {
         BufferedReader inoptionfile;
+        String tmp;
         try {
             inoptionfile = new BufferedReader(new InputStreamReader(new FileInputStream(optionFile)));
             while (inoptionfile.ready()) {
@@ -409,45 +410,52 @@ public class MainFrame extends javax.swing.JFrame {
                     switch (tokencounter) {
                         case 1:
                         {
-                            TmpOptions.set_PATH_1S(st.nextToken());
-                            jTextFieldPlatformSource.setText(st.nextToken());
+                            tmp = st.nextToken();
+                            TmpOptions.set_PATH_1S(tmp);
+                            jTextFieldPlatformSource.setText(tmp);
                             break;
                         }
                             
                         case 2:
                         {
-                            TmpOptions.set_PATH_BASE(st.nextToken());
-                            jTextFieldBaseSource.setText(st.nextToken());
+                            tmp = st.nextToken();
+                            TmpOptions.set_PATH_BASE(tmp);
+                            jTextFieldBaseSource.setText(tmp);
                             break;
                         }
                         case 3:
                         {
-                            TmpOptions.set_BASE_LOGIN(st.nextToken());
-                            jTextFieldBaseUser.setText(st.nextToken());
+                            tmp = st.nextToken();
+                            TmpOptions.set_BASE_LOGIN(tmp);
+                            jTextFieldBaseUser.setText(tmp);
                             break;
                         }
                         case 4:
                         {
-                            TmpOptions.set_BASE_PASS(st.nextToken().toCharArray());
-                            jTextFieldBasePass.setText(st.nextToken());
+                            tmp = st.nextToken();
+                            TmpOptions.set_BASE_PASS(tmp.toCharArray());
+                            jTextFieldBasePass.setText(tmp);
                             break;
                         }
                         case 5:
                         {
-                            TmpOptions.set_FTP_SERVER_NAME(st.nextToken());
-                            jTextFieldFTPSource.setText(st.nextToken());
+                            tmp = st.nextToken();
+                            TmpOptions.set_FTP_SERVER_NAME(tmp);
+                            jTextFieldFTPSource.setText(tmp);
                             break;
                         }
                         case 6:
                         {
-                            TmpOptions.set_FTP_SERVER_LOGIN(st.nextToken());
-                            jTextFieldFTPUser.setText(st.nextToken());
+                            tmp = st.nextToken();
+                            TmpOptions.set_FTP_SERVER_LOGIN(tmp);
+                            jTextFieldFTPUser.setText(tmp);
                             break;
                         }
                         case 7:
                         {
-                            TmpOptions.set_FTP_SERVER_PASS(st.nextToken().toCharArray());
-                            jTextFieldFTPPass.setText(st.nextToken());
+                            tmp = st.nextToken();
+                            TmpOptions.set_FTP_SERVER_PASS(tmp.toCharArray());
+                            jTextFieldFTPPass.setText(tmp);
                             break;
                         }
                     }
@@ -465,10 +473,10 @@ public class MainFrame extends javax.swing.JFrame {
         try{
             outoptionfile = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(optionFile)));
             //формируем строку для записи
-            String optionString = jTextFieldPlatformSource.getText() + " " +
+            String optionString = jTextFieldPlatformSource.getText() + ";" +
                     jTextFieldBaseSource.getText() + ";" + jTextFieldBaseUser.getText() +
-                    ";" + jTextFieldBasePass.toString() + ";" + jTextFieldFTPSource.getText() + ";" +
-                    jTextFieldFTPUser.getText() + ";" + jTextFieldFTPPass.toString();
+                    ";" + new String(jTextFieldBasePass.getPassword()) + ";" + jTextFieldFTPSource.getText() + ";" +
+                    jTextFieldFTPUser.getText() + ";" + new String(jTextFieldFTPPass.getPassword());
             System.out.println(optionString);
             outoptionfile.write(optionString);
             outoptionfile.close();
