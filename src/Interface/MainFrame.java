@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import java.io.*;
 import java.util.Date;
 import java.util.StringTokenizer;
+import URBD1SLib.ftp.*;
 
 public class MainFrame extends javax.swing.JFrame {
 
