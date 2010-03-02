@@ -4,7 +4,6 @@ import java.util.*;
 import javax.swing.*;
 import java.io.*;
 import URBD1SLib.ftp.*;
-import java.awt.Color;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class MainFrame extends javax.swing.JFrame {
@@ -20,6 +19,7 @@ public class MainFrame extends javax.swing.JFrame {
     options TmpOptions = new options();
     ftp_work exchange = null;
     JFileChooser jFileChooserPlatformSource = new JFileChooser();
+
     public MainFrame() {
         initComponents();
         checkingOptionFile();
@@ -339,27 +339,23 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuQustionAboutActionPerformed
 
     private void jButtonRunAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunAllActionPerformed
-        exchange = new ftp_work(TmpOptions.get_FTP_SERVER_NAME(),TmpOptions.get_FTP_SERVER_LOGIN(),TmpOptions.get_FTP_SERVER_PASS(),
-                                TmpOptions.get_cp_file(), TmpOptions.get_pc_file());
+        //ДИМЫЧ! надо разбить код этого метода на 4 метода, и запускать их отсюда последовательно,
+        //т.к. должна быть возможность запускать эти методы отдельно друг от друга (infile,download и.т.д)
+        exchange = new ftp_work(TmpOptions.get_FTP_SERVER_NAME(), TmpOptions.get_FTP_SERVER_LOGIN(), TmpOptions.get_FTP_SERVER_PASS(),
+                TmpOptions.get_cp_file(), TmpOptions.get_pc_file());
         exchange.parsing_folder();
-        jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nПодключение к фтп-серверу...");
-        if (exchange.ftp_connect() == consterr.NOT_ERR)
-        {
-            jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nПодключение прошло успешно...");
-            jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nЗагружаю файл...");
-            
-             if (exchange.get_file()==consterr.NOT_ERR)
-             {
-                 jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nПолучение файла прошло успешно...");
-             }
-             else
-             {
-                jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nОшибка при получение файла");
-             }
-        }
-        else
-        {
-            jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nОшибка при подключение к фтп-серверу");
+        jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\n" + getDateAndTime() + "Подключение к фтп-серверу...");
+        if (exchange.ftp_connect() == consterr.NOT_ERR) {
+            jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\n" + getDateAndTime() + "Подключение прошло успешно...");
+            jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\n" + getDateAndTime() + "Загружаю файл...");
+
+            if (exchange.get_file() == consterr.NOT_ERR) {
+                jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\n" + getDateAndTime() + "Получение файла прошло успешно...");
+            } else {
+                jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\n" + getDateAndTime() + "Ошибка при получение файла");
+            }
+        } else {
+            jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\n" + getDateAndTime() + "Ошибка при подключение к фтп-серверу");
         }
     }//GEN-LAST:event_jButtonRunAllActionPerformed
 
@@ -375,7 +371,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButtonSelPlatformSourceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelPlatformSourceActionPerformed
         // указываем папку с запускалкой 1С
         // открыть диалог выбора файла; если файл выбран - присваиваем его имя в поле
-        
+
         FileNameExtensionFilter filter = new FileNameExtensionFilter("*.exe", "exe");
         jFileChooserPlatformSource.setFileFilter(filter);
         int result = jFileChooserPlatformSource.showOpenDialog(null);   //объявляем, в след.строке присваиваем
@@ -391,7 +387,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void Apply() {
         //выгружаем в файл настроек и записываем его
-        jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nЗаписываю настройки в файл...");
+        jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\n" + getDateAndTime() + "Записываю настройки в файл...");
         saveOptions();
     }
 
@@ -450,10 +446,10 @@ public class MainFrame extends javax.swing.JFrame {
         File dir;
         dir = new File(userDir);
         if (!dir.exists()) {
-            jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "Каталог настроек не найден и будет создан...");
+            jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "" + getDateAndTime() + "Каталог настроек не найден и будет создан...");
             dir.mkdirs();
         } else {
-            jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "Каталог настроек найден...");
+            jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "" + getDateAndTime() + "Каталог настроек найден...");
         }
 
         //проверяем, есть ли файл настроек
@@ -462,13 +458,12 @@ public class MainFrame extends javax.swing.JFrame {
         //если нет файла, то создаем
         if (!optionFile.exists()) {
             try {
-                jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nФайл настроек не найден и будет создан...");
+                jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\n" + getDateAndTime() + "Файл настроек не найден и будет создан...");
                 optionFile.createNewFile();
             } catch (IOException ex) {
-                //Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nФайл настроек найден...");
+            jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\n" + getDateAndTime() + "Файл настроек найден...");
             loadOptions();
         }
     }
@@ -481,73 +476,64 @@ public class MainFrame extends javax.swing.JFrame {
             while (inoptionfile.ready()) {
                 String stroka = inoptionfile.readLine();
                 StringTokenizer st = new StringTokenizer(stroka, ";");
-                if(st.countTokens() < 7) {
-                    jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nНеверный файл настроек!..");
+                if (st.countTokens() < 7) {
+                    jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\n" + getDateAndTime() + "Неверный файл настроек!..");
                     break;
                 }
-                jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nЧитаю файл настроек...");
+                jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\n" + getDateAndTime() + "Читаю файл настроек...");
                 int tokencounter = 1;
                 while (st.hasMoreTokens()) {
                     switch (tokencounter) {
-                        case 1:
-                        {
+                        case 1: {
                             tmp = st.nextToken();
                             TmpOptions.set_PATH_1S(tmp);
                             jTextFieldPlatformSource.setText(tmp);
                             break;
                         }
-                            
-                        case 2:
-                        {
+
+                        case 2: {
                             tmp = st.nextToken();
                             TmpOptions.set_PATH_BASE(tmp);
                             jTextFieldBaseSource.setText(tmp);
                             break;
                         }
-                        case 3:
-                        {
+                        case 3: {
                             tmp = st.nextToken();
                             TmpOptions.set_BASE_LOGIN(tmp);
                             jTextFieldBaseUser.setText(tmp);
                             break;
                         }
-                        case 4:
-                        {
+                        case 4: {
                             tmp = st.nextToken();
                             TmpOptions.set_BASE_PASS(tmp.toCharArray());
                             jTextFieldBasePass.setText(tmp);
                             break;
                         }
-                        case 5:
-                        {
+                        case 5: {
                             tmp = st.nextToken();
                             TmpOptions.set_FTP_SERVER_NAME(tmp);
                             jTextFieldFTPSource.setText(tmp);
                             break;
                         }
-                        case 6:
-                        {
+                        case 6: {
                             tmp = st.nextToken();
                             TmpOptions.set_FTP_SERVER_LOGIN(tmp);
                             jTextFieldFTPUser.setText(tmp);
                             break;
                         }
-                        case 7:
-                        {
+                        case 7: {
                             tmp = st.nextToken();
                             TmpOptions.set_FTP_SERVER_PASS(tmp.toCharArray());
                             jTextFieldFTPPass.setText(tmp);
                             break;
                         }
-                        case 8:
-                        {
+                        case 8: {
                             tmp = st.nextToken();
                             TmpOptions.set_cp_file(tmp);
                             jTextFieldFileOnServer.setText(tmp);
                             break;
                         }
-                        case 9:
-                        {
+                        case 9: {
                             tmp = st.nextToken();
                             TmpOptions.set_pc_file(tmp);
                             jTextFieldFileOnLocalhost.setText(tmp);
@@ -556,7 +542,7 @@ public class MainFrame extends javax.swing.JFrame {
                     }
                     tokencounter++;
                 }
-                jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nФайл настроек прочитан...");
+                jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\n" + getDateAndTime() + "Файл настроек прочитан...");
             }
         } catch (IOException e) {
         }
@@ -565,42 +551,43 @@ public class MainFrame extends javax.swing.JFrame {
     private void saveOptions() {
         //записываем настройки в файл
         BufferedWriter outoptionfile;
-        try{
+        try {
             outoptionfile = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(optionFile)));
             //формируем строку для записи
-            String optionString = jTextFieldPlatformSource.getText() + ";" +
-                                  jTextFieldBaseSource.getText() + ";" +
-                                  jTextFieldBaseUser.getText() + ";" +
-                                  new String(jTextFieldBasePass.getPassword()) + ";" +
-                                  jTextFieldFTPSource.getText() + ";" +
-                                  jTextFieldFTPUser.getText() + ";" +
-                                  new String(jTextFieldFTPPass.getPassword()) + ";" +
-                                  jTextFieldFileOnServer.getText()+";"+
-                                  jTextFieldFileOnLocalhost.getText();
+            String optionString = jTextFieldPlatformSource.getText() + ";"
+                    + jTextFieldBaseSource.getText() + ";"
+                    + jTextFieldBaseUser.getText() + ";"
+                    + new String(jTextFieldBasePass.getPassword()) + ";"
+                    + jTextFieldFTPSource.getText() + ";"
+                    + jTextFieldFTPUser.getText() + ";"
+                    + new String(jTextFieldFTPPass.getPassword()) + ";"
+                    + jTextFieldFileOnServer.getText() + ";"
+                    + jTextFieldFileOnLocalhost.getText();
             System.out.println(optionString);
             outoptionfile.write(optionString);
             outoptionfile.close();
 
-                            TmpOptions.set_PATH_1S(jTextFieldPlatformSource.getText());
-                            TmpOptions.set_PATH_BASE(jTextFieldBaseSource.getText());
-                            TmpOptions.set_BASE_LOGIN(jTextFieldBaseUser.getText());
-                            TmpOptions.set_BASE_PASS(jTextFieldBasePass.getPassword());
-                            TmpOptions.set_FTP_SERVER_NAME(jTextFieldFTPSource.getText());
-                            TmpOptions.set_FTP_SERVER_LOGIN(jTextFieldFTPUser.getText());
-                            TmpOptions.set_FTP_SERVER_PASS(jTextFieldFTPPass.getPassword());
-                            TmpOptions.set_cp_file(jTextFieldFileOnServer.getText());
-                            TmpOptions.set_pc_file(jTextFieldFileOnLocalhost.getText());
+            TmpOptions.set_PATH_1S(jTextFieldPlatformSource.getText());
+            TmpOptions.set_PATH_BASE(jTextFieldBaseSource.getText());
+            TmpOptions.set_BASE_LOGIN(jTextFieldBaseUser.getText());
+            TmpOptions.set_BASE_PASS(jTextFieldBasePass.getPassword());
+            TmpOptions.set_FTP_SERVER_NAME(jTextFieldFTPSource.getText());
+            TmpOptions.set_FTP_SERVER_LOGIN(jTextFieldFTPUser.getText());
+            TmpOptions.set_FTP_SERVER_PASS(jTextFieldFTPPass.getPassword());
+            TmpOptions.set_cp_file(jTextFieldFileOnServer.getText());
+            TmpOptions.set_pc_file(jTextFieldFileOnLocalhost.getText());
 
         } catch (IOException e) {
         }
-        jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nНастройки записаны...");
+        jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\n" + getDateAndTime() + "Настройки записаны...");
     }
 
-    private void getDateAndTime() {
+    public String getDateAndTime() {
         Date date = new Date(System.currentTimeMillis());
-        String customerDate = (1900 + date.getYear()) + "-" +
-                (1 + date.getMonth()) + "-" + date.getDate() +
-                " " + date.getHours() + ":" + date.getMinutes() +
-                ":" + date.getSeconds();
+        String customerDate = (1900 + date.getYear()) + "-"
+                + (1 + date.getMonth()) + "-" + date.getDate()
+                + " " + date.getHours() + ":" + date.getMinutes()
+                + ":" + date.getSeconds();
+        return customerDate;
     }
 }
