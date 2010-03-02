@@ -361,7 +361,6 @@ public class MainFrame extends javax.swing.JFrame {
         {
             jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nОшибка при подключение к фтп-серверу");
         }
-
     }//GEN-LAST:event_jButtonRunAllActionPerformed
 
     private void jButtonApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApplyActionPerformed
