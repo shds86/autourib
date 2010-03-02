@@ -168,38 +168,39 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelFTPSource)
-                    .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelOptionsLayout.createSequentialGroup()
-                            .addComponent(jButtonApply)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonCancel))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelOptionsLayout.createSequentialGroup()
-                            .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelOptionsLayout.createSequentialGroup()
-                                    .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabelBaseUserAndPass)
-                                        .addComponent(jLabelPlatformSource)
-                                        .addComponent(jLabelBaseSource))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jTextFieldBaseSource, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
-                                        .addComponent(jTextFieldFTPSource, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-                                        .addGroup(jPanelOptionsLayout.createSequentialGroup()
-                                            .addComponent(jTextFieldBaseUser, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jTextFieldBasePass, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE))
-                                        .addComponent(jTextFieldPlatformSource, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelOptionsLayout.createSequentialGroup()
-                                    .addComponent(jLabelFTPUserAndPass)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextFieldFTPUser, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jTextFieldFTPPass, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)))
-                            .addGap(18, 18, 18)
-                            .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jButtonSelBaseSource, 0, 0, Short.MAX_VALUE)
-                                .addComponent(jButtonSelPlatformSource, javax.swing.GroupLayout.PREFERRED_SIZE, 31, Short.MAX_VALUE))
-                            .addGap(65, 65, 65))))
+                    .addGroup(jPanelOptionsLayout.createSequentialGroup()
+                        .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelOptionsLayout.createSequentialGroup()
+                                .addComponent(jButtonApply)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 264, Short.MAX_VALUE)
+                                .addComponent(jButtonCancel))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelOptionsLayout.createSequentialGroup()
+                                .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelOptionsLayout.createSequentialGroup()
+                                        .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabelBaseUserAndPass)
+                                            .addComponent(jLabelPlatformSource)
+                                            .addComponent(jLabelBaseSource))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTextFieldBaseSource, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                                            .addComponent(jTextFieldFTPSource, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                                            .addGroup(jPanelOptionsLayout.createSequentialGroup()
+                                                .addComponent(jTextFieldBaseUser, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jTextFieldBasePass, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE))
+                                            .addComponent(jTextFieldPlatformSource, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelOptionsLayout.createSequentialGroup()
+                                        .addComponent(jLabelFTPUserAndPass)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextFieldFTPUser, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jTextFieldFTPPass, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButtonSelBaseSource, 0, 0, Short.MAX_VALUE)
+                                    .addComponent(jButtonSelPlatformSource, javax.swing.GroupLayout.PREFERRED_SIZE, 31, Short.MAX_VALUE))))
+                        .addGap(65, 65, 65)))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
         jPanelOptionsLayout.setVerticalGroup(
@@ -316,19 +317,17 @@ public class MainFrame extends javax.swing.JFrame {
         dispose();
 }//GEN-LAST:event_jButtonCancelActionPerformed
 
+    @SuppressWarnings("static-access")
     private void jButtonSelPlatformSourceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelPlatformSourceActionPerformed
         // указываем папку с запускалкой 1С
         // открыть диалог выбора файла; если файл выбран - присваиваем его имя в поле
         JFileChooser jFileChooserPlatformSource = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("ZIP Archive", "zip");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("*.exe", "exe");
         jFileChooserPlatformSource.setFileFilter(filter);
-        int result = jFileChooserPlatformSource.showOpenDialog(null);
+        int result = jFileChooserPlatformSource.showOpenDialog(null);   //объявляем, в след.строке присваиваем
         if (result == jFileChooserPlatformSource.APPROVE_OPTION) {
-            jTextFieldPlatformSource.setText(jFileChooserPlatformSource.getParent());
-            //jTextFieldPlatformSource.setText(jFileChooserPlatformSource.getParent())
+            jTextFieldPlatformSource.setText(jFileChooserPlatformSource.getSelectedFile().getAbsolutePath());
         }
-            //далее проверить файл настроек на правильность
-            //далее прочитать файл настроек и выставить его содержимое в нужные поля
     }//GEN-LAST:event_jButtonSelPlatformSourceActionPerformed
 
     private void Apply() {
