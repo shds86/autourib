@@ -4,6 +4,7 @@ import java.util.*;
 import javax.swing.*;
 import java.io.*;
 import URBD1SLib.ftp.*;
+import java.awt.Color;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class MainFrame extends javax.swing.JFrame {
@@ -17,6 +18,8 @@ public class MainFrame extends javax.swing.JFrame {
     String ftpUser = null;     //имя пользователя ftp
     String ftpPass = null;     //пароль пользователя ftp
     options TmpOptions = new options();
+    ftp_work exchange = null;
+    JFileChooser jFileChooserPlatformSource = new JFileChooser();
     public MainFrame() {
         initComponents();
         checkingOptionFile();
@@ -53,6 +56,10 @@ public class MainFrame extends javax.swing.JFrame {
         jButtonSelBaseSource = new javax.swing.JButton();
         jTextFieldBasePass = new javax.swing.JPasswordField();
         jTextFieldFTPPass = new javax.swing.JPasswordField();
+        jTextFieldFileOnServer = new javax.swing.JTextField();
+        jTextFieldFileOnLocalhost = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuFileExit = new javax.swing.JMenuItem();
@@ -117,7 +124,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(jButtonRunOutfile))
                     .addGroup(jPanelMainLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -160,6 +167,16 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTextFieldFTPPass.setText("jPasswordField1");
 
+        jTextFieldFileOnServer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldFileOnServerActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Путь до файла на фтп");
+
+        jLabel2.setText("Путь до файла локально");
+
         javax.swing.GroupLayout jPanelOptionsLayout = new javax.swing.GroupLayout(jPanelOptions);
         jPanelOptions.setLayout(jPanelOptionsLayout);
         jPanelOptionsLayout.setHorizontalGroup(
@@ -167,41 +184,49 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(jPanelOptionsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelFTPSource)
                     .addGroup(jPanelOptionsLayout.createSequentialGroup()
-                        .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelOptionsLayout.createSequentialGroup()
-                                .addComponent(jButtonApply)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 264, Short.MAX_VALUE)
-                                .addComponent(jButtonCancel))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelOptionsLayout.createSequentialGroup()
+                        .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelFTPSource)
+                            .addGroup(jPanelOptionsLayout.createSequentialGroup()
                                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelOptionsLayout.createSequentialGroup()
                                         .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabelBaseUserAndPass)
                                             .addComponent(jLabelPlatformSource)
-                                            .addComponent(jLabelBaseSource))
+                                            .addComponent(jLabelBaseSource)
+                                            .addComponent(jLabelBaseUserAndPass))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jTextFieldBaseSource, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
-                                            .addComponent(jTextFieldFTPSource, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
                                             .addGroup(jPanelOptionsLayout.createSequentialGroup()
                                                 .addComponent(jTextFieldBaseUser, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(jTextFieldBasePass, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE))
-                                            .addComponent(jTextFieldPlatformSource, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)))
+                                            .addComponent(jTextFieldPlatformSource, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                                            .addComponent(jTextFieldFTPSource, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelOptionsLayout.createSequentialGroup()
-                                        .addComponent(jLabelFTPUserAndPass)
+                                        .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabelFTPUserAndPass)
+                                            .addComponent(jLabel1)
+                                            .addComponent(jLabel2))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextFieldFTPUser, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextFieldFTPPass, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)))
+                                        .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanelOptionsLayout.createSequentialGroup()
+                                                .addComponent(jTextFieldFTPUser, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(10, 10, 10)
+                                                .addComponent(jTextFieldFTPPass, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE))
+                                            .addComponent(jTextFieldFileOnServer, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                                            .addComponent(jTextFieldFileOnLocalhost, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE))))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jButtonSelBaseSource, 0, 0, Short.MAX_VALUE)
-                                    .addComponent(jButtonSelPlatformSource, javax.swing.GroupLayout.PREFERRED_SIZE, 31, Short.MAX_VALUE))))
-                        .addGap(65, 65, 65)))
-                .addContainerGap(11, Short.MAX_VALUE))
+                                    .addComponent(jButtonSelPlatformSource, javax.swing.GroupLayout.PREFERRED_SIZE, 31, Short.MAX_VALUE))
+                                .addGap(65, 65, 65)))
+                        .addGap(11, 11, 11))
+                    .addGroup(jPanelOptionsLayout.createSequentialGroup()
+                        .addComponent(jButtonApply)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonCancel)
+                        .addContainerGap(334, Short.MAX_VALUE))))
         );
         jPanelOptionsLayout.setVerticalGroup(
             jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,25 +241,33 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabelBaseSource)
                     .addComponent(jButtonSelBaseSource)
                     .addComponent(jTextFieldBaseSource, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(9, 9, 9)
                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelBaseUserAndPass)
                     .addComponent(jTextFieldBaseUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldBasePass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldBasePass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelBaseUserAndPass))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelFTPSource)
                     .addComponent(jTextFieldFTPSource, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelFTPUserAndPass)
                     .addComponent(jTextFieldFTPUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldFTPPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jTextFieldFTPPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelFTPUserAndPass))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldFileOnServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldFileOnLocalhost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(39, 39, 39)
                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonApply)
                     .addComponent(jButtonCancel))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Настройки", jPanelOptions);
@@ -286,8 +319,8 @@ public class MainFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -306,7 +339,29 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuQustionAboutActionPerformed
 
     private void jButtonRunAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunAllActionPerformed
-        //
+        exchange = new ftp_work(TmpOptions.get_FTP_SERVER_NAME(),TmpOptions.get_FTP_SERVER_LOGIN(),TmpOptions.get_FTP_SERVER_PASS(),
+                                TmpOptions.get_cp_file(), TmpOptions.get_pc_file());
+        exchange.parsing_folder();
+        jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nПодключение к фтп-серверу...");
+        if (exchange.ftp_connect() == consterr.NOT_ERR)
+        {
+            jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nПодключение прошло успешно...");
+            jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nЗагружаю файл...");
+            
+             if (exchange.get_file()==consterr.NOT_ERR)
+             {
+                 jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nПолучение файла прошло успешно...");
+             }
+             else
+             {
+                jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nОшибка при получение файла");
+             }
+        }
+        else
+        {
+            jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nОшибка при подключение к фтп-серверу");
+        }
+
     }//GEN-LAST:event_jButtonRunAllActionPerformed
 
     private void jButtonApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApplyActionPerformed
@@ -321,7 +376,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButtonSelPlatformSourceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelPlatformSourceActionPerformed
         // указываем папку с запускалкой 1С
         // открыть диалог выбора файла; если файл выбран - присваиваем его имя в поле
-        JFileChooser jFileChooserPlatformSource = new JFileChooser();
+        
         FileNameExtensionFilter filter = new FileNameExtensionFilter("*.exe", "exe");
         jFileChooserPlatformSource.setFileFilter(filter);
         int result = jFileChooserPlatformSource.showOpenDialog(null);   //объявляем, в след.строке присваиваем
@@ -329,6 +384,11 @@ public class MainFrame extends javax.swing.JFrame {
             jTextFieldPlatformSource.setText(jFileChooserPlatformSource.getSelectedFile().getAbsolutePath());
         }
     }//GEN-LAST:event_jButtonSelPlatformSourceActionPerformed
+
+    private void jTextFieldFileOnServerActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jTextFieldFileOnServerActionPerformed
+    {//GEN-HEADEREND:event_jTextFieldFileOnServerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldFileOnServerActionPerformed
 
     private void Apply() {
         //выгружаем в файл настроек и записываем его
@@ -349,6 +409,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonRunUpload;
     private javax.swing.JButton jButtonSelBaseSource;
     private javax.swing.JButton jButtonSelPlatformSource;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelBaseSource;
     private javax.swing.JLabel jLabelBaseUserAndPass;
     private javax.swing.JLabel jLabelFTPSource;
@@ -371,6 +433,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPasswordField jTextFieldFTPPass;
     private javax.swing.JTextField jTextFieldFTPSource;
     private javax.swing.JTextField jTextFieldFTPUser;
+    private javax.swing.JTextField jTextFieldFileOnLocalhost;
+    private javax.swing.JTextField jTextFieldFileOnServer;
     private javax.swing.JTextField jTextFieldPlatformSource;
     // End of variables declaration//GEN-END:variables
 
@@ -476,6 +540,20 @@ public class MainFrame extends javax.swing.JFrame {
                             jTextFieldFTPPass.setText(tmp);
                             break;
                         }
+                        case 8:
+                        {
+                            tmp = st.nextToken();
+                            TmpOptions.set_cp_file(tmp);
+                            jTextFieldFileOnServer.setText(tmp);
+                            break;
+                        }
+                        case 9:
+                        {
+                            tmp = st.nextToken();
+                            TmpOptions.set_pc_file(tmp);
+                            jTextFieldFileOnLocalhost.setText(tmp);
+                            break;
+                        }
                     }
                     tokencounter++;
                 }
@@ -492,12 +570,28 @@ public class MainFrame extends javax.swing.JFrame {
             outoptionfile = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(optionFile)));
             //формируем строку для записи
             String optionString = jTextFieldPlatformSource.getText() + ";" +
-                    jTextFieldBaseSource.getText() + ";" + jTextFieldBaseUser.getText() +
-                    ";" + new String(jTextFieldBasePass.getPassword()) + ";" + jTextFieldFTPSource.getText() + ";" +
-                    jTextFieldFTPUser.getText() + ";" + new String(jTextFieldFTPPass.getPassword());
+                                  jTextFieldBaseSource.getText() + ";" +
+                                  jTextFieldBaseUser.getText() + ";" +
+                                  new String(jTextFieldBasePass.getPassword()) + ";" +
+                                  jTextFieldFTPSource.getText() + ";" +
+                                  jTextFieldFTPUser.getText() + ";" +
+                                  new String(jTextFieldFTPPass.getPassword()) + ";" +
+                                  jTextFieldFileOnServer.getText()+";"+
+                                  jTextFieldFileOnLocalhost.getText();
             System.out.println(optionString);
             outoptionfile.write(optionString);
             outoptionfile.close();
+
+                            TmpOptions.set_PATH_1S(jTextFieldPlatformSource.getText());
+                            TmpOptions.set_PATH_BASE(jTextFieldBaseSource.getText());
+                            TmpOptions.set_BASE_LOGIN(jTextFieldBaseUser.getText());
+                            TmpOptions.set_BASE_PASS(jTextFieldBasePass.getPassword());
+                            TmpOptions.set_FTP_SERVER_NAME(jTextFieldFTPSource.getText());
+                            TmpOptions.set_FTP_SERVER_LOGIN(jTextFieldFTPUser.getText());
+                            TmpOptions.set_FTP_SERVER_PASS(jTextFieldFTPPass.getPassword());
+                            TmpOptions.set_cp_file(jTextFieldFileOnServer.getText());
+                            TmpOptions.set_pc_file(jTextFieldFileOnLocalhost.getText());
+
         } catch (IOException e) {
         }
         jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\nНастройки записаны...");

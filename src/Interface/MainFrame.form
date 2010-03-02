@@ -79,8 +79,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" min="-2" pref="288" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jTabbedPane1" pref="321" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -135,7 +135,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane2" pref="241" max="32767" attributes="0"/>
+                              <Component id="jScrollPane2" pref="274" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -206,40 +206,45 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabelFTPSource" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jButtonApply" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="264" max="32767" attributes="0"/>
-                                      <Component id="jButtonCancel" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabelFTPSource" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jLabelBaseUserAndPass" alignment="0" min="-2" max="-2" attributes="0"/>
                                                   <Component id="jLabelPlatformSource" alignment="0" min="-2" max="-2" attributes="0"/>
                                                   <Component id="jLabelBaseSource" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabelBaseUserAndPass" alignment="0" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="jTextFieldBaseSource" alignment="1" pref="232" max="32767" attributes="1"/>
-                                                  <Component id="jTextFieldFTPSource" alignment="0" pref="232" max="32767" attributes="0"/>
                                                   <Group type="102" alignment="0" attributes="0">
                                                       <Component id="jTextFieldBaseUser" min="-2" pref="113" max="-2" attributes="0"/>
                                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                                       <Component id="jTextFieldBasePass" pref="109" max="32767" attributes="0"/>
                                                   </Group>
                                                   <Component id="jTextFieldPlatformSource" alignment="1" pref="232" max="32767" attributes="1"/>
+                                                  <Component id="jTextFieldFTPSource" alignment="0" pref="232" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabelFTPUserAndPass" min="-2" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jLabelFTPUserAndPass" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jTextFieldFTPUser" min="-2" pref="113" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="jTextFieldFTPPass" pref="109" max="32767" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="jTextFieldFTPUser" min="-2" pref="113" max="-2" attributes="1"/>
+                                                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                                                      <Component id="jTextFieldFTPPass" pref="109" max="32767" attributes="0"/>
+                                                  </Group>
+                                                  <Component id="jTextFieldFileOnServer" alignment="0" pref="232" max="32767" attributes="1"/>
+                                                  <Component id="jTextFieldFileOnLocalhost" alignment="0" pref="232" max="32767" attributes="1"/>
+                                              </Group>
                                           </Group>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -247,12 +252,18 @@
                                           <Component id="jButtonSelBaseSource" min="0" pref="0" max="32767" attributes="1"/>
                                           <Component id="jButtonSelPlatformSource" alignment="0" pref="31" max="32767" attributes="1"/>
                                       </Group>
+                                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jButtonApply" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jButtonCancel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="334" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="11" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -271,29 +282,39 @@
                           <Component id="jButtonSelBaseSource" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextFieldBaseSource" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelBaseUserAndPass" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextFieldBaseUser" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextFieldBasePass" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelBaseUserAndPass" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelFTPSource" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldFTPSource" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabelFTPSource" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldFTPSource" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelFTPUserAndPass" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextFieldFTPUser" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextFieldFTPPass" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelFTPUserAndPass" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jTextFieldFileOnServer" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jTextFieldFileOnLocalhost" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jButtonApply" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButtonCancel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="33" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -371,6 +392,23 @@
             <Component class="javax.swing.JPasswordField" name="jTextFieldFTPPass">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jPasswordField1"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextFieldFileOnServer">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldFileOnServerActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextFieldFileOnLocalhost">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x41f;&#x443;&#x442;&#x44c; &#x434;&#x43e; &#x444;&#x430;&#x439;&#x43b;&#x430; &#x43d;&#x430; &#x444;&#x442;&#x43f;"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x41f;&#x443;&#x442;&#x44c; &#x434;&#x43e; &#x444;&#x430;&#x439;&#x43b;&#x430; &#x43b;&#x43e;&#x43a;&#x430;&#x43b;&#x44c;&#x43d;&#x43e;"/>
               </Properties>
             </Component>
           </SubComponents>
