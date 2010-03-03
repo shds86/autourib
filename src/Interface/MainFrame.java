@@ -426,7 +426,7 @@ public class MainFrame extends javax.swing.JFrame {
         jFileChooserBaseSource.setFileFilter(filter);
         int result = jFileChooserBaseSource.showOpenDialog(null);   //объявляем, в след.строке присваиваем
         if (result == jFileChooserBaseSource.APPROVE_OPTION) {
-            jTextFieldBaseSource.setText(jFileChooserBaseSource.getSelectedFile().getAbsolutePath());
+            jTextFieldBaseSource.setText(jFileChooserBaseSource.getSelectedFile().getParent());
         }
     }//GEN-LAST:event_jButtonSelBaseSourceActionPerformed
 
