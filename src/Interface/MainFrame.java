@@ -351,6 +351,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButtonRunAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunAllActionPerformed
         //ДИМЫЧ! надо разбить код этого метода на 4 метода, и запускать их отсюда последовательно,
         //т.к. должна быть возможность запускать эти методы отдельно друг от друга (infile,download и.т.д)
+        byte err;
         exchange = new ftp_work(TmpOptions.get_FTP_SERVER_NAME(),
                                 TmpOptions.get_FTP_SERVER_LOGIN(),
                                 TmpOptions.get_FTP_SERVER_PASS(),
@@ -359,24 +360,25 @@ public class MainFrame extends javax.swing.JFrame {
 
         exchange.parsing_folder();
         jTextAreaSystemLog.append("\n" + getDateAndTime() + " Подключение к фтп-серверу...");
-        if (exchange.ftp_connect() == consterr.NOT_ERR)
+        if ((err=exchange.ftp_connect()) == consterr.NOT_ERR)
         {
-            jTextAreaSystemLog.setForeground(Color.red);
             jTextAreaSystemLog.append("\n" + getDateAndTime() + " Подключение прошло успешно...");
             
             jTextAreaSystemLog.append("\n" + getDateAndTime() + " Загружаю файл...");
-            if (exchange.get_file() == consterr.NOT_ERR)
+            if ((err=exchange.get_file()) == consterr.NOT_ERR)
             {
                 jTextAreaSystemLog.append("\n" + getDateAndTime() + " Получение файла прошло успешно...");
             }
             else
             {
-                jTextAreaSystemLog.append("\n" + getDateAndTime() + " Ошибка при получение файла");
+                jTextAreaSystemLog.append("\n" + getDateAndTime() + " "+consterr.PrintErr(err));
+                return;
             }
         }
         else
         {
-            jTextAreaSystemLog.append("\n" + getDateAndTime() + " Ошибка при подключение к фтп-серверу");
+            jTextAreaSystemLog.append("\n" + getDateAndTime() + " " + consterr.PrintErr(err));
+            return;
         }
     }//GEN-LAST:event_jButtonRunAllActionPerformed
 
