@@ -4,7 +4,10 @@ import java.util.*;
 import javax.swing.*;
 import java.io.*;
 import URBD1SLib.ftp.*;
+import java.awt.Color;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.*;
+
 
 public class MainFrame extends javax.swing.JFrame {
 
@@ -93,7 +96,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTextAreaSystemLog.setColumns(1);
         jTextAreaSystemLog.setEditable(false);
-        jTextAreaSystemLog.setFont(new java.awt.Font("Monospaced", 0, 12));
+        jTextAreaSystemLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jTextAreaSystemLog.setRows(1);
         jTextAreaSystemLog.setText("Системный лог...");
         jScrollPane2.setViewportView(jTextAreaSystemLog);
@@ -348,21 +351,32 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButtonRunAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunAllActionPerformed
         //ДИМЫЧ! надо разбить код этого метода на 4 метода, и запускать их отсюда последовательно,
         //т.к. должна быть возможность запускать эти методы отдельно друг от друга (infile,download и.т.д)
-        exchange = new ftp_work(TmpOptions.get_FTP_SERVER_NAME(), TmpOptions.get_FTP_SERVER_LOGIN(), TmpOptions.get_FTP_SERVER_PASS(),
-                TmpOptions.get_cp_file(), TmpOptions.get_pc_file());
-        exchange.parsing_folder();
-        jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\n" + getDateAndTime() + "Подключение к фтп-серверу...");
-        if (exchange.ftp_connect() == consterr.NOT_ERR) {
-            jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\n" + getDateAndTime() + "Подключение прошло успешно...");
-            jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\n" + getDateAndTime() + "Загружаю файл...");
+        exchange = new ftp_work(TmpOptions.get_FTP_SERVER_NAME(),
+                                TmpOptions.get_FTP_SERVER_LOGIN(),
+                                TmpOptions.get_FTP_SERVER_PASS(),
+                                TmpOptions.get_cp_file(),
+                                TmpOptions.get_pc_file());
 
-            if (exchange.get_file() == consterr.NOT_ERR) {
-                jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\n" + getDateAndTime() + "Получение файла прошло успешно...");
-            } else {
-                jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\n" + getDateAndTime() + "Ошибка при получение файла");
+        exchange.parsing_folder();
+        jTextAreaSystemLog.append("\n" + getDateAndTime() + " Подключение к фтп-серверу...");
+        if (exchange.ftp_connect() == consterr.NOT_ERR)
+        {
+            jTextAreaSystemLog.setForeground(Color.red);
+            jTextAreaSystemLog.append("\n" + getDateAndTime() + " Подключение прошло успешно...");
+            
+            jTextAreaSystemLog.append("\n" + getDateAndTime() + " Загружаю файл...");
+            if (exchange.get_file() == consterr.NOT_ERR)
+            {
+                jTextAreaSystemLog.append("\n" + getDateAndTime() + " Получение файла прошло успешно...");
             }
-        } else {
-            jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\n" + getDateAndTime() + "Ошибка при подключение к фтп-серверу");
+            else
+            {
+                jTextAreaSystemLog.append("\n" + getDateAndTime() + " Ошибка при получение файла");
+            }
+        }
+        else
+        {
+            jTextAreaSystemLog.append("\n" + getDateAndTime() + " Ошибка при подключение к фтп-серверу");
         }
     }//GEN-LAST:event_jButtonRunAllActionPerformed
 
@@ -394,7 +408,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void Apply() {
         //выгружаем в файл настроек и записываем его
-        jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\n" + getDateAndTime() + "Записываю настройки в файл...");
+        jTextAreaSystemLog.append("\n" + getDateAndTime() + " Записываю настройки в файл...");
         saveOptions();
     }
 
@@ -453,10 +467,10 @@ public class MainFrame extends javax.swing.JFrame {
         File dir;
         dir = new File(userDir);
         if (!dir.exists()) {
-            jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "" + getDateAndTime() + "Каталог настроек не найден и будет создан...");
+            jTextAreaSystemLog.append(getDateAndTime() + " Каталог настроек не найден и будет создан...");
             dir.mkdirs();
         } else {
-            jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "" + getDateAndTime() + "Каталог настроек найден...");
+            jTextAreaSystemLog.append(getDateAndTime() + " Каталог настроек найден...");
         }
 
         //проверяем, есть ли файл настроек
@@ -465,12 +479,12 @@ public class MainFrame extends javax.swing.JFrame {
         //если нет файла, то создаем
         if (!optionFile.exists()) {
             try {
-                jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\n" + getDateAndTime() + "Файл настроек не найден и будет создан...");
+                jTextAreaSystemLog.append("\n" + getDateAndTime() + " Файл настроек не найден и будет создан...");
                 optionFile.createNewFile();
             } catch (IOException ex) {
             }
         } else {
-            jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\n" + getDateAndTime() + "Файл настроек найден...");
+            jTextAreaSystemLog.append("\n" + getDateAndTime() + " Файл настроек найден...");
             loadOptions();
         }
     }
@@ -484,10 +498,10 @@ public class MainFrame extends javax.swing.JFrame {
                 String stroka = inoptionfile.readLine();
                 StringTokenizer st = new StringTokenizer(stroka, ";");
                 if (st.countTokens() < 7) {
-                    jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\n" + getDateAndTime() + "Неверный файл настроек!..");
+                    jTextAreaSystemLog.append("\n" + getDateAndTime() + " Неверный файл настроек!..");
                     break;
                 }
-                jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\n" + getDateAndTime() + "Читаю файл настроек...");
+                jTextAreaSystemLog.append("\n" + getDateAndTime() + " Читаю файл настроек...");
                 int tokencounter = 1;
                 while (st.hasMoreTokens()) {
                     switch (tokencounter) {
@@ -549,7 +563,7 @@ public class MainFrame extends javax.swing.JFrame {
                     }
                     tokencounter++;
                 }
-                jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\n" + getDateAndTime() + "Файл настроек прочитан...");
+                jTextAreaSystemLog.append("\n" + getDateAndTime() + " Файл настроек прочитан...");
             }
         } catch (IOException e) {
         }
@@ -586,15 +600,15 @@ public class MainFrame extends javax.swing.JFrame {
 
         } catch (IOException e) {
         }
-        jTextAreaSystemLog.setText(jTextAreaSystemLog.getText() + "\n" + getDateAndTime() + "Настройки записаны...");
+        jTextAreaSystemLog.append("\n" + getDateAndTime() + " Настройки записаны...");
     }
 
     public String getDateAndTime() {
         Date date = new Date(System.currentTimeMillis());
         String customerDate = (1900 + date.getYear()) + "-"
                 + (1 + date.getMonth()) + "-" + date.getDate()
-                + " " + date.getHours() + ":" + date.getMinutes()
-                + ":" + date.getSeconds();
+                + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
         return customerDate;
     }
 }
+
