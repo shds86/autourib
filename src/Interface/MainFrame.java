@@ -22,6 +22,7 @@ public class MainFrame extends javax.swing.JFrame {
     options TmpOptions = new options();
     ftp_work exchange = null;
     JFileChooser jFileChooserPlatformSource = new JFileChooser();
+    JFileChooser jFileChooserBaseSource = new JFileChooser();
 
     public MainFrame()
     {
@@ -48,6 +49,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButtonRunAll = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextAreaSystemLog = new javax.swing.JTextArea();
+        jButtonRunSynch = new javax.swing.JButton();
         jPanelOptions = new javax.swing.JPanel();
         jTextFieldBaseSource = new javax.swing.JTextField();
         jButtonCancel = new javax.swing.JButton();
@@ -96,10 +98,12 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTextAreaSystemLog.setColumns(1);
         jTextAreaSystemLog.setEditable(false);
-        jTextAreaSystemLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jTextAreaSystemLog.setFont(new java.awt.Font("Monospaced", 0, 12));
         jTextAreaSystemLog.setRows(1);
         jTextAreaSystemLog.setText("Системный лог...");
         jScrollPane2.setViewportView(jTextAreaSystemLog);
+
+        jButtonRunSynch.setText("Синхронизация");
 
         javax.swing.GroupLayout jPanelMainLayout = new javax.swing.GroupLayout(jPanelMain);
         jPanelMain.setLayout(jPanelMainLayout);
@@ -112,7 +116,8 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jButtonRunUpload, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
                     .addComponent(jButtonRunDownload, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
                     .addComponent(jButtonRunAll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonRunInfile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE))
+                    .addComponent(jButtonRunInfile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                    .addComponent(jButtonRunSynch, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -120,22 +125,23 @@ public class MainFrame extends javax.swing.JFrame {
         jPanelMainLayout.setVerticalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMainLayout.createSequentialGroup()
-                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelMainLayout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jButtonRunAll)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonRunInfile)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonRunDownload)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonRunUpload)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonRunOutfile))
-                    .addGroup(jPanelMainLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)))
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jPanelMainLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jButtonRunAll)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonRunInfile)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonRunDownload)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonRunUpload)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonRunOutfile)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addComponent(jButtonRunSynch)
+                .addGap(38, 38, 38))
         );
 
         jTabbedPane1.addTab("Главная", jPanelMain);
@@ -172,6 +178,11 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         jButtonSelBaseSource.setText("...");
+        jButtonSelBaseSource.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSelBaseSourceActionPerformed(evt);
+            }
+        });
 
         jTextFieldBasePass.setText("jPasswordField1");
 
@@ -394,7 +405,6 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButtonSelPlatformSourceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelPlatformSourceActionPerformed
         // указываем папку с запускалкой 1С
         // открыть диалог выбора файла; если файл выбран - присваиваем его имя в поле
-
         FileNameExtensionFilter filter = new FileNameExtensionFilter("*.exe", "exe");
         jFileChooserPlatformSource.setFileFilter(filter);
         int result = jFileChooserPlatformSource.showOpenDialog(null);   //объявляем, в след.строке присваиваем
@@ -407,6 +417,18 @@ public class MainFrame extends javax.swing.JFrame {
     {//GEN-HEADEREND:event_jTextFieldFileOnServerActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldFileOnServerActionPerformed
+
+    @SuppressWarnings("static-access")
+    private void jButtonSelBaseSourceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelBaseSourceActionPerformed
+        // указываем папку с базой
+        // открыть диалог выбора файла; если файл выбран - присваиваем его имя в поле
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("*.MD", "MD");
+        jFileChooserBaseSource.setFileFilter(filter);
+        int result = jFileChooserBaseSource.showOpenDialog(null);   //объявляем, в след.строке присваиваем
+        if (result == jFileChooserBaseSource.APPROVE_OPTION) {
+            jTextFieldBaseSource.setText(jFileChooserBaseSource.getSelectedFile().getAbsolutePath());
+        }
+    }//GEN-LAST:event_jButtonSelBaseSourceActionPerformed
 
     private void Apply() {
         //выгружаем в файл настроек и записываем его
@@ -424,6 +446,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonRunDownload;
     private javax.swing.JButton jButtonRunInfile;
     private javax.swing.JButton jButtonRunOutfile;
+    private javax.swing.JButton jButtonRunSynch;
     private javax.swing.JButton jButtonRunUpload;
     private javax.swing.JButton jButtonSelBaseSource;
     private javax.swing.JButton jButtonSelPlatformSource;
