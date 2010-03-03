@@ -20,7 +20,13 @@ public class MainFrame extends javax.swing.JFrame {
     ftp_work exchange = null;
     JFileChooser jFileChooserPlatformSource = new JFileChooser();
 
-    public MainFrame() {
+    public MainFrame()
+    {
+        try
+        {
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        }
+        catch (Exception err){}
         initComponents();
         checkingOptionFile();
         getDateAndTime();
@@ -87,6 +93,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTextAreaSystemLog.setColumns(1);
         jTextAreaSystemLog.setEditable(false);
+        jTextAreaSystemLog.setFont(new java.awt.Font("Monospaced", 0, 12));
         jTextAreaSystemLog.setRows(1);
         jTextAreaSystemLog.setText("Системный лог...");
         jScrollPane2.setViewportView(jTextAreaSystemLog);
@@ -103,9 +110,9 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jButtonRunDownload, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
                     .addComponent(jButtonRunAll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonRunInfile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE))
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanelMainLayout.setVerticalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
