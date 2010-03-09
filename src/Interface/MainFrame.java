@@ -371,24 +371,30 @@ public class MainFrame extends javax.swing.JFrame {
 
         exchange.parsing_folder();
         jTextAreaSystemLog.append("\n" + getDateAndTime() + " Подключение к фтп-серверу...");
+        jTextAreaSystemLog.repaint();
         if ((err=exchange.ftp_connect()) == consterr.NOT_ERR)
         {
             jTextAreaSystemLog.append("\n" + getDateAndTime() + " Подключение прошло успешно...");
+            jTextAreaSystemLog.repaint();
             
             jTextAreaSystemLog.append("\n" + getDateAndTime() + " Загружаю файл...");
+            jTextAreaSystemLog.repaint();
             if ((err=exchange.get_file()) == consterr.NOT_ERR)
             {
                 jTextAreaSystemLog.append("\n" + getDateAndTime() + " Получение файла прошло успешно...");
+                jTextAreaSystemLog.repaint();
             }
             else
             {
                 jTextAreaSystemLog.append("\n" + getDateAndTime() + " "+consterr.PrintErr(err));
+                jTextAreaSystemLog.repaint();
                 return;
             }
         }
         else
         {
             jTextAreaSystemLog.append("\n" + getDateAndTime() + " " + consterr.PrintErr(err));
+            jTextAreaSystemLog.repaint();
             return;
         }
     }//GEN-LAST:event_jButtonRunAllActionPerformed
@@ -433,6 +439,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void Apply() {
         //выгружаем в файл настроек и записываем его
         jTextAreaSystemLog.append("\n" + getDateAndTime() + " Записываю настройки в файл...");
+        jTextAreaSystemLog.repaint();
         saveOptions();
     }
 
@@ -493,9 +500,11 @@ public class MainFrame extends javax.swing.JFrame {
         dir = new File(userDir);
         if (!dir.exists()) {
             jTextAreaSystemLog.append(getDateAndTime() + " Каталог настроек не найден и будет создан...");
+            jTextAreaSystemLog.repaint();
             dir.mkdirs();
         } else {
             jTextAreaSystemLog.append(getDateAndTime() + " Каталог настроек найден...");
+            jTextAreaSystemLog.repaint();
         }
 
         //проверяем, есть ли файл настроек
@@ -505,11 +514,13 @@ public class MainFrame extends javax.swing.JFrame {
         if (!optionFile.exists()) {
             try {
                 jTextAreaSystemLog.append("\n" + getDateAndTime() + " Файл настроек не найден и будет создан...");
+                jTextAreaSystemLog.repaint();
                 optionFile.createNewFile();
             } catch (IOException ex) {
             }
         } else {
             jTextAreaSystemLog.append("\n" + getDateAndTime() + " Файл настроек найден...");
+            jTextAreaSystemLog.repaint();
             loadOptions();
         }
     }
@@ -524,9 +535,11 @@ public class MainFrame extends javax.swing.JFrame {
                 StringTokenizer st = new StringTokenizer(stroka, ";");
                 if (st.countTokens() < 7) {
                     jTextAreaSystemLog.append("\n" + getDateAndTime() + " Неверный файл настроек!..");
+                    jTextAreaSystemLog.repaint();
                     break;
                 }
                 jTextAreaSystemLog.append("\n" + getDateAndTime() + " Читаю файл настроек...");
+                jTextAreaSystemLog.repaint();
                 int tokencounter = 1;
                 while (st.hasMoreTokens()) {
                     switch (tokencounter) {
@@ -589,6 +602,7 @@ public class MainFrame extends javax.swing.JFrame {
                     tokencounter++;
                 }
                 jTextAreaSystemLog.append("\n" + getDateAndTime() + " Файл настроек прочитан...");
+                jTextAreaSystemLog.repaint();
             }
         } catch (IOException e) {
         }
@@ -626,6 +640,7 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (IOException e) {
         }
         jTextAreaSystemLog.append("\n" + getDateAndTime() + " Настройки записаны...");
+        jTextAreaSystemLog.repaint();
     }
 
     public String getDateAndTime() {
