@@ -4,9 +4,7 @@ import java.util.*;
 import javax.swing.*;
 import java.io.*;
 import URBD1SLib.ftp.*;
-import java.awt.Color;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.text.*;
 
 
 public class MainFrame extends javax.swing.JFrame {
@@ -21,6 +19,7 @@ public class MainFrame extends javax.swing.JFrame {
     String ftpPass = null;     //пароль пользователя ftp
     options TmpOptions = new options();
     ftp_work exchange = null;
+    run_1s run1s = null;
     JFileChooser jFileChooserPlatformSource = new JFileChooser();
     JFileChooser jFileChooserBaseSource = new JFileChooser();
 
@@ -362,41 +361,9 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButtonRunAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunAllActionPerformed
         //ДИМЫЧ! надо разбить код этого метода на 4 метода, и запускать их отсюда последовательно,
         //т.к. должна быть возможность запускать эти методы отдельно друг от друга (infile,download и.т.д)
-        byte err;
-        exchange = new ftp_work(TmpOptions.get_FTP_SERVER_NAME(),
-                                TmpOptions.get_FTP_SERVER_LOGIN(),
-                                TmpOptions.get_FTP_SERVER_PASS(),
-                                TmpOptions.get_cp_file(),
-                                TmpOptions.get_pc_file());
-
-        exchange.parsing_folder();
-        jTextAreaSystemLog.append("\n" + getDateAndTime() + " Подключение к фтп-серверу...");
-        jTextAreaSystemLog.repaint();
-        if ((err=exchange.ftp_connect()) == consterr.NOT_ERR)
-        {
-            jTextAreaSystemLog.append("\n" + getDateAndTime() + " Подключение прошло успешно...");
-            jTextAreaSystemLog.repaint();
-            
-            jTextAreaSystemLog.append("\n" + getDateAndTime() + " Загружаю файл...");
-            jTextAreaSystemLog.repaint();
-            if ((err=exchange.get_file()) == consterr.NOT_ERR)
-            {
-                jTextAreaSystemLog.append("\n" + getDateAndTime() + " Получение файла прошло успешно...");
-                jTextAreaSystemLog.repaint();
-            }
-            else
-            {
-                jTextAreaSystemLog.append("\n" + getDateAndTime() + " "+consterr.PrintErr(err));
-                jTextAreaSystemLog.repaint();
-                return;
-            }
-        }
-        else
-        {
-            jTextAreaSystemLog.append("\n" + getDateAndTime() + " " + consterr.PrintErr(err));
-            jTextAreaSystemLog.repaint();
-            return;
-        }
+        this.getRootPane().updateUI();
+        GetFileOnFTP();
+        RunWith1S();
     }//GEN-LAST:event_jButtonRunAllActionPerformed
 
     private void jButtonApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApplyActionPerformed
@@ -416,6 +383,7 @@ public class MainFrame extends javax.swing.JFrame {
         int result = jFileChooserPlatformSource.showOpenDialog(null);   //объявляем, в след.строке присваиваем
         if (result == jFileChooserPlatformSource.APPROVE_OPTION) {
             jTextFieldPlatformSource.setText(jFileChooserPlatformSource.getSelectedFile().getAbsolutePath());
+            jTextAreaSystemLog.repaint();
         }
     }//GEN-LAST:event_jButtonSelPlatformSourceActionPerformed
 
@@ -441,6 +409,85 @@ public class MainFrame extends javax.swing.JFrame {
         jTextAreaSystemLog.append("\n" + getDateAndTime() + " Записываю настройки в файл...");
         jTextAreaSystemLog.repaint();
         saveOptions();
+    }
+
+    private void GetFileOnFTP()
+    {
+        byte err;
+        exchange = new ftp_work(TmpOptions.get_FTP_SERVER_NAME(),
+                                TmpOptions.get_FTP_SERVER_LOGIN(),
+                                TmpOptions.get_FTP_SERVER_PASS(),
+                                TmpOptions.get_cp_file(),
+                                TmpOptions.get_pc_file());
+
+        exchange.parsing_folder();
+        jTextAreaSystemLog.append("\n" + getDateAndTime() + " Подключение к фтп-серверу...");
+        jTextAreaSystemLog.repaint();
+        this.getRootPane().updateUI();
+        if ((err=exchange.ftp_connect()) == consterr.NOT_ERR)
+        {
+            jTextAreaSystemLog.append("\n" + getDateAndTime() + " Подключение прошло успешно...");
+            jTextAreaSystemLog.append("\n" + getDateAndTime() + " Загружаю файл...");
+            if ((err=exchange.get_file()) == consterr.NOT_ERR)
+            {
+                jTextAreaSystemLog.append("\n" + getDateAndTime() + " Получение файла прошло успешно...");
+                return;
+            }
+            else
+            {
+                jTextAreaSystemLog.append("\n" + getDateAndTime() + " "+consterr.PrintErr(err));
+                return;
+            }
+        }
+        else
+        {
+            jTextAreaSystemLog.append("\n" + getDateAndTime() + " " + consterr.PrintErr(err));
+            return;
+        }
+    }
+
+    private void RunWith1S()
+    {
+        int err;
+        run1s = new run_1s(TmpOptions.get_PATH_1S(),
+                           TmpOptions.get_PATH_BASE(),
+                           TmpOptions.get_BASE_LOGIN(),
+                           new String(TmpOptions.get_BASE_PASS()));
+        List<String> tmplst = null;
+        err=run1s.create_prm();
+        if (err==consterr.NOT_ERR)
+        {
+            jTextAreaSystemLog.append("\n" + getDateAndTime() + " Запускаем 1С");
+            jTextAreaSystemLog.repaint();
+            err=run1s.start();
+            if (err==consterr.NOT_ERR)
+            {
+                tmplst = run1s.parsing_log();
+                if (tmplst != null)
+                {
+                    for (int i = 0; i < tmplst.size(); i++)
+                    {
+                        jTextAreaSystemLog.append("\n" + getDateAndTime() +" "+ tmplst.get(i));
+                        jTextAreaSystemLog.repaint();
+                    }
+                }
+                else
+                {
+                    jTextAreaSystemLog.append("\n" + getDateAndTime() +" "+ consterr.PrintErr((byte)err));
+                    jTextAreaSystemLog.repaint();
+                }
+            }
+            else
+            {
+                jTextAreaSystemLog.append("\n" + getDateAndTime() +" "+ consterr.PrintErr((byte)err));
+                jTextAreaSystemLog.repaint();
+            }
+        }
+        else
+        {
+            jTextAreaSystemLog.append("\n" + getDateAndTime() +" "+ consterr.PrintErr((byte)err));
+            jTextAreaSystemLog.repaint();
+        }
     }
 
     public static void main(String args[]) {
