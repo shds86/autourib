@@ -804,8 +804,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     public String getDateAndTime() {
         Date date = new Date(System.currentTimeMillis());
-        String customerDate = (1900 + date.getYear()) + "-"
-                + (1 + date.getMonth()) + "-" + date.getDate()
+        String customerDate = date.getDate() + "/" + (1 + date.getMonth()) + "/" + (1900 + date.getYear())
                 + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
         return customerDate;
     }
