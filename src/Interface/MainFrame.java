@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.io.*;
 import URBD1SLib.ftp.*;
 import java.awt.AWTException;
+import java.awt.PopupMenu;
 import java.awt.SystemTray;
 import javax.swing.filechooser.FileNameExtensionFilter;
 //import java.awt.image.*;
@@ -55,6 +56,7 @@ public class MainFrame extends javax.swing.JFrame {
         {
             icon = new TrayIcon(image);
             icon.setToolTip(MainFrame.this.getTitle());
+
             icon.addActionListener(new ActionListener(){
 
                 public void actionPerformed(ActionEvent e) {
@@ -71,6 +73,7 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanelMain = new javax.swing.JPanel();
         jButtonRunOutfile = new javax.swing.JButton();
@@ -660,6 +663,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuQustionAbout;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelOptions;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextAreaSystemLog;
