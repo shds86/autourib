@@ -72,13 +72,13 @@ public class MainFrame extends javax.swing.JFrame {
         jTextFieldFTPPass = new javax.swing.JPasswordField();
         jTextFieldInfileOnServer = new javax.swing.JTextField();
         jTextFieldInfileOnLocalhost = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelInfileOnServer = new javax.swing.JLabel();
+        jLabelInfileOnLocalhost = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTextFieldOutfileOnLocalhost = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        jLabelOutfileOnLocalhost = new javax.swing.JLabel();
         jTextFieldOutfileOnServer = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        jLabelOutfileOnServer = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuFileExit = new javax.swing.JMenuItem();
@@ -221,15 +221,15 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTextFieldFTPPass.setText("jPasswordField1");
 
-        jLabel1.setText("Файл загрузки на сервере");
+        jLabelInfileOnServer.setText("Файл загрузки на сервере");
 
-        jLabel2.setText("Файл загрузки локально");
+        jLabelInfileOnLocalhost.setText("Файл загрузки локально");
 
         jLabel3.setText("FTP-пароль");
 
-        jLabel4.setText("Файл выгрузки локально");
+        jLabelOutfileOnLocalhost.setText("Файл выгрузки локально");
 
-        jLabel5.setText("Файл выгрузки на сервере");
+        jLabelOutfileOnServer.setText("Файл выгрузки на сервере");
 
         javax.swing.GroupLayout jPanelOptionsLayout = new javax.swing.GroupLayout(jPanelOptions);
         jPanelOptions.setLayout(jPanelOptionsLayout);
@@ -269,18 +269,18 @@ public class MainFrame extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanelOptionsLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
+                                .addComponent(jLabelInfileOnServer)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jTextFieldInfileOnServer, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel3)
                             .addGroup(jPanelOptionsLayout.createSequentialGroup()
-                                .addComponent(jLabel5)
+                                .addComponent(jLabelOutfileOnServer)
                                 .addGap(10, 10, 10)
                                 .addComponent(jTextFieldOutfileOnServer, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanelOptionsLayout.createSequentialGroup()
                                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel4))
+                                    .addComponent(jLabelInfileOnLocalhost)
+                                    .addComponent(jLabelOutfileOnLocalhost))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jTextFieldOutfileOnLocalhost)
@@ -340,25 +340,25 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(jTextFieldFTPPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(14, 14, 14)
                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(jLabelInfileOnServer)
                     .addComponent(jTextFieldInfileOnServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(3, 3, 3)
                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelOptionsLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(jLabel2))
+                        .addComponent(jLabelInfileOnLocalhost))
                     .addGroup(jPanelOptionsLayout.createSequentialGroup()
                         .addGap(9, 9, 9)
                         .addComponent(jTextFieldInfileOnLocalhost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(12, 12, 12)
                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(jLabelOutfileOnLocalhost)
                     .addComponent(jTextFieldOutfileOnLocalhost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldOutfileOnServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                    .addComponent(jLabelOutfileOnServer))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonApply)
                     .addComponent(jButtonCancel))
@@ -596,15 +596,15 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonRunUpload;
     private javax.swing.JButton jButtonSelBaseSource;
     private javax.swing.JButton jButtonSelPlatformSource;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelBaseSource;
     private javax.swing.JLabel jLabelBaseUserAndPass;
     private javax.swing.JLabel jLabelFTPSource;
     private javax.swing.JLabel jLabelFTPUserAndPass;
+    private javax.swing.JLabel jLabelInfileOnLocalhost;
+    private javax.swing.JLabel jLabelInfileOnServer;
+    private javax.swing.JLabel jLabelOutfileOnLocalhost;
+    private javax.swing.JLabel jLabelOutfileOnServer;
     private javax.swing.JLabel jLabelPlatformSource;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuFile;
@@ -792,8 +792,8 @@ public class MainFrame extends javax.swing.JFrame {
             TmpOptions.set_FTP_SERVER_NAME(jTextFieldFTPSource.getText());
             TmpOptions.set_FTP_SERVER_LOGIN(jTextFieldFTPUser.getText());
             TmpOptions.set_FTP_SERVER_PASS(jTextFieldFTPPass.getPassword());
-            TmpOptions.set_cp_ftp_file(jTextFieldFileOnServer.getText());
-            TmpOptions.set_pc_local_file(jTextFieldFileOnLocalhost.getText());
+            TmpOptions.set_cp_ftp_file(jTextFieldInfileOnServer.getText());
+            TmpOptions.set_pc_local_file(jTextFieldInfileOnLocalhost.getText());
 
 
         } catch (IOException e) {

@@ -262,20 +262,20 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelInfileOnServer" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="jTextFieldInfileOnServer" min="-2" pref="232" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
-                                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelOutfileOnServer" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                       <Component id="jTextFieldOutfileOnServer" min="-2" pref="232" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabelInfileOnLocalhost" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabelOutfileOnLocalhost" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -357,14 +357,14 @@
                       </Group>
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelInfileOnServer" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextFieldInfileOnServer" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelInfileOnLocalhost" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
@@ -373,13 +373,13 @@
                       </Group>
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelOutfileOnLocalhost" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextFieldOutfileOnLocalhost" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jTextFieldOutfileOnServer" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelOutfileOnServer" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -483,12 +483,12 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldInfileOnLocalhost">
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel1">
+            <Component class="javax.swing.JLabel" name="jLabelInfileOnServer">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x424;&#x430;&#x439;&#x43b; &#x437;&#x430;&#x433;&#x440;&#x443;&#x437;&#x43a;&#x438; &#x43d;&#x430; &#x441;&#x435;&#x440;&#x432;&#x435;&#x440;&#x435;"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel2">
+            <Component class="javax.swing.JLabel" name="jLabelInfileOnLocalhost">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x424;&#x430;&#x439;&#x43b; &#x437;&#x430;&#x433;&#x440;&#x443;&#x437;&#x43a;&#x438; &#x43b;&#x43e;&#x43a;&#x430;&#x43b;&#x44c;&#x43d;&#x43e;"/>
               </Properties>
@@ -503,14 +503,14 @@
                 <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="MainFrame_jTextFieldFileOnLocalhost1"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel4">
+            <Component class="javax.swing.JLabel" name="jLabelOutfileOnLocalhost">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x424;&#x430;&#x439;&#x43b; &#x432;&#x44b;&#x433;&#x440;&#x443;&#x437;&#x43a;&#x438; &#x43b;&#x43e;&#x43a;&#x430;&#x43b;&#x44c;&#x43d;&#x43e;"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldOutfileOnServer">
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel5">
+            <Component class="javax.swing.JLabel" name="jLabelOutfileOnServer">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x424;&#x430;&#x439;&#x43b; &#x432;&#x44b;&#x433;&#x440;&#x443;&#x437;&#x43a;&#x438; &#x43d;&#x430; &#x441;&#x435;&#x440;&#x432;&#x435;&#x440;&#x435;"/>
               </Properties>
