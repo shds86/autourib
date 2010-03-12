@@ -31,6 +31,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
         catch (Exception err){}
         initComponents();
+        setLocationRelativeTo(null);
         jButtonRunDownload.setEnabled(false);
         jButtonRunUpload.setEnabled(false);
         jButtonRunOutfile.setEnabled(false);
@@ -69,14 +70,14 @@ public class MainFrame extends javax.swing.JFrame {
         jButtonSelBaseSource = new javax.swing.JButton();
         jTextFieldBasePass = new javax.swing.JPasswordField();
         jTextFieldFTPPass = new javax.swing.JPasswordField();
-        jTextFieldFileOnServer = new javax.swing.JTextField();
-        jTextFieldFileOnLocalhost = new javax.swing.JTextField();
+        jTextFieldInfileOnServer = new javax.swing.JTextField();
+        jTextFieldInfileOnLocalhost = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextFieldFileOnLocalhost1 = new javax.swing.JTextField();
+        jTextFieldOutfileOnLocalhost = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextFieldFileOnLocalhost2 = new javax.swing.JTextField();
+        jTextFieldOutfileOnServer = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
@@ -126,7 +127,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTextAreaSystemLog.setColumns(1);
         jTextAreaSystemLog.setEditable(false);
-        jTextAreaSystemLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jTextAreaSystemLog.setFont(new java.awt.Font("Monospaced", 0, 12));
         jTextAreaSystemLog.setRows(1);
         jTextAreaSystemLog.setText("Системный лог...");
         jScrollPane2.setViewportView(jTextAreaSystemLog);
@@ -270,20 +271,20 @@ public class MainFrame extends javax.swing.JFrame {
                             .addGroup(jPanelOptionsLayout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldFileOnServer, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextFieldInfileOnServer, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel3)
                             .addGroup(jPanelOptionsLayout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addGap(10, 10, 10)
-                                .addComponent(jTextFieldFileOnLocalhost2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextFieldOutfileOnServer, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanelOptionsLayout.createSequentialGroup()
                                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel4))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldFileOnLocalhost1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextFieldFileOnLocalhost, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jTextFieldOutfileOnLocalhost)
+                                    .addComponent(jTextFieldInfileOnLocalhost, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)))))
                     .addGroup(jPanelOptionsLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButtonApply)
@@ -296,7 +297,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextFieldBasePass, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jTextFieldBaseUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))))
-                .addGap(249, 249, 249))
+                .addGap(187, 187, 187))
         );
         jPanelOptionsLayout.setVerticalGroup(
             jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -340,22 +341,24 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextFieldFileOnServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
+                    .addComponent(jTextFieldInfileOnServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(3, 3, 3)
                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelOptionsLayout.createSequentialGroup()
-                        .addGap(3, 3, 3)
+                        .addGap(12, 12, 12)
                         .addComponent(jLabel2))
-                    .addComponent(jTextFieldFileOnLocalhost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelOptionsLayout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jTextFieldInfileOnLocalhost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(12, 12, 12)
                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextFieldFileOnLocalhost1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldOutfileOnLocalhost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldFileOnLocalhost2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldOutfileOnServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonApply)
                     .addComponent(jButtonCancel))
@@ -620,10 +623,10 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPasswordField jTextFieldFTPPass;
     private javax.swing.JTextField jTextFieldFTPSource;
     private javax.swing.JTextField jTextFieldFTPUser;
-    private javax.swing.JTextField jTextFieldFileOnLocalhost;
-    private javax.swing.JTextField jTextFieldFileOnLocalhost1;
-    private javax.swing.JTextField jTextFieldFileOnLocalhost2;
-    private javax.swing.JTextField jTextFieldFileOnServer;
+    private javax.swing.JTextField jTextFieldInfileOnLocalhost;
+    private javax.swing.JTextField jTextFieldInfileOnServer;
+    private javax.swing.JTextField jTextFieldOutfileOnLocalhost;
+    private javax.swing.JTextField jTextFieldOutfileOnServer;
     private javax.swing.JTextField jTextFieldPlatformSource;
     // End of variables declaration//GEN-END:variables
 
@@ -730,13 +733,13 @@ public class MainFrame extends javax.swing.JFrame {
                         case 8: {
                             tmp = st.nextToken();
                             TmpOptions.set_cp_ftp_file(tmp);
-                            jTextFieldFileOnServer.setText(tmp);
+                            jTextFieldInfileOnServer.setText(tmp);
                             break;
                         }
                         case 9: {
                             tmp = st.nextToken();
                             TmpOptions.set_pc_local_file(tmp);
-                            jTextFieldFileOnLocalhost.setText(tmp);
+                            jTextFieldInfileOnLocalhost.setText(tmp);
                             break;
                         }
                     }
@@ -762,8 +765,10 @@ public class MainFrame extends javax.swing.JFrame {
                     + jTextFieldFTPSource.getText() + ";"
                     + jTextFieldFTPUser.getText() + ";"
                     + new String(jTextFieldFTPPass.getPassword()) + ";"
-                    + jTextFieldFileOnServer.getText() + ";"
-                    + jTextFieldFileOnLocalhost.getText();
+                    + jTextFieldInfileOnServer.getText() + ";"
+                    + jTextFieldInfileOnLocalhost.getText() + ";"
+                    + jTextFieldOutfileOnServer.getText() + ";"
+                    + jTextFieldOutfileOnLocalhost.getText();
             System.out.println(optionString);
             outoptionfile.write(optionString);
             outoptionfile.close();
@@ -777,6 +782,7 @@ public class MainFrame extends javax.swing.JFrame {
             TmpOptions.set_FTP_SERVER_PASS(jTextFieldFTPPass.getPassword());
             TmpOptions.set_cp_ftp_file(jTextFieldFileOnServer.getText());
             TmpOptions.set_pc_local_file(jTextFieldFileOnLocalhost.getText());
+
 
         } catch (IOException e) {
         }
