@@ -506,8 +506,8 @@ public class MainFrame extends javax.swing.JFrame {
         exchange = new ftp_work(TmpOptions.get_FTP_SERVER_NAME(),
                                 TmpOptions.get_FTP_SERVER_LOGIN(),
                                 TmpOptions.get_FTP_SERVER_PASS(),
-                                TmpOptions.get_cp_file(),
-                                TmpOptions.get_pc_file());
+                                TmpOptions.get_cp_ftp_file(),
+                                TmpOptions.get_pc_local_file());
 
         exchange.parsing_folder();
         jTextAreaSystemLog.append("\n" + getDateAndTime() + " Подключение к фтп-серверу...");
@@ -729,13 +729,13 @@ public class MainFrame extends javax.swing.JFrame {
                         }
                         case 8: {
                             tmp = st.nextToken();
-                            TmpOptions.set_cp_file(tmp);
+                            TmpOptions.set_cp_ftp_file(tmp);
                             jTextFieldFileOnServer.setText(tmp);
                             break;
                         }
                         case 9: {
                             tmp = st.nextToken();
-                            TmpOptions.set_pc_file(tmp);
+                            TmpOptions.set_pc_local_file(tmp);
                             jTextFieldFileOnLocalhost.setText(tmp);
                             break;
                         }
@@ -775,8 +775,8 @@ public class MainFrame extends javax.swing.JFrame {
             TmpOptions.set_FTP_SERVER_NAME(jTextFieldFTPSource.getText());
             TmpOptions.set_FTP_SERVER_LOGIN(jTextFieldFTPUser.getText());
             TmpOptions.set_FTP_SERVER_PASS(jTextFieldFTPPass.getPassword());
-            TmpOptions.set_cp_file(jTextFieldFileOnServer.getText());
-            TmpOptions.set_pc_file(jTextFieldFileOnLocalhost.getText());
+            TmpOptions.set_cp_ftp_file(jTextFieldFileOnServer.getText());
+            TmpOptions.set_pc_local_file(jTextFieldFileOnLocalhost.getText());
 
         } catch (IOException e) {
         }
