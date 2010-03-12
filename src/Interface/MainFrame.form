@@ -381,7 +381,7 @@
                           <Component id="jTextFieldOutfileOnServer" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="8" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jButtonApply" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButtonCancel" alignment="3" min="-2" max="-2" attributes="0"/>

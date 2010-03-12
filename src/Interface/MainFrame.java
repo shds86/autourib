@@ -744,13 +744,13 @@ public class MainFrame extends javax.swing.JFrame {
                         }
                         case 10: {
                             tmp = st.nextToken();
-                            //TmpOptions.set_pc_local_file(tmp);
+                            TmpOptions.set_cp_local_file(tmp);
                             jTextFieldInfileOnServer.setText(tmp);
                             break;
                         }
                         case 11: {
                             tmp = st.nextToken();
-                            //TmpOptions.set_pc_local_file(tmp);
+                            TmpOptions.set_pc_ftp_file(tmp);
                             jTextFieldOutfileOnLocalhost.setText(tmp);
                             break;
                         }
