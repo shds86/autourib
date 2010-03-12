@@ -27,10 +27,13 @@ public class MainFrame extends javax.swing.JFrame {
     {
         try
         {
-        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         }
         catch (Exception err){}
         initComponents();
+        jButtonRunDownload.setEnabled(false);
+        jButtonRunUpload.setEnabled(false);
+        jButtonRunOutfile.setEnabled(false);
         checkingOptionFile();
         getDateAndTime();
     }
@@ -87,12 +90,32 @@ public class MainFrame extends javax.swing.JFrame {
         setResizable(false);
 
         jButtonRunOutfile.setText("Отправить на сервер");
+        jButtonRunOutfile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRunOutfileActionPerformed(evt);
+            }
+        });
 
         jButtonRunUpload.setText("Выгрузить из базы");
+        jButtonRunUpload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRunUploadActionPerformed(evt);
+            }
+        });
 
         jButtonRunDownload.setText("Загрузить в базу");
+        jButtonRunDownload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRunDownloadActionPerformed(evt);
+            }
+        });
 
         jButtonRunInfile.setText("Принять с сервера");
+        jButtonRunInfile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRunInfileActionPerformed(evt);
+            }
+        });
 
         jButtonRunAll.setText("Запустить обмен");
         jButtonRunAll.addActionListener(new java.awt.event.ActionListener() {
@@ -106,7 +129,6 @@ public class MainFrame extends javax.swing.JFrame {
         jTextAreaSystemLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jTextAreaSystemLog.setRows(1);
         jTextAreaSystemLog.setText("Системный лог...");
-        jTextAreaSystemLog.setEnabled(false);
         jScrollPane2.setViewportView(jTextAreaSystemLog);
 
         jButtonRunSynch.setText("Синхронизация");
@@ -141,12 +163,12 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jButtonRunUpload)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonRunOutfile)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
                 .addComponent(jButtonRunSynch)
                 .addGap(38, 38, 38))
             .addGroup(jPanelMainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -380,11 +402,11 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
         );
 
         pack();
@@ -442,6 +464,34 @@ public class MainFrame extends javax.swing.JFrame {
             jTextFieldBaseSource.setText(jFileChooserBaseSource.getSelectedFile().getParent());
         }
     }//GEN-LAST:event_jButtonSelBaseSourceActionPerformed
+
+    private void jButtonRunInfileActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonRunInfileActionPerformed
+    {//GEN-HEADEREND:event_jButtonRunInfileActionPerformed
+        jButtonRunInfile.setEnabled(false);
+
+        jButtonRunDownload.setEnabled(true);
+    }//GEN-LAST:event_jButtonRunInfileActionPerformed
+
+    private void jButtonRunDownloadActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonRunDownloadActionPerformed
+    {//GEN-HEADEREND:event_jButtonRunDownloadActionPerformed
+        jButtonRunDownload.setEnabled(false);
+
+        jButtonRunUpload.setEnabled(true);
+    }//GEN-LAST:event_jButtonRunDownloadActionPerformed
+
+    private void jButtonRunOutfileActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonRunOutfileActionPerformed
+    {//GEN-HEADEREND:event_jButtonRunOutfileActionPerformed
+        jButtonRunOutfile.setEnabled(false);
+
+        jButtonRunInfile.setEnabled(true);
+    }//GEN-LAST:event_jButtonRunOutfileActionPerformed
+
+    private void jButtonRunUploadActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonRunUploadActionPerformed
+    {//GEN-HEADEREND:event_jButtonRunUploadActionPerformed
+        jButtonRunUpload.setEnabled(false);
+
+        jButtonRunOutfile.setEnabled(true);
+    }//GEN-LAST:event_jButtonRunUploadActionPerformed
 
     private void Apply() {
         //выгружаем в файл настроек и записываем его

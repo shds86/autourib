@@ -69,12 +69,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jTabbedPane1" alignment="1" pref="690" max="32767" attributes="1"/>
+          <Component id="jTabbedPane1" min="-2" pref="628" max="-2" attributes="1"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jTabbedPane1" alignment="1" pref="412" max="32767" attributes="0"/>
+          <Component id="jTabbedPane1" alignment="1" pref="408" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -124,13 +124,13 @@
                       <Component id="jButtonRunUpload" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jButtonRunOutfile" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="139" max="32767" attributes="0"/>
+                      <EmptySpace pref="135" max="32767" attributes="0"/>
                       <Component id="jButtonRunSynch" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" pref="365" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" pref="361" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -141,21 +141,33 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x41e;&#x442;&#x43f;&#x440;&#x430;&#x432;&#x438;&#x442;&#x44c; &#x43d;&#x430; &#x441;&#x435;&#x440;&#x432;&#x435;&#x440;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRunOutfileActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonRunUpload">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x412;&#x44b;&#x433;&#x440;&#x443;&#x437;&#x438;&#x442;&#x44c; &#x438;&#x437; &#x431;&#x430;&#x437;&#x44b;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRunUploadActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonRunDownload">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x417;&#x430;&#x433;&#x440;&#x443;&#x437;&#x438;&#x442;&#x44c; &#x432; &#x431;&#x430;&#x437;&#x443;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRunDownloadActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonRunInfile">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x41f;&#x440;&#x438;&#x43d;&#x44f;&#x442;&#x44c; &#x441; &#x441;&#x435;&#x440;&#x432;&#x435;&#x440;&#x430;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRunInfileActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonRunAll">
               <Properties>
@@ -181,7 +193,6 @@
                     </Property>
                     <Property name="rows" type="int" value="1"/>
                     <Property name="text" type="java.lang.String" value="&#x421;&#x438;&#x441;&#x442;&#x435;&#x43c;&#x43d;&#x44b;&#x439; &#x43b;&#x43e;&#x433;..."/>
-                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
               </SubComponents>
