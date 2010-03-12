@@ -742,6 +742,18 @@ public class MainFrame extends javax.swing.JFrame {
                             jTextFieldInfileOnLocalhost.setText(tmp);
                             break;
                         }
+                        case 10: {
+                            tmp = st.nextToken();
+                            //TmpOptions.set_pc_local_file(tmp);
+                            jTextFieldInfileOnServer.setText(tmp);
+                            break;
+                        }
+                        case 11: {
+                            tmp = st.nextToken();
+                            //TmpOptions.set_pc_local_file(tmp);
+                            jTextFieldOutfileOnLocalhost.setText(tmp);
+                            break;
+                        }
                     }
                     tokencounter++;
                 }
