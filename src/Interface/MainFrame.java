@@ -1,11 +1,20 @@
 package Interface;
 
+import java.awt.event.ActionEvent;
 import java.util.*;
 import javax.swing.*;
 import java.io.*;
 import URBD1SLib.ftp.*;
+import java.awt.AWTException;
+import java.awt.SystemTray;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
+//import java.awt.image.*;
+import java.awt.SystemTray.*;
+import java.awt.Toolkit;
+import java.awt.Toolkit.*;
+import java.awt.TrayIcon;
+import java.awt.TrayIcon.*;
+import java.awt.event.ActionListener;
 
 public class MainFrame extends javax.swing.JFrame {
 
@@ -22,7 +31,9 @@ public class MainFrame extends javax.swing.JFrame {
     run_1s run1s = null;
     JFileChooser jFileChooserPlatformSource = new JFileChooser();
     JFileChooser jFileChooserBaseSource = new JFileChooser();
-
+    java.awt.Image image;
+    TrayIcon icon = null;
+    
     public MainFrame()
     {
         try
@@ -37,6 +48,23 @@ public class MainFrame extends javax.swing.JFrame {
         jButtonRunOutfile.setEnabled(false);
         checkingOptionFile();
         getDateAndTime();
+
+        image = Toolkit.getDefaultToolkit().getImage("icon.gif");
+        setIconImage(image);
+        if (SystemTray.isSupported())
+        {
+            icon = new TrayIcon(image);
+            icon.setToolTip(MainFrame.this.getTitle());
+            icon.addActionListener(new ActionListener(){
+
+                public void actionPerformed(ActionEvent e) {
+                    MainFrame.this.setVisible(true);
+                    MainFrame.this.setExtendedState(MainFrame.NORMAL);
+                    java.awt.SystemTray.getSystemTray().remove(icon);
+                }
+
+            });
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -89,6 +117,11 @@ public class MainFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Клиент URBD1Slib");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowIconified(java.awt.event.WindowEvent evt) {
+                formWindowIconified(evt);
+            }
+        });
 
         jButtonRunOutfile.setText("Отправить на сервер");
         jButtonRunOutfile.addActionListener(new java.awt.event.ActionListener() {
@@ -417,7 +450,6 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jMenuFileExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileExitActionPerformed
         dispose();
-
     }//GEN-LAST:event_jMenuFileExitActionPerformed
 
     private void jMenuQuestionHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuQuestionHelpActionPerformed
@@ -495,6 +527,20 @@ public class MainFrame extends javax.swing.JFrame {
 
         jButtonRunOutfile.setEnabled(true);
     }//GEN-LAST:event_jButtonRunUploadActionPerformed
+
+    private void formWindowIconified(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowIconified
+    {//GEN-HEADEREND:event_formWindowIconified
+        // TODO add your handling code here:
+        this.setVisible(false);
+        try
+        {
+            java.awt.SystemTray.getSystemTray().add(icon);
+        }
+        catch (AWTException e1)
+        {
+            e1.printStackTrace();
+        }
+    }//GEN-LAST:event_formWindowIconified
 
     private void Apply() {
         //выгружаем в файл настроек и записываем его
