@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.io.*;
 import URBD1SLib.ftp.*;
 import java.awt.AWTException;
+import java.awt.MenuItem;
 import java.awt.PopupMenu;
 import java.awt.SystemTray;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -34,7 +35,7 @@ public class MainFrame extends javax.swing.JFrame {
     JFileChooser jFileChooserBaseSource = new JFileChooser();
     java.awt.Image image;
     TrayIcon icon = null;
-    
+    PopupMenu iconpopup;
     public MainFrame()
     {
         try
@@ -45,10 +46,25 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         jButtonRunDownload.setEnabled(false);
-        jButtonRunUpload.setEnabled(false);
+        jButtonRunUpload.setEnabled(true);
         jButtonRunOutfile.setEnabled(false);
         checkingOptionFile();
         getDateAndTime();
+        MenuItem exitpopup = new MenuItem("Выход");
+        iconpopup = new PopupMenu("IconPopUP");
+        iconpopup.addSeparator();
+        iconpopup.add(exitpopup);
+
+        exitpopup.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+//                throw new UnsupportedOperationException("Not supported yet.");
+
+                dispose();
+//                System.exit(0);
+            }
+        });
 
         image = Toolkit.getDefaultToolkit().getImage("icon.gif");
         setIconImage(image);
@@ -56,7 +72,7 @@ public class MainFrame extends javax.swing.JFrame {
         {
             icon = new TrayIcon(image);
             icon.setToolTip(MainFrame.this.getTitle());
-
+            icon.setPopupMenu(iconpopup);
             icon.addActionListener(new ActionListener(){
 
                 public void actionPerformed(ActionEvent e) {
@@ -73,7 +89,6 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanelMain = new javax.swing.JPanel();
         jButtonRunOutfile = new javax.swing.JButton();
@@ -506,7 +521,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButtonRunInfileActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonRunInfileActionPerformed
     {//GEN-HEADEREND:event_jButtonRunInfileActionPerformed
         jButtonRunInfile.setEnabled(false);
-
+        GetFileOnFTP();
         jButtonRunDownload.setEnabled(true);
     }//GEN-LAST:event_jButtonRunInfileActionPerformed
 
@@ -514,14 +529,14 @@ public class MainFrame extends javax.swing.JFrame {
     {//GEN-HEADEREND:event_jButtonRunDownloadActionPerformed
         jButtonRunDownload.setEnabled(false);
 
-        jButtonRunUpload.setEnabled(true);
+        jButtonRunInfile.setEnabled(true);
     }//GEN-LAST:event_jButtonRunDownloadActionPerformed
 
     private void jButtonRunOutfileActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonRunOutfileActionPerformed
     {//GEN-HEADEREND:event_jButtonRunOutfileActionPerformed
         jButtonRunOutfile.setEnabled(false);
 
-        jButtonRunInfile.setEnabled(true);
+        jButtonRunUpload.setEnabled(true);
     }//GEN-LAST:event_jButtonRunOutfileActionPerformed
 
     private void jButtonRunUploadActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonRunUploadActionPerformed
@@ -559,7 +574,7 @@ public class MainFrame extends javax.swing.JFrame {
                                 TmpOptions.get_FTP_SERVER_LOGIN(),
                                 TmpOptions.get_FTP_SERVER_PASS(),
                                 TmpOptions.get_cp_ftp_file(),
-                                TmpOptions.get_pc_local_file());
+                                TmpOptions.get_cp_local_file());
 
         exchange.parsing_folder();
         jTextAreaSystemLog.append("\n" + getDateAndTime() + " Подключение к фтп-серверу...");
@@ -585,6 +600,37 @@ public class MainFrame extends javax.swing.JFrame {
             jTextAreaSystemLog.append("\n" + getDateAndTime() + " " + consterr.PrintErr(err));
             return;
         }
+    }
+
+    private void PutFileOnFTP()
+    {
+        byte err;
+        exchange = new ftp_work(TmpOptions.get_FTP_SERVER_NAME(),
+                                TmpOptions.get_FTP_SERVER_LOGIN(),
+                                TmpOptions.get_FTP_SERVER_PASS());
+
+
+        if ((err=exchange.ftp_connect()) == consterr.NOT_ERR)
+        {
+            jTextAreaSystemLog.append("\n" + getDateAndTime() + " Подключение прошло успешно...");
+            jTextAreaSystemLog.append("\n" + getDateAndTime() + " Отправляю файл на север...");
+            if ((err=exchange.put_file(exchange.parsing_folder(TmpOptions.get_pc_local_file()),new File(TmpOptions.get_pc_ftp_file()))) == consterr.NOT_ERR)
+            {
+                jTextAreaSystemLog.append("\n" + getDateAndTime() + " Отправка файла прошла успешно...");
+                return;
+            }
+            else
+            {
+                jTextAreaSystemLog.append("\n" + getDateAndTime() + " "+consterr.PrintErr(err));
+                return;
+            }
+        }
+        else
+        {
+            jTextAreaSystemLog.append("\n" + getDateAndTime() + " " + consterr.PrintErr(err));
+            return;
+        }
+
     }
 
     private void RunWith1S()
@@ -663,7 +709,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuQustionAbout;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelOptions;
-    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextAreaSystemLog;
@@ -788,20 +833,20 @@ public class MainFrame extends javax.swing.JFrame {
                         }
                         case 9: {
                             tmp = st.nextToken();
-                            TmpOptions.set_pc_local_file(tmp);
+                            TmpOptions.set_cp_local_file(tmp);
                             jTextFieldInfileOnLocalhost.setText(tmp);
                             break;
                         }
                         case 10: {
                             tmp = st.nextToken();
-                            TmpOptions.set_cp_local_file(tmp);
-                            jTextFieldInfileOnServer.setText(tmp);
+                            TmpOptions.set_pc_local_file(tmp);
+                            jTextFieldOutfileOnLocalhost.setText(tmp);
                             break;
                         }
                         case 11: {
                             tmp = st.nextToken();
                             TmpOptions.set_pc_ftp_file(tmp);
-                            jTextFieldOutfileOnLocalhost.setText(tmp);
+                            jTextFieldOutfileOnServer.setText(tmp);
                             break;
                         }
                     }
@@ -843,7 +888,9 @@ public class MainFrame extends javax.swing.JFrame {
             TmpOptions.set_FTP_SERVER_LOGIN(jTextFieldFTPUser.getText());
             TmpOptions.set_FTP_SERVER_PASS(jTextFieldFTPPass.getPassword());
             TmpOptions.set_cp_ftp_file(jTextFieldInfileOnServer.getText());
-            TmpOptions.set_pc_local_file(jTextFieldInfileOnLocalhost.getText());
+            TmpOptions.set_cp_local_file(jTextFieldInfileOnLocalhost.getText());
+            TmpOptions.set_pc_ftp_file(jTextFieldOutfileOnServer.getText());
+            TmpOptions.set_pc_local_file(jTextFieldOutfileOnLocalhost.getText());
 
 
         } catch (IOException e) {
