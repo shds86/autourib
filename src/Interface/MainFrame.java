@@ -468,6 +468,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jMenuFileExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileExitActionPerformed
         dispose();
+
     }//GEN-LAST:event_jMenuFileExitActionPerformed
 
     private void jMenuQuestionHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuQuestionHelpActionPerformed
@@ -528,7 +529,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButtonRunDownloadActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonRunDownloadActionPerformed
     {//GEN-HEADEREND:event_jButtonRunDownloadActionPerformed
         jButtonRunDownload.setEnabled(false);
-
+        RunWith1S();
         jButtonRunInfile.setEnabled(true);
     }//GEN-LAST:event_jButtonRunDownloadActionPerformed
 
@@ -546,9 +547,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButtonRunOutfile.setEnabled(true);
     }//GEN-LAST:event_jButtonRunUploadActionPerformed
 
-    private void formWindowIconified(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowIconified
-    {//GEN-HEADEREND:event_formWindowIconified
-        // TODO add your handling code here:
+    private void formWindowIconified(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowIconified
         this.setVisible(false);
         try
         {
@@ -573,8 +572,8 @@ public class MainFrame extends javax.swing.JFrame {
         exchange = new ftp_work(TmpOptions.get_FTP_SERVER_NAME(),
                                 TmpOptions.get_FTP_SERVER_LOGIN(),
                                 TmpOptions.get_FTP_SERVER_PASS(),
-                                TmpOptions.get_cp_ftp_file(),
-                                TmpOptions.get_cp_local_file());
+                                TmpOptions.get_cp_file(),
+                                TmpOptions.get_pc_file());
 
         exchange.parsing_folder();
         jTextAreaSystemLog.append("\n" + getDateAndTime() + " Подключение к фтп-серверу...");
@@ -600,37 +599,6 @@ public class MainFrame extends javax.swing.JFrame {
             jTextAreaSystemLog.append("\n" + getDateAndTime() + " " + consterr.PrintErr(err));
             return;
         }
-    }
-
-    private void PutFileOnFTP()
-    {
-        byte err;
-        exchange = new ftp_work(TmpOptions.get_FTP_SERVER_NAME(),
-                                TmpOptions.get_FTP_SERVER_LOGIN(),
-                                TmpOptions.get_FTP_SERVER_PASS());
-
-
-        if ((err=exchange.ftp_connect()) == consterr.NOT_ERR)
-        {
-            jTextAreaSystemLog.append("\n" + getDateAndTime() + " Подключение прошло успешно...");
-            jTextAreaSystemLog.append("\n" + getDateAndTime() + " Отправляю файл на север...");
-            if ((err=exchange.put_file(exchange.parsing_folder(TmpOptions.get_pc_local_file()),new File(TmpOptions.get_pc_ftp_file()))) == consterr.NOT_ERR)
-            {
-                jTextAreaSystemLog.append("\n" + getDateAndTime() + " Отправка файла прошла успешно...");
-                return;
-            }
-            else
-            {
-                jTextAreaSystemLog.append("\n" + getDateAndTime() + " "+consterr.PrintErr(err));
-                return;
-            }
-        }
-        else
-        {
-            jTextAreaSystemLog.append("\n" + getDateAndTime() + " " + consterr.PrintErr(err));
-            return;
-        }
-
     }
 
     private void RunWith1S()
@@ -827,26 +795,14 @@ public class MainFrame extends javax.swing.JFrame {
                         }
                         case 8: {
                             tmp = st.nextToken();
-                            TmpOptions.set_cp_ftp_file(tmp);
+                            TmpOptions.set_cp_file(tmp);
                             jTextFieldInfileOnServer.setText(tmp);
                             break;
                         }
                         case 9: {
                             tmp = st.nextToken();
-                            TmpOptions.set_cp_local_file(tmp);
+                            TmpOptions.set_pc_file(tmp);
                             jTextFieldInfileOnLocalhost.setText(tmp);
-                            break;
-                        }
-                        case 10: {
-                            tmp = st.nextToken();
-                            TmpOptions.set_pc_local_file(tmp);
-                            jTextFieldOutfileOnLocalhost.setText(tmp);
-                            break;
-                        }
-                        case 11: {
-                            tmp = st.nextToken();
-                            TmpOptions.set_pc_ftp_file(tmp);
-                            jTextFieldOutfileOnServer.setText(tmp);
                             break;
                         }
                     }
@@ -873,9 +829,7 @@ public class MainFrame extends javax.swing.JFrame {
                     + jTextFieldFTPUser.getText() + ";"
                     + new String(jTextFieldFTPPass.getPassword()) + ";"
                     + jTextFieldInfileOnServer.getText() + ";"
-                    + jTextFieldInfileOnLocalhost.getText() + ";"
-                    + jTextFieldOutfileOnServer.getText() + ";"
-                    + jTextFieldOutfileOnLocalhost.getText();
+                    + jTextFieldInfileOnLocalhost.getText();
             System.out.println(optionString);
             outoptionfile.write(optionString);
             outoptionfile.close();
@@ -887,11 +841,8 @@ public class MainFrame extends javax.swing.JFrame {
             TmpOptions.set_FTP_SERVER_NAME(jTextFieldFTPSource.getText());
             TmpOptions.set_FTP_SERVER_LOGIN(jTextFieldFTPUser.getText());
             TmpOptions.set_FTP_SERVER_PASS(jTextFieldFTPPass.getPassword());
-            TmpOptions.set_cp_ftp_file(jTextFieldInfileOnServer.getText());
-            TmpOptions.set_cp_local_file(jTextFieldInfileOnLocalhost.getText());
-            TmpOptions.set_pc_ftp_file(jTextFieldOutfileOnServer.getText());
-            TmpOptions.set_pc_local_file(jTextFieldOutfileOnLocalhost.getText());
-
+            TmpOptions.set_cp_file(jTextFieldInfileOnServer.getText());
+            TmpOptions.set_pc_file(jTextFieldInfileOnLocalhost.getText());
 
         } catch (IOException e) {
         }
@@ -901,7 +852,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     public String getDateAndTime() {
         Date date = new Date(System.currentTimeMillis());
-        String customerDate = date.getDate() + "/" + (1 + date.getMonth()) + "/" + (1900 + date.getYear())
+        String customerDate = (1900 + date.getYear()) + "-"
+                + (1 + date.getMonth()) + "-" + date.getDate()
                 + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
         return customerDate;
     }
