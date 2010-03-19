@@ -193,7 +193,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTextAreaSystemLog.setColumns(1);
         jTextAreaSystemLog.setEditable(false);
-        jTextAreaSystemLog.setFont(new java.awt.Font("Monospaced", 0, 12));
+        jTextAreaSystemLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jTextAreaSystemLog.setRows(1);
         jTextAreaSystemLog.setText("Системный лог...");
         jScrollPane2.setViewportView(jTextAreaSystemLog);
