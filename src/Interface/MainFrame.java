@@ -455,7 +455,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuFileExitActionPerformed
 
     private void jMenuQuestionHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuQuestionHelpActionPerformed
-        
+        //здесь сделать показ хелпа в формате txt или chm
     }//GEN-LAST:event_jMenuQuestionHelpActionPerformed
 
     private void jMenuQustionAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuQustionAboutActionPerformed
