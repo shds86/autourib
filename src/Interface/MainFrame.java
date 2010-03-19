@@ -40,18 +40,20 @@ public class MainFrame extends javax.swing.JFrame {
     {
         try
         {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+           UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         }
         catch (Exception err){}
         initComponents();
         setLocationRelativeTo(null);
-        jButtonRunDownload.setEnabled(false);
+//        jButtonRunDownload.setEnabled(false);
         jButtonRunUpload.setEnabled(true);
         jButtonRunOutfile.setEnabled(false);
         checkingOptionFile();
         getDateAndTime();
         MenuItem exitpopup = new MenuItem("Выход");
+        MenuItem run1ss = new MenuItem("Запустить обмен");
         iconpopup = new PopupMenu("IconPopUP");
+        iconpopup.add(run1ss);
         iconpopup.addSeparator();
         iconpopup.add(exitpopup);
 
@@ -59,13 +61,22 @@ public class MainFrame extends javax.swing.JFrame {
 
             public void actionPerformed(ActionEvent e)
             {
-//                throw new UnsupportedOperationException("Not supported yet.");
+                System.out.println(e.getSource().getClass());
                 dispose();
-//                System.exit(0);
+                System.exit(0);
             }
         });
 
-        image = Toolkit.getDefaultToolkit().getImage("icon.gif");
+        run1ss.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                System.out.println(e.getSource());
+                RunWith1S();
+            }
+        });
+
+        image = Toolkit.getDefaultToolkit().getImage("lib"+System.getProperty("file.separator")+"icon.gif");
         setIconImage(image);
         if (SystemTray.isSupported())
         {
@@ -82,6 +93,7 @@ public class MainFrame extends javax.swing.JFrame {
 
             });
         }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -510,9 +522,9 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButtonRunDownloadActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonRunDownloadActionPerformed
     {//GEN-HEADEREND:event_jButtonRunDownloadActionPerformed
-        jButtonRunDownload.setEnabled(false);
+//        jButtonRunDownload.setEnabled(false);
         RunWith1S();
-        jButtonRunInfile.setEnabled(true);
+//        jButtonRunInfile.setEnabled(true);
     }//GEN-LAST:event_jButtonRunDownloadActionPerformed
 
     private void jButtonRunOutfileActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonRunOutfileActionPerformed
@@ -628,6 +640,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     public static void main(String args[]) {
+
         new MainFrame().setVisible(true);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
