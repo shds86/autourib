@@ -4,6 +4,7 @@ public class AboutFrame extends javax.swing.JFrame {
 
     public AboutFrame() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")

@@ -60,7 +60,6 @@ public class MainFrame extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e)
             {
 //                throw new UnsupportedOperationException("Not supported yet.");
-
                 dispose();
 //                System.exit(0);
             }
@@ -456,6 +455,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuFileExitActionPerformed
 
     private void jMenuQuestionHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuQuestionHelpActionPerformed
+        
     }//GEN-LAST:event_jMenuQuestionHelpActionPerformed
 
     private void jMenuQustionAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuQustionAboutActionPerformed
@@ -463,8 +463,6 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuQustionAboutActionPerformed
 
     private void jButtonRunAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunAllActionPerformed
-        //ДИМЫЧ! надо разбить код этого метода на 4 метода, и запускать их отсюда последовательно,
-        //т.к. должна быть возможность запускать эти методы отдельно друг от друга (infile,download и.т.д)
         this.getRootPane().updateUI();
         GetFileOnFTP();
         RunWith1S();
