@@ -45,7 +45,7 @@ public class MainFrame extends javax.swing.JFrame {
         catch (Exception err){}
         initComponents();
         setLocationRelativeTo(null);
-//        jButtonRunDownload.setEnabled(false);
+        jButtonRunDownload.setEnabled(false);
         jButtonRunUpload.setEnabled(true);
         jButtonRunOutfile.setEnabled(false);
         checkingOptionFile();
@@ -88,7 +88,8 @@ public class MainFrame extends javax.swing.JFrame {
             icon.setPopupMenu(iconpopup);
             icon.addActionListener(new ActionListener(){
 
-                public void actionPerformed(ActionEvent e) {
+                public void actionPerformed(ActionEvent e)
+                {
                     MainFrame.this.setVisible(true);
                     MainFrame.this.setExtendedState(MainFrame.NORMAL);
                     java.awt.SystemTray.getSystemTray().remove(icon);
