@@ -2,10 +2,13 @@ package Interface;
 
 import java.awt.event.ActionEvent;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import java.io.*;
 import URBD1SLib.ftp.*;
 import java.awt.AWTException;
+import java.awt.Desktop;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
 import java.awt.SystemTray;
@@ -22,6 +25,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     //объявляем глобальные переменные
     File optionFile;            //файл с настройками (путь)
+    File helpFile;              //файл с помощью
     String baseSource = null;   //путь  до базы
     String baseUser = null;     //имя пользователя базы
     String basePass = null;     //пароль пользователя базы
@@ -104,6 +108,8 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenuTextArea = new javax.swing.JPopupMenu();
+        jMenuItemTextAreaClear = new javax.swing.JMenuItem();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanelMain = new javax.swing.JPanel();
         jButtonRunOutfile = new javax.swing.JButton();
@@ -146,6 +152,14 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuQuestion = new javax.swing.JMenu();
         jMenuQuestionHelp = new javax.swing.JMenuItem();
         jMenuQustionAbout = new javax.swing.JMenuItem();
+
+        jMenuItemTextAreaClear.setText("Очистить лог");
+        jMenuItemTextAreaClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemTextAreaClearActionPerformed(evt);
+            }
+        });
+        jPopupMenuTextArea.add(jMenuItemTextAreaClear);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Клиент URBD1Slib");
@@ -196,6 +210,7 @@ public class MainFrame extends javax.swing.JFrame {
         jTextAreaSystemLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jTextAreaSystemLog.setRows(1);
         jTextAreaSystemLog.setText("Системный лог...");
+        jTextAreaSystemLog.setComponentPopupMenu(jPopupMenuTextArea);
         jScrollPane2.setViewportView(jTextAreaSystemLog);
 
         jButtonRunSynch.setText("Синхронизация");
@@ -471,7 +486,15 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuFileExitActionPerformed
 
     private void jMenuQuestionHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuQuestionHelpActionPerformed
-        //здесь сделать показ хелпа в формате txt или chm
+        //здесь показ хелпа в формате txt или chm
+        String userDir = new String();
+        userDir = System.getProperty("user.dir") + System.getProperty("file.separator") + "Help" + System.getProperty("file.separator") + "AvtoURIB.chm";
+        helpFile = new File(userDir);
+        try {
+            Desktop.getDesktop().open(helpFile);
+        } catch (IOException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuQuestionHelpActionPerformed
 
     private void jMenuQustionAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuQustionAboutActionPerformed
@@ -556,6 +579,11 @@ public class MainFrame extends javax.swing.JFrame {
             e1.printStackTrace();
         }
     }//GEN-LAST:event_formWindowIconified
+
+    private void jMenuItemTextAreaClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTextAreaClearActionPerformed
+        // TODO add your handling code here:
+        jTextAreaSystemLog.setText("");
+    }//GEN-LAST:event_jMenuItemTextAreaClearActionPerformed
 
     private void Apply() {
         //выгружаем в файл настроек и записываем его
@@ -671,11 +699,13 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenuItem jMenuFileExit;
+    private javax.swing.JMenuItem jMenuItemTextAreaClear;
     private javax.swing.JMenu jMenuQuestion;
     private javax.swing.JMenuItem jMenuQuestionHelp;
     private javax.swing.JMenuItem jMenuQustionAbout;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelOptions;
+    private javax.swing.JPopupMenu jPopupMenuTextArea;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextAreaSystemLog;
