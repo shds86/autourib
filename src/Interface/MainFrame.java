@@ -51,9 +51,13 @@ public class MainFrame extends javax.swing.JFrame {
         checkingOptionFile();
         getDateAndTime();
         MenuItem exitpopup = new MenuItem("Выход");
-        MenuItem run1ss = new MenuItem("Запустить обмен");
+        MenuItem allExchange = new MenuItem("Выполнить полный обмен");
+        MenuItem inExchange = new MenuItem("Выполнить загрузку");
+        MenuItem outExchange = new MenuItem("Выполнить выгрузку");
         iconpopup = new PopupMenu("IconPopUP");
-        iconpopup.add(run1ss);
+        iconpopup.add(allExchange);
+        iconpopup.add(inExchange);
+        iconpopup.add(outExchange);
         iconpopup.addSeparator();
         iconpopup.add(exitpopup);
 
@@ -67,12 +71,11 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        run1ss.addActionListener(new ActionListener() {
+        allExchange.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e)
             {
-                System.out.println(e.getSource());
-                RunWith1S();
+                jButtonRunAllActionPerformed(e);
             }
         });
 
@@ -522,9 +525,9 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButtonRunDownloadActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonRunDownloadActionPerformed
     {//GEN-HEADEREND:event_jButtonRunDownloadActionPerformed
-//        jButtonRunDownload.setEnabled(false);
+        jButtonRunDownload.setEnabled(false);
         RunWith1S();
-//        jButtonRunInfile.setEnabled(true);
+        jButtonRunInfile.setEnabled(true);
     }//GEN-LAST:event_jButtonRunDownloadActionPerformed
 
     private void jButtonRunOutfileActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonRunOutfileActionPerformed
