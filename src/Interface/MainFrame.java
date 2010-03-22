@@ -98,10 +98,8 @@ public class MainFrame extends javax.swing.JFrame {
                     MainFrame.this.setExtendedState(MainFrame.NORMAL);
                     java.awt.SystemTray.getSystemTray().remove(icon);
                 }
-
             });
         }
-
     }
 
     @SuppressWarnings("unchecked")
