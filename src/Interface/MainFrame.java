@@ -207,7 +207,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTextAreaSystemLog.setColumns(1);
         jTextAreaSystemLog.setEditable(false);
-        jTextAreaSystemLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jTextAreaSystemLog.setFont(new java.awt.Font("Monospaced", 0, 12));
         jTextAreaSystemLog.setRows(1);
         jTextAreaSystemLog.setText("Системный лог...");
         jTextAreaSystemLog.setComponentPopupMenu(jPopupMenuTextArea);
@@ -245,12 +245,12 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jButtonRunUpload)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonRunOutfile)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 366, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
                 .addComponent(jButtonRunSynch)
                 .addGap(38, 38, 38))
             .addGroup(jPanelMainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -373,7 +373,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanelOptionsLayout.setVerticalGroup(
             jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelOptionsLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(24, 24, 24)
                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelOptionsLayout.createSequentialGroup()
                         .addComponent(jLabelPlatformSource)
@@ -475,7 +475,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
         );
 
         pack();
@@ -598,11 +598,9 @@ public class MainFrame extends javax.swing.JFrame {
         byte err;
         exchange = new ftp_work(TmpOptions.get_FTP_SERVER_NAME(),
                                 TmpOptions.get_FTP_SERVER_LOGIN(),
-                                TmpOptions.get_FTP_SERVER_PASS(),
-                                TmpOptions.get_cp_file(),
-                                TmpOptions.get_pc_file());
+                                TmpOptions.get_FTP_SERVER_PASS());
 
-        exchange.parsing_folder();
+//        exchange.parsing_folder();
         jTextAreaSystemLog.append("\n" + getDateAndTime() + " Подключение к фтп-серверу...");
         jTextAreaSystemLog.repaint();
         this.getRootPane().updateUI();
@@ -610,7 +608,7 @@ public class MainFrame extends javax.swing.JFrame {
         {
             jTextAreaSystemLog.append("\n" + getDateAndTime() + " Подключение прошло успешно...");
             jTextAreaSystemLog.append("\n" + getDateAndTime() + " Загружаю файл...");
-            if ((err=exchange.get_file()) == consterr.NOT_ERR)
+            if ((err=exchange.get_file(TmpOptions.get_cp_file(),new File(TmpOptions.get_pc_file()))) == consterr.NOT_ERR)
             {
                 jTextAreaSystemLog.append("\n" + getDateAndTime() + " Получение файла прошло успешно...");
                 return;
