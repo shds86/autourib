@@ -71,7 +71,6 @@ public class MainFrame extends javax.swing.JFrame {
                                         {
                                             public void actionPerformed(ActionEvent e)
                                             {
-                                                MainFrame.this.setVisible(true);
                                                 MainFrame.this.setExtendedState(MainFrame.NORMAL);
                                                 java.awt.SystemTray.getSystemTray().remove(icon);
                                                 dispose();
