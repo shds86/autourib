@@ -62,6 +62,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButtonRunDownload.setEnabled(false);
         jButtonRunUpload.setEnabled(true);
         jButtonRunOutfile.setEnabled(false);
+        jButtonRunSynch.setVisible(false);
         checkingOptionFile();
         getDateAndTime();
         MenuItem exitpopup = new MenuItem("Выход");
