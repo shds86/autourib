@@ -67,7 +67,7 @@ public class MainFrame extends javax.swing.JFrame {
         iconpopup.add(outExchange);
         iconpopup.addSeparator();
         iconpopup.add(exitpopup);
-
+        
         exitpopup.addActionListener(new ActionListener()
                                         {
                                             public void actionPerformed(ActionEvent e)
