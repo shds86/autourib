@@ -20,6 +20,10 @@ import java.awt.TrayIcon;
 import java.awt.TrayIcon.*;
 import java.awt.event.ActionListener;
 
+/**
+ *
+ * @author support
+ */
 public class MainFrame extends javax.swing.JFrame {
 
     //объявляем глобальные переменные
@@ -40,6 +44,9 @@ public class MainFrame extends javax.swing.JFrame {
     TrayIcon icon = null;
     PopupMenu iconpopup;
     byte key;
+    /**
+     *
+     */
     public MainFrame()
     {
         try
@@ -734,6 +741,10 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String args[]) {
 
         new MainFrame().setVisible(true);
@@ -977,6 +988,10 @@ public class MainFrame extends javax.swing.JFrame {
         jTextAreaSystemLog.repaint();
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDateAndTime() {
         Date date = new Date(System.currentTimeMillis());
         String customerDate = (1900 + date.getYear()) + "-"
