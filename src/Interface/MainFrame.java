@@ -13,7 +13,6 @@ import java.awt.MenuItem;
 import java.awt.PopupMenu;
 import java.awt.SystemTray;
 import javax.swing.filechooser.FileNameExtensionFilter;
-//import java.awt.image.*;
 import java.awt.SystemTray.*;
 import java.awt.Toolkit;
 import java.awt.Toolkit.*;
@@ -35,8 +34,8 @@ public class MainFrame extends javax.swing.JFrame {
     options TmpOptions = new options();
     ftp_work exchange = null;
     run_1s run1s = null;
-    JFileChooser jFileChooserPlatformSource = new JFileChooser();
-    JFileChooser jFileChooserBaseSource = new JFileChooser();
+    JFileChooser jFileChooserPlatformSource;// = new JFileChooser();
+    JFileChooser jFileChooserBaseSource;// = new JFileChooser();
     java.awt.Image image;
     TrayIcon icon = null;
     PopupMenu iconpopup;
@@ -47,6 +46,9 @@ public class MainFrame extends javax.swing.JFrame {
            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         }
         catch (Exception err){}
+
+        jFileChooserPlatformSource = new JFileChooser();
+        jFileChooserBaseSource = new JFileChooser();
         initComponents();
         setLocationRelativeTo(null);
         jButtonRunDownload.setEnabled(false);
@@ -65,40 +67,41 @@ public class MainFrame extends javax.swing.JFrame {
         iconpopup.addSeparator();
         iconpopup.add(exitpopup);
 
-        exitpopup.addActionListener(new ActionListener() {
+        exitpopup.addActionListener(new ActionListener()
+                                        {
+                                            public void actionPerformed(ActionEvent e)
+                                            {
+                                                MainFrame.this.setVisible(true);
+                                                MainFrame.this.setExtendedState(MainFrame.NORMAL);
+                                                java.awt.SystemTray.getSystemTray().remove(icon);
+                                                dispose();
+                                            }
+                                        });
 
-            public void actionPerformed(ActionEvent e)
-            {
-                System.out.println(e.getSource().getClass());
-                dispose();
-                System.exit(0);
-            }
-        });
-
-        allExchange.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent e)
-            {
-                jButtonRunAllActionPerformed(e);
-            }
-        });
-
-        image = Toolkit.getDefaultToolkit().getImage("lib"+System.getProperty("file.separator")+"icon.gif");
+        allExchange.addActionListener(new ActionListener()
+                                          {
+                                              public void actionPerformed(ActionEvent e)
+                                              {
+                                                  jButtonRunAllActionPerformed(e);
+                                              }
+                                          });
+        
+        image = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("icon.gif"));
         setIconImage(image);
         if (SystemTray.isSupported())
         {
             icon = new TrayIcon(image);
             icon.setToolTip(MainFrame.this.getTitle());
             icon.setPopupMenu(iconpopup);
-            icon.addActionListener(new ActionListener(){
-
-                public void actionPerformed(ActionEvent e)
-                {
-                    MainFrame.this.setVisible(true);
-                    MainFrame.this.setExtendedState(MainFrame.NORMAL);
-                    java.awt.SystemTray.getSystemTray().remove(icon);
-                }
-            });
+            icon.addActionListener(new ActionListener()
+                                       {
+                                           public void actionPerformed(ActionEvent e)
+                                           {
+                                               MainFrame.this.setVisible(true);
+                                               MainFrame.this.setExtendedState(MainFrame.NORMAL);
+                                               java.awt.SystemTray.getSystemTray().remove(icon);
+                                           }
+                                       });
         }
     }
 
