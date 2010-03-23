@@ -85,7 +85,27 @@ public class MainFrame extends javax.swing.JFrame {
                                                   jButtonRunAllActionPerformed(e);
                                               }
                                           });
-        
+
+        inExchange.addActionListener(new ActionListener()
+                                         {
+                                             public void actionPerformed(ActionEvent e)
+                                             {
+                                                 key = 1;
+                                                 GetFileOnFTP();
+                                                 RunWith1S();
+                                             }
+                                         });
+
+       outExchange.addActionListener(new ActionListener()
+                                         {
+                                             public void actionPerformed(ActionEvent e)
+                                             {
+                                                 key = 2;
+                                                 RunWith1S();
+                                                 PutFileOnFTP();
+                                             }
+        })
+        ;
         image = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("icon.gif"));
         setIconImage(image);
         if (SystemTray.isSupported())
@@ -508,6 +528,7 @@ public class MainFrame extends javax.swing.JFrame {
         this.getRootPane().updateUI();
         GetFileOnFTP();
         RunWith1S();
+        PutFileOnFTP();
     }//GEN-LAST:event_jButtonRunAllActionPerformed
 
     private void jButtonApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApplyActionPerformed
@@ -587,7 +608,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jMenuItemTextAreaClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTextAreaClearActionPerformed
         // TODO add your handling code here:
-        jTextAreaSystemLog.setText("");
+        jTextAreaSystemLog.setText(null);
     }//GEN-LAST:event_jMenuItemTextAreaClearActionPerformed
 
     private void Apply() {
@@ -603,7 +624,8 @@ public class MainFrame extends javax.swing.JFrame {
         exchange = new ftp_work(TmpOptions.get_FTP_SERVER_NAME(),
                                 TmpOptions.get_FTP_SERVER_LOGIN(),
                                 TmpOptions.get_FTP_SERVER_PASS());
-
+        
+        jTextAreaSystemLog.append("\n--------------------------------------------------");
         jTextAreaSystemLog.append("\n" + getDateAndTime() + " Подключение к фтп-серверу...");
         jTextAreaSystemLog.repaint();
         this.getRootPane().updateUI();
@@ -614,17 +636,20 @@ public class MainFrame extends javax.swing.JFrame {
             if ((err=exchange.get_file(TmpOptions.get_cp_file_on_ftp(),new File(TmpOptions.get_cp_file_on_localhos()))) == consterr.NOT_ERR)
             {
                 jTextAreaSystemLog.append("\n" + getDateAndTime() + " Получение файла прошло успешно...");
+                jTextAreaSystemLog.append("\n--------------------------------------------------");
                 return;
             }
             else
             {
                 jTextAreaSystemLog.append("\n" + getDateAndTime() + " "+consterr.PrintErr(err));
+                jTextAreaSystemLog.append("\n--------------------------------------------------");
                 return;
             }
         }
         else
         {
             jTextAreaSystemLog.append("\n" + getDateAndTime() + " " + consterr.PrintErr(err));
+            jTextAreaSystemLog.append("\n--------------------------------------------------");
             return;
         }
     }
@@ -636,6 +661,7 @@ public class MainFrame extends javax.swing.JFrame {
                                 TmpOptions.get_FTP_SERVER_LOGIN(),
                                 TmpOptions.get_FTP_SERVER_PASS());
 
+        jTextAreaSystemLog.append("\n--------------------------------------------------");
         jTextAreaSystemLog.append("\n" + getDateAndTime() + " Подключение к фтп-серверу...");
         jTextAreaSystemLog.repaint();
         this.getRootPane().updateUI();
@@ -646,17 +672,20 @@ public class MainFrame extends javax.swing.JFrame {
             if ((err=exchange.put_file(TmpOptions.get_pc_file_on_ftp(), new File(TmpOptions.get_pc_file_on_localhost()))) == consterr.NOT_ERR)
             {
                 jTextAreaSystemLog.append("\n" + getDateAndTime() + " Файл успешно отправлен...");
+                jTextAreaSystemLog.append("\n--------------------------------------------------");
                 return;
             }
             else
             {
                 jTextAreaSystemLog.append("\n" + getDateAndTime() + " "+consterr.PrintErr(err));
+                jTextAreaSystemLog.append("\n--------------------------------------------------");
                 return;
             }
         }
         else
         {
             jTextAreaSystemLog.append("\n" + getDateAndTime() + " " + consterr.PrintErr(err));
+            jTextAreaSystemLog.append("\n--------------------------------------------------");
             return;
         }
     }
@@ -772,6 +801,11 @@ public class MainFrame extends javax.swing.JFrame {
             jTextAreaSystemLog.append(getDateAndTime() + " Каталог настроек не найден и будет создан...");
             jTextAreaSystemLog.repaint();
             dir.mkdirs();
+            jButtonRunAll.setEnabled(false);
+            jButtonRunDownload.setEnabled(false);
+            jButtonRunInfile.setEnabled(false);
+            jButtonRunOutfile.setEnabled(false);
+            jButtonRunUpload.setEnabled(false);
         } else {
             jTextAreaSystemLog.append(getDateAndTime() + " Каталог настроек найден...");
             jTextAreaSystemLog.repaint();
@@ -786,12 +820,21 @@ public class MainFrame extends javax.swing.JFrame {
                 jTextAreaSystemLog.append("\n" + getDateAndTime() + " Файл настроек не найден и будет создан...");
                 jTextAreaSystemLog.repaint();
                 optionFile.createNewFile();
+
+                jButtonRunAll.setEnabled(false);
+                jButtonRunDownload.setEnabled(false);
+                jButtonRunInfile.setEnabled(false);
+                jButtonRunOutfile.setEnabled(false);
+                jButtonRunUpload.setEnabled(false);
             } catch (IOException ex) {
             }
         } else {
             jTextAreaSystemLog.append("\n" + getDateAndTime() + " Файл настроек найден...");
             jTextAreaSystemLog.repaint();
             loadOptions();
+            jButtonRunAll.setEnabled(true);
+            jButtonRunInfile.setEnabled(true);
+            jButtonRunUpload.setEnabled(true);
         }
     }
 
@@ -923,6 +966,10 @@ public class MainFrame extends javax.swing.JFrame {
             TmpOptions.set_cp_file_on_localhost(jTextFieldInfileOnLocalhost.getText());
             TmpOptions.set_pc_file_on_localhost(jTextFieldOutfileOnLocalhost.getText());
             TmpOptions.set_pc_file_on_ftp(jTextFieldOutfileOnServer.getText());
+
+            jButtonRunAll.setEnabled(true);
+            jButtonRunInfile.setEnabled(true);
+            jButtonRunUpload.setEnabled(true);
 
         } catch (IOException e) {
         }
