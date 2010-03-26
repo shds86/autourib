@@ -71,7 +71,7 @@ public class MainFrame extends javax.swing.JFrame {
             UIManager.put("FileChooser.listViewButtonAccessibleName", "Список");
         }
         catch (Exception err){}
-
+java.util.Timer
         jFileChooserPlatformSource = new JFileChooser();
         jFileChooserPlatformSource.setDialogTitle("Диалог выбора папки 1С:Предприятие");
         jFileChooserBaseSource = new JFileChooser();
@@ -1018,4 +1018,3 @@ public class MainFrame extends javax.swing.JFrame {
         return customerDate;
     }
 }
-
