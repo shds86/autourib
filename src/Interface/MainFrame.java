@@ -29,17 +29,17 @@ public class MainFrame extends javax.swing.JFrame {
     //объявляем глобальные переменные
     File optionFile;            //файл с настройками (путь)
     File helpFile;              //файл с помощью
-    String baseSource = null;   //путь  до базы
-    String baseUser = null;     //имя пользователя базы
-    String basePass = null;     //пароль пользователя базы
-    String ftpSource = null;   //путь до ftp
-    String ftpUser = null;     //имя пользователя ftp
-    String ftpPass = null;     //пароль пользователя ftp
+//    String baseSource = null;   //путь  до базы
+//    String baseUser = null;     //имя пользователя базы
+//    String basePass = null;     //пароль пользователя базы
+//    String ftpSource = null;   //путь до ftp
+//    String ftpUser = null;     //имя пользователя ftp
+//    String ftpPass = null;     //пароль пользователя ftp
     options TmpOptions = new options();
     ftp_work exchange = null;
     run_1s run1s = null;
-    JFileChooser jFileChooserPlatformSource;// = new JFileChooser();
-    JFileChooser jFileChooserBaseSource;// = new JFileChooser();
+    JFileChooser jFileChooserPlatformSource;
+    JFileChooser jFileChooserBaseSource;
     java.awt.Image image;
     TrayIcon icon = null;
     PopupMenu iconpopup;
@@ -51,7 +51,6 @@ public class MainFrame extends javax.swing.JFrame {
     {
         try
         {
-
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             UIManager.put("FileChooser.lookInLabelText", "Папка");
             UIManager.put("FileChooser.filesOfTypeLabelText", "Тип файла");
@@ -532,7 +531,6 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jMenuFileExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileExitActionPerformed
         dispose();
-
     }//GEN-LAST:event_jMenuFileExitActionPerformed
 
     private void jMenuQuestionHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuQuestionHelpActionPerformed
@@ -767,7 +765,6 @@ public class MainFrame extends javax.swing.JFrame {
      * @param args
      */
     public static void main(String args[]) {
-
         new MainFrame().setVisible(true);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
