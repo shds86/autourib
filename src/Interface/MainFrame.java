@@ -51,12 +51,32 @@ public class MainFrame extends javax.swing.JFrame {
     {
         try
         {
-           UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.put("FileChooser.lookInLabelText", "Папка");
+            UIManager.put("FileChooser.filesOfTypeLabelText", "Тип файла");
+            UIManager.put("FileChooser.upFolderToolTipText", "На один уровень вверх");
+            UIManager.put("FileChooser.fileNameLabelText", "Имя файла");
+            UIManager.put("FileChooser.homeFolderToolTipText", "Домашняя папка");
+            UIManager.put("FileChooser.newFolderToolTipText", "Новая папка");
+            UIManager.put("FileChooser.listViewButtonToolTipText", "Список");
+            UIManager.put("FileChooser.detailsViewButtonToolTipText", "Детально");
+            UIManager.put("FileChooser.saveButtonText", "Сохранить");
+            UIManager.put("FileChooser.openButtonText", "Открыть");
+            UIManager.put("FileChooser.cancelButtonText", "Отменить");
+            UIManager.put("FileChooser.updateButtonText", "Вверх");
+            UIManager.put("FileChooser.helpButtonText", "Помощь");
+            UIManager.put("FileChooser.saveButtonToolTipText", "Сохранить");
+            UIManager.put("FileChooser.openButtonToolTipText", "Открыть выбранный файл");
+            UIManager.put("FileChooser.cancelButtonToolTipText", "Закрыть диалог");
+            UIManager.put("FileChooser.listViewButtonAccessibleName", "Список");
         }
         catch (Exception err){}
 
         jFileChooserPlatformSource = new JFileChooser();
+        jFileChooserPlatformSource.setDialogTitle("Диалог выбора папки 1С:Предприятие");
         jFileChooserBaseSource = new JFileChooser();
+        jFileChooserBaseSource.setDialogTitle("Диалог выбора папки базы");
         initComponents();
         setLocationRelativeTo(null);
         jButtonRunDownload.setEnabled(false);
