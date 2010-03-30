@@ -26,6 +26,15 @@ import java.awt.event.ActionListener;
  */
 public class MainFrame extends javax.swing.JFrame {
 
+//    Здесь будут писаться заметки, предложения, дальнейшие пожелания для дальнейшей реализации в программе
+//    1. Реализовать работу программы по расписанию
+//    2. Реализовать работу ФТП через прокси-сервер
+//    3. Реализовать работу с несколькими базами.
+//    4. Реализавать выполнение сервисных функций 1С.
+//    5. Автозапуск(служба или автозагрузка?)
+//    6. Сообщение пользователю о удачной или неудачной выгрузке.
+//    7. Отправка отчета на сервер о причинах неудачного обмена????
+
     //объявляем глобальные переменные
     File optionFile;            //файл с настройками (путь)
     File helpFile;              //файл с помощью
@@ -43,7 +52,9 @@ public class MainFrame extends javax.swing.JFrame {
     java.awt.Image image;
     TrayIcon icon = null;
     PopupMenu iconpopup;
+    java.util.TimerTask juTT;
     byte key;
+    boolean key_stop = false;
     /**
      *
      */
@@ -71,7 +82,7 @@ public class MainFrame extends javax.swing.JFrame {
             UIManager.put("FileChooser.listViewButtonAccessibleName", "Список");
         }
         catch (Exception err){}
-java.util.Timer
+
         jFileChooserPlatformSource = new JFileChooser();
         jFileChooserPlatformSource.setDialogTitle("Диалог выбора папки 1С:Предприятие");
         jFileChooserBaseSource = new JFileChooser();
@@ -150,6 +161,9 @@ java.util.Timer
                                            }
                                        });
         }
+
+
+
     }
 
     @SuppressWarnings("unchecked")
@@ -168,6 +182,7 @@ java.util.Timer
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextAreaSystemLog = new javax.swing.JTextArea();
         jButtonRunSynch = new javax.swing.JButton();
+        jProgressBar1 = new javax.swing.JProgressBar();
         jPanelOptions = new javax.swing.JPanel();
         jTextFieldBaseSource = new javax.swing.JTextField();
         jButtonCancel = new javax.swing.JButton();
@@ -270,13 +285,15 @@ java.util.Timer
             .addGroup(jPanelMainLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonRunOutfile, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonRunUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonRunDownload, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonRunAll, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonRunInfile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonRunSynch, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jButtonRunOutfile, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonRunUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonRunDownload, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonRunAll, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonRunInfile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonRunSynch, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -293,7 +310,9 @@ java.util.Timer
                 .addComponent(jButtonRunUpload)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonRunOutfile)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
+                .addGap(60, 60, 60)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addComponent(jButtonRunSynch)
                 .addGap(38, 38, 38))
             .addGroup(jPanelMainLayout.createSequentialGroup()
@@ -550,11 +569,54 @@ java.util.Timer
     }//GEN-LAST:event_jMenuQustionAboutActionPerformed
 
     private void jButtonRunAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunAllActionPerformed
+        jButtonRunAll.setEnabled(false);
+
         key = 0;
+
+        java.util.Timer juT = new java.util.Timer();
         this.getRootPane().updateUI();
-        GetFileOnFTP();
-        RunWith1S();
-        PutFileOnFTP();
+//        System.out.println(System.currentTimeMillis());
+
+        juTT = new java.util.TimerTask()
+                   {
+                        public void run()
+                        {
+                            jTextAreaSystemLog.append("\n----запустились"+System.currentTimeMillis());
+                            GetFileOnFTP();
+                            jTextAreaSystemLog.append("\n----вошли в задачу "+System.currentTimeMillis());
+                            RunWith1S();
+                            jTextAreaSystemLog.append("\n----закончили задачу "+System.currentTimeMillis());
+                            //PutFileOnFTP();
+                            jButtonRunAll.setEnabled(true);
+                            key_stop = true;
+                        }
+                   };
+        juT.schedule(juTT, 100);
+//        new java.util.Timer().schedule(new java.util.TimerTask()
+//                   {
+//                        public void run()
+//                        {
+//                            while (key_stop == false)
+//                            {
+//                                try{
+//                                this.wait(1000);}
+//                                catch (InterruptedException ee)
+//                                {
+//                                if (jProgressBar1.getValue()<jProgressBar1.getMaximum())
+//                                    jProgressBar1.setValue(jProgressBar1.getValue()+jProgressBar1.getMaximum()/1000);
+//                                else
+//                                    jProgressBar1.setValue(jProgressBar1.getMinimum());
+//
+//                                }
+//
+//                                if (jProgressBar1.getValue()<jProgressBar1.getMaximum())
+//                                    jProgressBar1.setValue(jProgressBar1.getValue()+jProgressBar1.getMaximum()/1000);
+//                                else
+//                                    jProgressBar1.setValue(jProgressBar1.getMinimum());
+//                            }
+//                        }
+//                   }, 0);
+        jTextAreaSystemLog.append("\n---- вышли из задачи"+System.currentTimeMillis());
     }//GEN-LAST:event_jButtonRunAllActionPerformed
 
     private void jButtonApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApplyActionPerformed
@@ -798,6 +860,7 @@ java.util.Timer
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelOptions;
     private javax.swing.JPopupMenu jPopupMenuTextArea;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextAreaSystemLog;
