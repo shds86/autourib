@@ -38,12 +38,6 @@ public class MainFrame extends javax.swing.JFrame {
     //объявляем глобальные переменные
     File optionFile;            //файл с настройками (путь)
     File helpFile;              //файл с помощью
-//    String baseSource = null;   //путь  до базы
-//    String baseUser = null;     //имя пользователя базы
-//    String basePass = null;     //пароль пользователя базы
-//    String ftpSource = null;   //путь до ftp
-//    String ftpUser = null;     //имя пользователя ftp
-//    String ftpPass = null;     //пароль пользователя ftp
     options TmpOptions = new options();
     ftp_work exchange = null;
     run_1s run1s = null;
