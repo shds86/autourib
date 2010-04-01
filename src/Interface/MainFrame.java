@@ -49,6 +49,70 @@ public class MainFrame extends javax.swing.JFrame {
     java.util.TimerTask juTT;
     byte key;
     boolean key_stop = false;
+    
+        class DrawProgressBar extends Thread
+        {
+            @Override
+            public void run()
+            {
+                while (thr.isAlive())
+                {
+                    try
+                    {
+                        DrawProgressBar.sleep(500);
+                        if (jProgressBar1.getValue()<jProgressBar1.getMaximum())
+                        {
+                            jProgressBar1.setValue(jProgressBar1.getValue()+jProgressBar1.getMaximum()/10);
+                        }
+                        else jProgressBar1.setValue(jProgressBar1.getMinimum());
+                    }
+                    catch (InterruptedException err)
+                    {
+                        if (jProgressBar1.getValue()<jProgressBar1.getMaximum())
+                        {
+                            jProgressBar1.setValue(jProgressBar1.getValue()+jProgressBar1.getMaximum()/10);
+                        }
+                        else jProgressBar1.setValue(jProgressBar1.getMinimum());
+                    }
+                }
+                jProgressBar1.setValue(jProgressBar1.getMinimum());
+            }
+            public Thread thr;
+            public DrawProgressBar(Thread tmp)
+            {
+                this.thr = tmp;
+            }
+        }
+
+        class RunExchangeInThread implements Runnable
+        {
+            private int keythread;
+            public void run()
+            {
+                switch(this.keythread)
+                {
+                    case 0:
+                        {
+                            GetFileOnFTP();
+                            RunWith1S();
+                            PutFileOnFTP();
+                            break;
+                        }
+                    case 1:{GetFileOnFTP();break;}
+                    case 2:{RunWith1S();break;}
+                    case 3:{PutFileOnFTP();break;}
+                }
+            }
+            public RunExchangeInThread(int keythread)
+            {
+                this.keythread = keythread;
+            }
+            public void SelectMethod()
+            {
+                System.out.println();
+            }
+        }
+
     /**
      *
      */
@@ -564,53 +628,11 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButtonRunAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunAllActionPerformed
         jButtonRunAll.setEnabled(false);
-
         key = 0;
-
-        java.util.Timer juT = new java.util.Timer();
         this.getRootPane().updateUI();
-//        System.out.println(System.currentTimeMillis());
-
-        juTT = new java.util.TimerTask()
-                   {
-                        public void run()
-                        {
-                            jTextAreaSystemLog.append("\n----запустились"+System.currentTimeMillis());
-                            GetFileOnFTP();
-                            jTextAreaSystemLog.append("\n----вошли в задачу "+System.currentTimeMillis());
-                            RunWith1S();
-                            jTextAreaSystemLog.append("\n----закончили задачу "+System.currentTimeMillis());
-                            //PutFileOnFTP();
-                            jButtonRunAll.setEnabled(true);
-                            key_stop = true;
-                        }
-                   };
-        juT.schedule(juTT, 100);
-//        new java.util.Timer().schedule(new java.util.TimerTask()
-//                   {
-//                        public void run()
-//                        {
-//                            while (key_stop == false)
-//                            {
-//                                try{
-//                                this.wait(1000);}
-//                                catch (InterruptedException ee)
-//                                {
-//                                if (jProgressBar1.getValue()<jProgressBar1.getMaximum())
-//                                    jProgressBar1.setValue(jProgressBar1.getValue()+jProgressBar1.getMaximum()/1000);
-//                                else
-//                                    jProgressBar1.setValue(jProgressBar1.getMinimum());
-//
-//                                }
-//
-//                                if (jProgressBar1.getValue()<jProgressBar1.getMaximum())
-//                                    jProgressBar1.setValue(jProgressBar1.getValue()+jProgressBar1.getMaximum()/1000);
-//                                else
-//                                    jProgressBar1.setValue(jProgressBar1.getMinimum());
-//                            }
-//                        }
-//                   }, 0);
-        jTextAreaSystemLog.append("\n---- вышли из задачи"+System.currentTimeMillis());
+        Thread thr = (new Thread(new RunExchangeInThread(0)));
+        thr.start();
+        (new Thread(new DrawProgressBar(thr))).start();
     }//GEN-LAST:event_jButtonRunAllActionPerformed
 
     private void jButtonApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApplyActionPerformed
@@ -649,7 +671,10 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButtonRunInfileActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonRunInfileActionPerformed
     {//GEN-HEADEREND:event_jButtonRunInfileActionPerformed
         jButtonRunInfile.setEnabled(false);
-        GetFileOnFTP();
+//        GetFileOnFTP();
+        Thread thr = (new Thread(new RunExchangeInThread(1)));
+        thr.start();
+        (new Thread(new DrawProgressBar(thr))).start();
         jButtonRunDownload.setEnabled(true);
     }//GEN-LAST:event_jButtonRunInfileActionPerformed
 
@@ -657,14 +682,19 @@ public class MainFrame extends javax.swing.JFrame {
     {//GEN-HEADEREND:event_jButtonRunDownloadActionPerformed
         key = 1;
         jButtonRunDownload.setEnabled(false);
-        RunWith1S();
+        Thread thr = (new Thread(new RunExchangeInThread(2)));
+        thr.start();
+        (new Thread(new DrawProgressBar(thr))).start();
         jButtonRunInfile.setEnabled(true);
     }//GEN-LAST:event_jButtonRunDownloadActionPerformed
 
     private void jButtonRunOutfileActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonRunOutfileActionPerformed
     {//GEN-HEADEREND:event_jButtonRunOutfileActionPerformed
         jButtonRunOutfile.setEnabled(false);
-        PutFileOnFTP();
+//        PutFileOnFTP();
+        Thread thr = (new Thread(new RunExchangeInThread(3)));
+        thr.start();
+        (new Thread(new DrawProgressBar(thr))).start();
         jButtonRunUpload.setEnabled(true);
     }//GEN-LAST:event_jButtonRunOutfileActionPerformed
 
@@ -672,7 +702,9 @@ public class MainFrame extends javax.swing.JFrame {
     {//GEN-HEADEREND:event_jButtonRunUploadActionPerformed
         key = 2;
         jButtonRunUpload.setEnabled(false);
-        RunWith1S();
+        Thread thr = (new Thread(new RunExchangeInThread(2)));
+        thr.start();
+        (new Thread(new DrawProgressBar(thr))).start();
         jButtonRunOutfile.setEnabled(true);
     }//GEN-LAST:event_jButtonRunUploadActionPerformed
 
