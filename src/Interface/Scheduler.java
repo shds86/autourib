@@ -142,6 +142,7 @@ public class Scheduler extends javax.swing.JFrame {
         //jTableListJob.addRowSelectionInterval(0, 1);
         jTableListJob.setValueAt(this.listSched.getLast(),jTableListJob.getRowCount()-1,0);
         jTableListJob.setValueAt(this.listSched.getLast().getFrequency(),jTableListJob.getRowCount()-1,1);
+        //
     }//GEN-LAST:event_jButtonAddJobActionPerformed
 
     private void jButtonRemoveJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveJobActionPerformed
