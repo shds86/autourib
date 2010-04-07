@@ -19,7 +19,7 @@ import org.apache.commons.logging.LogFactory;
 public class main implements Job{
     public static Log _log = LogFactory.getLog(main.class);
     static MainFrame Frame;
-
+//
 
     public main() {}
     public void execute(JobExecutionContext context) throws JobExecutionException
