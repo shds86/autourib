@@ -15,7 +15,7 @@ public class AboutFrame extends javax.swing.JFrame {
         jLabelCthulhu = new javax.swing.JLabel();
         jLabelProjectName = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jButtonClose.setText("Закрыть");
         jButtonClose.addActionListener(new java.awt.event.ActionListener() {

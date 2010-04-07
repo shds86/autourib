@@ -49,6 +49,7 @@ public class MainFrame extends javax.swing.JFrame {
     java.util.TimerTask juTT;
     byte key;
     boolean key_stop = false;
+    LinkedList<schedulerURBD> schedURBD = new LinkedList<schedulerURBD>();
     
         class DrawProgressBar extends Thread
         {
@@ -75,7 +76,7 @@ public class MainFrame extends javax.swing.JFrame {
                         else jProgressBar1.setValue(jProgressBar1.getMinimum());
                     }
                 }
-                jProgressBar1.setValue(jProgressBar1.getMinimum());
+                jProgressBar1.setValue(jProgressBar1.getMaximum());
             }
             public Thread thr;
             public DrawProgressBar(Thread tmp)
@@ -93,25 +94,49 @@ public class MainFrame extends javax.swing.JFrame {
                 {
                     case 0:
                         {
+                            jButtonRunAll.setEnabled(false);
                             GetFileOnFTP();
+                            RunWith1S();
+                            PutFileOnFTP();
+                            jButtonRunAll.setEnabled(true);
+                            break;
+                        }
+                    case 1:
+                        {
+                            GetFileOnFTP();
+                            break;
+                        }
+                    case 2:
+                        {
+                            RunWith1S();
+                            break;
+                        }
+                    case 3:
+                        {
+                            PutFileOnFTP();
+                            break;
+                        }
+                    case 4:
+                        {
+                            GetFileOnFTP();
+                            RunWith1S();
+                            break;
+                        }
+                    case 5:
+                        {
                             RunWith1S();
                             PutFileOnFTP();
                             break;
                         }
-                    case 1:{GetFileOnFTP();break;}
-                    case 2:{RunWith1S();break;}
-                    case 3:{PutFileOnFTP();break;}
                 }
             }
             public RunExchangeInThread(int keythread)
             {
                 this.keythread = keythread;
             }
-            public void SelectMethod()
-            {
-                System.out.println();
-            }
         }
+
+
 
     /**
      *
@@ -187,21 +212,23 @@ public class MainFrame extends javax.swing.JFrame {
                                              public void actionPerformed(ActionEvent e)
                                              {
                                                  key = 1;
-                                                 GetFileOnFTP();
-                                                 RunWith1S();
+                                                 Thread thr = (new Thread(new RunExchangeInThread(4)));
+                                                 thr.start();
+                                                 (new Thread(new DrawProgressBar(thr))).start();
                                              }
                                          });
 
-       outExchange.addActionListener(new ActionListener()
-                                         {
+        outExchange.addActionListener(new ActionListener()
+                                          {
                                              public void actionPerformed(ActionEvent e)
                                              {
                                                  key = 2;
-                                                 RunWith1S();
-                                                 PutFileOnFTP();
+                                                 Thread thr = (new Thread(new RunExchangeInThread(5)));
+                                                 thr.start();
+                                                 (new Thread(new DrawProgressBar(thr))).start();
                                              }
-        })
-        ;
+        });
+
         image = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("icon.gif"));
         setIconImage(image);
         if (SystemTray.isSupported())
@@ -220,8 +247,31 @@ public class MainFrame extends javax.swing.JFrame {
                                        });
         }
 
+//  java.util.Timer timer2 = new java.util.Timer();
+//  TimerTask task = new TimerTask() {
+//      public void run()
+//      {
+//            jButtonRunAll.doClick();
+//            jTextAreaSystemLog.append("\nБЛЯЯЯЯЯЯЯЯЯЯЯЯЯЯЯЯЯ");
+//      }
+//  };
+//  Date date = new Date(110, 3, 2, 12, 5);
+//timer2.schedule(task, date, 120000);
 
-
+//    javax.swing.Timer tmptimer=new javax.swing.Timer(1000,new ActionListener()
+//                                                       {
+//                                                            public void actionPerformed(ActionEvent ev)
+//                                                            {
+//                                                                Date date = new Date(System.currentTimeMillis());
+//                                                                if ((date.getHours()==11)&&(date.getMinutes()==40))
+//                                                                {
+//                                                                    jButtonRunAllActionPerformed(ev);
+//                                                                    System.out.println("БЛЯ РАБОТАЕТ!!!!!!!!!!!!");
+//                                                                }
+//                                                            }
+//                                                        }
+//                                                );
+//    tmptimer.start();
     }
 
     @SuppressWarnings("unchecked")
@@ -241,6 +291,7 @@ public class MainFrame extends javax.swing.JFrame {
         jTextAreaSystemLog = new javax.swing.JTextArea();
         jButtonRunSynch = new javax.swing.JButton();
         jProgressBar1 = new javax.swing.JProgressBar();
+        jButtonOpenScheduler = new javax.swing.JButton();
         jPanelOptions = new javax.swing.JPanel();
         jTextFieldBaseSource = new javax.swing.JTextField();
         jButtonCancel = new javax.swing.JButton();
@@ -336,6 +387,15 @@ public class MainFrame extends javax.swing.JFrame {
 
         jButtonRunSynch.setText("Синхронизация");
 
+        jProgressBar1.setForeground(new java.awt.Color(0, 102, 255));
+
+        jButtonOpenScheduler.setText("Добавить расписание");
+        jButtonOpenScheduler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOpenSchedulerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelMainLayout = new javax.swing.GroupLayout(jPanelMain);
         jPanelMain.setLayout(jPanelMainLayout);
         jPanelMainLayout.setHorizontalGroup(
@@ -343,39 +403,43 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(jPanelMainLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButtonRunOutfile, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButtonRunUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButtonRunDownload, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButtonRunAll, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButtonRunInfile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButtonRunSynch, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButtonRunOutfile, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                        .addComponent(jButtonRunUpload, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                        .addComponent(jButtonRunDownload, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                        .addComponent(jButtonRunAll, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                        .addComponent(jButtonRunInfile, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                        .addComponent(jButtonRunSynch, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jButtonOpenScheduler, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(8, 8, 8))
         );
         jPanelMainLayout.setVerticalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelMainLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jButtonRunAll)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonRunInfile)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonRunDownload)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonRunUpload)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonRunOutfile)
-                .addGap(60, 60, 60)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-                .addComponent(jButtonRunSynch)
-                .addGap(38, 38, 38))
-            .addGroup(jPanelMainLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMainLayout.createSequentialGroup()
+                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelMainLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE))
+                    .addGroup(jPanelMainLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jButtonRunAll)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonRunInfile)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonRunDownload)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonRunUpload)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonRunOutfile)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonOpenScheduler)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
+                        .addComponent(jButtonRunSynch)
+                        .addGap(11, 11, 11)
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -498,7 +562,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanelOptionsLayout.setVerticalGroup(
             jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelOptionsLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(53, 53, 53)
                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelOptionsLayout.createSequentialGroup()
                         .addComponent(jLabelPlatformSource)
@@ -600,7 +664,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
         );
 
         pack();
@@ -626,88 +690,6 @@ public class MainFrame extends javax.swing.JFrame {
         new AboutFrame().setVisible(true);
     }//GEN-LAST:event_jMenuQustionAboutActionPerformed
 
-    private void jButtonRunAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunAllActionPerformed
-        jButtonRunAll.setEnabled(false);
-        key = 0;
-        this.getRootPane().updateUI();
-        Thread thr = (new Thread(new RunExchangeInThread(0)));
-        thr.start();
-        (new Thread(new DrawProgressBar(thr))).start();
-    }//GEN-LAST:event_jButtonRunAllActionPerformed
-
-    private void jButtonApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApplyActionPerformed
-        Apply();
-}//GEN-LAST:event_jButtonApplyActionPerformed
-
-    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
-        dispose();
-}//GEN-LAST:event_jButtonCancelActionPerformed
-
-    @SuppressWarnings("static-access")
-    private void jButtonSelPlatformSourceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelPlatformSourceActionPerformed
-        // указываем папку с запускалкой 1С
-        // открыть диалог выбора файла; если файл выбран - присваиваем его имя в поле
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("*.exe", "exe");
-        jFileChooserPlatformSource.setFileFilter(filter);
-        int result = jFileChooserPlatformSource.showOpenDialog(null);   //объявляем, в след.строке присваиваем
-        if (result == jFileChooserPlatformSource.APPROVE_OPTION) {
-            jTextFieldPlatformSource.setText(jFileChooserPlatformSource.getSelectedFile().getAbsolutePath());
-            jTextAreaSystemLog.repaint();
-        }
-    }//GEN-LAST:event_jButtonSelPlatformSourceActionPerformed
-
-    @SuppressWarnings("static-access")
-    private void jButtonSelBaseSourceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelBaseSourceActionPerformed
-        // указываем папку с базой
-        // открыть диалог выбора файла; если файл выбран - присваиваем его имя в поле
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("*.MD", "MD");
-        jFileChooserBaseSource.setFileFilter(filter);
-        int result = jFileChooserBaseSource.showOpenDialog(null);   //объявляем, в след.строке присваиваем
-        if (result == jFileChooserBaseSource.APPROVE_OPTION) {
-            jTextFieldBaseSource.setText(jFileChooserBaseSource.getSelectedFile().getParent());
-        }
-    }//GEN-LAST:event_jButtonSelBaseSourceActionPerformed
-
-    private void jButtonRunInfileActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonRunInfileActionPerformed
-    {//GEN-HEADEREND:event_jButtonRunInfileActionPerformed
-        jButtonRunInfile.setEnabled(false);
-//        GetFileOnFTP();
-        Thread thr = (new Thread(new RunExchangeInThread(1)));
-        thr.start();
-        (new Thread(new DrawProgressBar(thr))).start();
-        jButtonRunDownload.setEnabled(true);
-    }//GEN-LAST:event_jButtonRunInfileActionPerformed
-
-    private void jButtonRunDownloadActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonRunDownloadActionPerformed
-    {//GEN-HEADEREND:event_jButtonRunDownloadActionPerformed
-        key = 1;
-        jButtonRunDownload.setEnabled(false);
-        Thread thr = (new Thread(new RunExchangeInThread(2)));
-        thr.start();
-        (new Thread(new DrawProgressBar(thr))).start();
-        jButtonRunInfile.setEnabled(true);
-    }//GEN-LAST:event_jButtonRunDownloadActionPerformed
-
-    private void jButtonRunOutfileActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonRunOutfileActionPerformed
-    {//GEN-HEADEREND:event_jButtonRunOutfileActionPerformed
-        jButtonRunOutfile.setEnabled(false);
-//        PutFileOnFTP();
-        Thread thr = (new Thread(new RunExchangeInThread(3)));
-        thr.start();
-        (new Thread(new DrawProgressBar(thr))).start();
-        jButtonRunUpload.setEnabled(true);
-    }//GEN-LAST:event_jButtonRunOutfileActionPerformed
-
-    private void jButtonRunUploadActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonRunUploadActionPerformed
-    {//GEN-HEADEREND:event_jButtonRunUploadActionPerformed
-        key = 2;
-        jButtonRunUpload.setEnabled(false);
-        Thread thr = (new Thread(new RunExchangeInThread(2)));
-        thr.start();
-        (new Thread(new DrawProgressBar(thr))).start();
-        jButtonRunOutfile.setEnabled(true);
-    }//GEN-LAST:event_jButtonRunUploadActionPerformed
-
     private void formWindowIconified(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowIconified
         this.setVisible(false);
         try
@@ -721,9 +703,86 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowIconified
 
     private void jMenuItemTextAreaClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTextAreaClearActionPerformed
-        // TODO add your handling code here:
         jTextAreaSystemLog.setText(null);
     }//GEN-LAST:event_jMenuItemTextAreaClearActionPerformed
+
+@SuppressWarnings(value = "static-access")
+    private void jButtonSelBaseSourceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelBaseSourceActionPerformed
+        // указываем папку с базой
+        // открыть диалог выбора файла; если файл выбран - присваиваем его имя в поле
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("*.MD", "MD");
+        jFileChooserBaseSource.setFileFilter(filter);
+        int result = jFileChooserBaseSource.showOpenDialog(null);   //объявляем, в след.строке присваиваем
+        if (result == jFileChooserBaseSource.APPROVE_OPTION) {
+            jTextFieldBaseSource.setText(jFileChooserBaseSource.getSelectedFile().getParent());
+        }
+}//GEN-LAST:event_jButtonSelBaseSourceActionPerformed
+
+@SuppressWarnings(value = "static-access")
+private void jButtonSelPlatformSourceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelPlatformSourceActionPerformed
+    // указываем папку с запускалкой 1С
+    // открыть диалог выбора файла; если файл выбран - присваиваем его имя в поле
+    FileNameExtensionFilter filter = new FileNameExtensionFilter("*.exe", "exe");
+    jFileChooserPlatformSource.setFileFilter(filter);
+    int result = jFileChooserPlatformSource.showOpenDialog(null);   //объявляем, в след.строке присваиваем
+    if (result == jFileChooserPlatformSource.APPROVE_OPTION) {
+        jTextFieldPlatformSource.setText(jFileChooserPlatformSource.getSelectedFile().getAbsolutePath());
+        jTextAreaSystemLog.repaint();
+    }
+}//GEN-LAST:event_jButtonSelPlatformSourceActionPerformed
+
+private void jButtonApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApplyActionPerformed
+    Apply();
+}//GEN-LAST:event_jButtonApplyActionPerformed
+
+private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
+    dispose();
+}//GEN-LAST:event_jButtonCancelActionPerformed
+
+private void jButtonRunAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunAllActionPerformed
+    key = 0;
+    Thread thr = (new Thread(new RunExchangeInThread(0)));
+    thr.start();
+    (new Thread(new DrawProgressBar(thr))).start();
+}//GEN-LAST:event_jButtonRunAllActionPerformed
+
+private void jButtonRunInfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunInfileActionPerformed
+    jButtonRunInfile.setEnabled(false);
+    Thread thr = (new Thread(new RunExchangeInThread(1)));
+    thr.start();
+    (new Thread(new DrawProgressBar(thr))).start();
+    jButtonRunDownload.setEnabled(true);
+}//GEN-LAST:event_jButtonRunInfileActionPerformed
+
+private void jButtonRunDownloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunDownloadActionPerformed
+    key = 1;
+    jButtonRunDownload.setEnabled(false);
+    Thread thr = (new Thread(new RunExchangeInThread(2)));
+    thr.start();
+    (new Thread(new DrawProgressBar(thr))).start();
+    jButtonRunInfile.setEnabled(true);
+}//GEN-LAST:event_jButtonRunDownloadActionPerformed
+
+private void jButtonRunUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunUploadActionPerformed
+    key = 2;
+    jButtonRunUpload.setEnabled(false);
+    Thread thr = (new Thread(new RunExchangeInThread(2)));
+    thr.start();
+    (new Thread(new DrawProgressBar(thr))).start();
+    jButtonRunOutfile.setEnabled(true);
+}//GEN-LAST:event_jButtonRunUploadActionPerformed
+
+private void jButtonRunOutfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunOutfileActionPerformed
+    jButtonRunOutfile.setEnabled(false);
+    Thread thr = (new Thread(new RunExchangeInThread(3)));
+    thr.start();
+    (new Thread(new DrawProgressBar(thr))).start();
+    jButtonRunUpload.setEnabled(true);
+}//GEN-LAST:event_jButtonRunOutfileActionPerformed
+
+private void jButtonOpenSchedulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOpenSchedulerActionPerformed
+    new Scheduler(schedURBD).setVisible(true);
+}//GEN-LAST:event_jButtonOpenSchedulerActionPerformed
 
     private void Apply() {
         //выгружаем в файл настроек и записываем его
@@ -732,7 +791,7 @@ public class MainFrame extends javax.swing.JFrame {
         saveOptions();
     }
 
-    private void GetFileOnFTP()
+    public void GetFileOnFTP()
     {
         byte err;
         exchange = new ftp_work(TmpOptions.get_FTP_SERVER_NAME(),
@@ -768,7 +827,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
 
-    private void PutFileOnFTP()
+    public void PutFileOnFTP()
     {
         byte err;
         exchange = new ftp_work(TmpOptions.get_FTP_SERVER_NAME(),
@@ -804,7 +863,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
 
-    private void RunWith1S()
+    public void RunWith1S()
     {
         int err;
         run1s = new run_1s(TmpOptions.get_PATH_1S(),
@@ -848,17 +907,18 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
 
-    /**
-     *
-     * @param args
-     */
-    public static void main(String args[]) {
-        new MainFrame().setVisible(true);
-    }
+//    /**
+//     *
+//     * @param args
+//     */
+//    public static void main(String args[]) {
+//        new MainFrame().setVisible(true);
+//    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonApply;
     private javax.swing.JButton jButtonCancel;
-    private javax.swing.JButton jButtonRunAll;
+    private javax.swing.JButton jButtonOpenScheduler;
+    public javax.swing.JButton jButtonRunAll;
     private javax.swing.JButton jButtonRunDownload;
     private javax.swing.JButton jButtonRunInfile;
     private javax.swing.JButton jButtonRunOutfile;
@@ -889,7 +949,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea jTextAreaSystemLog;
+    public javax.swing.JTextArea jTextAreaSystemLog;
     private javax.swing.JPasswordField jTextFieldBasePass;
     private javax.swing.JTextField jTextFieldBaseSource;
     private javax.swing.JTextField jTextFieldBaseUser;
@@ -902,6 +962,11 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldOutfileOnServer;
     private javax.swing.JTextField jTextFieldPlatformSource;
     // End of variables declaration//GEN-END:variables
+
+    javax.swing.JButton getjButtonRunAll()
+    {
+        return jButtonRunAll;
+    }
 
     private void checkingOptionFile() {
         //очищаем информационные поля
@@ -1104,6 +1169,7 @@ public class MainFrame extends javax.swing.JFrame {
         String customerDate = (1900 + date.getYear()) + "-"
                 + (1 + date.getMonth()) + "-" + date.getDate()
                 + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-        return customerDate;
+//        return customerDate;
+          return (new Date()).toString();
     }
 }
