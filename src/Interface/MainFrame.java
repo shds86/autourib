@@ -19,6 +19,7 @@ import java.awt.Toolkit.*;
 import java.awt.TrayIcon;
 import java.awt.TrayIcon.*;
 import java.awt.event.ActionListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -136,8 +137,6 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
 
-
-
     /**
      *
      */
@@ -178,6 +177,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButtonRunSynch.setVisible(false);
         checkingOptionFile();
         getDateAndTime();
+        
         MenuItem exitpopup = new MenuItem("Выход");
         MenuItem allExchange = new MenuItem("Выполнить полный обмен");
         MenuItem inExchange = new MenuItem("Выполнить загрузку");
@@ -291,7 +291,13 @@ public class MainFrame extends javax.swing.JFrame {
         jTextAreaSystemLog = new javax.swing.JTextArea();
         jButtonRunSynch = new javax.swing.JButton();
         jProgressBar1 = new javax.swing.JProgressBar();
-        jButtonOpenScheduler = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jSpinnerTimer = new javax.swing.JSpinner();
+        jComboBoxFrequency = new javax.swing.JComboBox();
+        jButtonAddJob = new javax.swing.JButton();
+        jButtonRemoveJob = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableListJob = new javax.swing.JTable();
         jPanelOptions = new javax.swing.JPanel();
         jTextFieldBaseSource = new javax.swing.JTextField();
         jButtonCancel = new javax.swing.JButton();
@@ -389,13 +395,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         jProgressBar1.setForeground(new java.awt.Color(0, 102, 255));
 
-        jButtonOpenScheduler.setText("Добавить расписание");
-        jButtonOpenScheduler.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonOpenSchedulerActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanelMainLayout = new javax.swing.GroupLayout(jPanelMain);
         jPanelMain.setLayout(jPanelMainLayout);
         jPanelMainLayout.setHorizontalGroup(
@@ -410,8 +409,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(jButtonRunAll, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
                         .addComponent(jButtonRunInfile, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
                         .addComponent(jButtonRunSynch, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jButtonOpenScheduler, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8))
@@ -434,9 +432,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(jButtonRunUpload)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonRunOutfile)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonOpenScheduler)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
                         .addComponent(jButtonRunSynch)
                         .addGap(11, 11, 11)
                         .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -444,6 +440,75 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Главная", jPanelMain);
+
+        jSpinnerTimer.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), new java.util.Date(1262293200000L), null, java.util.Calendar.HOUR_OF_DAY));
+        jSpinnerTimer.setPreferredSize(new java.awt.Dimension(124, 22));
+
+        jComboBoxFrequency.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Один раз", "Каждый час", "Каждый день", "Каждую неделю", "Каждый месяц", "Каждый год" }));
+
+        jButtonAddJob.setText("+");
+        jButtonAddJob.setPreferredSize(new java.awt.Dimension(42, 23));
+        jButtonAddJob.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddJobActionPerformed(evt);
+            }
+        });
+
+        jButtonRemoveJob.setText("-");
+        jButtonRemoveJob.setPreferredSize(new java.awt.Dimension(41, 23));
+        jButtonRemoveJob.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRemoveJobActionPerformed(evt);
+            }
+        });
+
+        jTableListJob.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Время начала", "Периодичность"
+            }
+        ));
+        jTableListJob.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(jTableListJob);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jComboBoxFrequency, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jSpinnerTimer, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButtonAddJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonRemoveJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(185, 185, 185))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jSpinnerTimer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBoxFrequency, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonAddJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonRemoveJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("Расписание", jPanel1);
 
         jTextFieldBaseSource.setPreferredSize(new java.awt.Dimension(6, 23));
 
@@ -780,9 +845,21 @@ private void jButtonRunOutfileActionPerformed(java.awt.event.ActionEvent evt) {/
     jButtonRunUpload.setEnabled(true);
 }//GEN-LAST:event_jButtonRunOutfileActionPerformed
 
-private void jButtonOpenSchedulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOpenSchedulerActionPerformed
-    new Scheduler(schedURBD).setVisible(true);
-}//GEN-LAST:event_jButtonOpenSchedulerActionPerformed
+private void jButtonAddJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddJobActionPerformed
+    System.out.println(((Date)jSpinnerTimer.getValue()));
+    schedURBD.add(new schedulerURBD(((Date)jSpinnerTimer.getValue()),jComboBoxFrequency.getSelectedIndex()));
+    schedURBD.getLast().createSCHED();
+    ((DefaultTableModel)jTableListJob.getModel()).setRowCount(jTableListJob.getRowCount()+1);
+    //jTableListJob.addRowSelectionInterval(0, 1);
+    jTableListJob.setValueAt(schedURBD.getLast(),jTableListJob.getRowCount()-1,0);
+    jTableListJob.setValueAt(schedURBD.getLast().getFrequency(),jTableListJob.getRowCount()-1,1);
+
+    //
+}//GEN-LAST:event_jButtonAddJobActionPerformed
+
+private void jButtonRemoveJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveJobActionPerformed
+
+}//GEN-LAST:event_jButtonRemoveJobActionPerformed
 
     private void Apply() {
         //выгружаем в файл настроек и записываем его
@@ -915,9 +992,10 @@ private void jButtonOpenSchedulerActionPerformed(java.awt.event.ActionEvent evt)
 //        new MainFrame().setVisible(true);
 //    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAddJob;
     private javax.swing.JButton jButtonApply;
     private javax.swing.JButton jButtonCancel;
-    private javax.swing.JButton jButtonOpenScheduler;
+    private javax.swing.JButton jButtonRemoveJob;
     public javax.swing.JButton jButtonRunAll;
     private javax.swing.JButton jButtonRunDownload;
     private javax.swing.JButton jButtonRunInfile;
@@ -926,6 +1004,7 @@ private void jButtonOpenSchedulerActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JButton jButtonRunUpload;
     private javax.swing.JButton jButtonSelBaseSource;
     private javax.swing.JButton jButtonSelPlatformSource;
+    private javax.swing.JComboBox jComboBoxFrequency;
     private javax.swing.JLabel jLabelBaseSource;
     private javax.swing.JLabel jLabelBaseUserAndPass;
     private javax.swing.JLabel jLabelFTPPass;
@@ -943,12 +1022,16 @@ private void jButtonOpenSchedulerActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JMenu jMenuQuestion;
     private javax.swing.JMenuItem jMenuQuestionHelp;
     private javax.swing.JMenuItem jMenuQustionAbout;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelOptions;
     private javax.swing.JPopupMenu jPopupMenuTextArea;
     private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSpinner jSpinnerTimer;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTableListJob;
     public javax.swing.JTextArea jTextAreaSystemLog;
     private javax.swing.JPasswordField jTextFieldBasePass;
     private javax.swing.JTextField jTextFieldBaseSource;
