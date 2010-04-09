@@ -850,15 +850,30 @@ private void jButtonAddJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     schedURBD.add(new schedulerURBD(((Date)jSpinnerTimer.getValue()),jComboBoxFrequency.getSelectedIndex()));
     schedURBD.getLast().createSCHED();
     ((DefaultTableModel)jTableListJob.getModel()).setRowCount(jTableListJob.getRowCount()+1);
-    //jTableListJob.addRowSelectionInterval(0, 1);
     jTableListJob.setValueAt(schedURBD.getLast(),jTableListJob.getRowCount()-1,0);
-    jTableListJob.setValueAt(schedURBD.getLast().getFrequency(),jTableListJob.getRowCount()-1,1);
-
-    //
+    jTableListJob.setValueAt(jComboBoxFrequency.getSelectedItem(),jTableListJob.getRowCount()-1,1);
+    schedURBD.getLast().start();
 }//GEN-LAST:event_jButtonAddJobActionPerformed
 
 private void jButtonRemoveJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveJobActionPerformed
-
+    int _selectRow = jTableListJob.getSelectedRow();
+    if (jTableListJob.getSelectedRow()!=-1)
+    {
+        if (schedURBD.get(_selectRow).stop()==true)
+        {
+            ((DefaultTableModel)jTableListJob.getModel()).removeRow(_selectRow);
+            jTextAreaSystemLog.append("\n" + getDateAndTime() +" удалено задание  "+ schedURBD.get(_selectRow).job.getFullName());
+            schedURBD.remove(_selectRow);
+        }
+        else
+        {
+            jTextAreaSystemLog.append("\n" + getDateAndTime() +" Не могу удалить задание "+ schedURBD.get(_selectRow).job.getFullName());
+        }
+    }
+    else
+    {
+        javax.swing.JOptionPane.showMessageDialog(null, "Выберите задание для удаления!!!","!!! В Н И М А Н И Е !!!",javax.swing.JOptionPane.WARNING_MESSAGE);
+    }
 }//GEN-LAST:event_jButtonRemoveJobActionPerformed
 
     private void Apply() {
@@ -919,6 +934,7 @@ private void jButtonRemoveJobActionPerformed(java.awt.event.ActionEvent evt) {//
         {
             jTextAreaSystemLog.append("\n" + getDateAndTime() + " Подключение прошло успешно...");
             jTextAreaSystemLog.append("\n" + getDateAndTime() + " Отправляю файл...");
+
             if ((err=exchange.put_file(TmpOptions.get_pc_file_on_ftp(), new File(TmpOptions.get_pc_file_on_localhost()))) == consterr.NOT_ERR)
             {
                 jTextAreaSystemLog.append("\n" + getDateAndTime() + " Файл успешно отправлен...");
@@ -969,6 +985,7 @@ private void jButtonRemoveJobActionPerformed(java.awt.event.ActionEvent evt) {//
                 {
                     jTextAreaSystemLog.append("\n" + getDateAndTime() +" "+ consterr.PrintErr((byte)err));
                     jTextAreaSystemLog.repaint();
+//                    javax.swing.JOptionPane.showMessageDialog(null, getDateAndTime() +" "+ consterr.PrintErr((byte)err),"ОШИБКА",javax.swing.JOptionPane.ERROR_MESSAGE);
                 }
             }
             else

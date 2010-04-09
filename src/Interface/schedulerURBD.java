@@ -127,7 +127,7 @@ public class schedulerURBD
             trigger = new CronTrigger(triggerName, "group1", jobName, "group1", _time);
             sched.addJob(job, true);
             Date ft = sched.scheduleJob(trigger);
-            sched.start();
+
         }
         catch (Exception err)
         {err.printStackTrace();}
@@ -149,6 +149,7 @@ public class schedulerURBD
             log.info(job.getFullName() + " has been scheduled to run at: " + ft
                 + " and repeat based on expression: "
                 + trigger.getCronExpression());
+            
             sched.start();
         }
         catch (Exception err)
@@ -177,5 +178,35 @@ public class schedulerURBD
     public int getFrequency()
     {
         return this.Frequency;
+    }
+
+    public boolean start()
+    {
+        try
+        {
+            this.sched.start();
+            return true;
+        }
+        catch(SchedulerException err)
+        {
+            return false;
+        }
+    }
+
+    public boolean stop()
+    {
+        try
+        {
+            if (this.sched.isStarted()==true)
+            {
+                this.sched.shutdown(true);
+                return true;
+            }
+            return false;
+        }
+        catch(SchedulerException err)
+        {
+            return false;
+        }
     }
 }
