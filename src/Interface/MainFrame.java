@@ -10,6 +10,7 @@ import URBD1SLib.ftp.*;
 import java.awt.AWTException;
 import java.awt.Desktop;
 import java.awt.MenuItem;
+import java.awt.MenuShortcut;
 import java.awt.PopupMenu;
 import java.awt.SystemTray;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -20,12 +21,14 @@ import java.awt.TrayIcon;
 import java.awt.TrayIcon.*;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
+import org.apache.commons.logging.LogFactory;
+import org.apache.commons.logging.Log;
 
 /**
  *
  * @author support
  */
-public class MainFrame extends javax.swing.JFrame {
+public class MainFrame extends javax.swing.JFrame implements Serializable{
 
 //    Здесь будут писаться заметки, предложения, дальнейшие пожелания для дальнейшей реализации в программе
 //    1. Реализовать работу программы по расписанию
@@ -37,6 +40,7 @@ public class MainFrame extends javax.swing.JFrame {
 //    7. Отправка отчета на сервер о причинах неудачного обмена????
 
     //объявляем глобальные переменные
+    public static Log _log = LogFactory.getLog(MainFrame.class);
     File optionFile;            //файл с настройками (путь)
     File helpFile;              //файл с помощью
     options TmpOptions = new options();
@@ -50,9 +54,9 @@ public class MainFrame extends javax.swing.JFrame {
     java.util.TimerTask juTT;
     byte key;
     boolean key_stop = false;
-    LinkedList<schedulerURBD> schedURBD = new LinkedList<schedulerURBD>();
+    LinkedList<schedulerURBD> schedURBD;
     
-        class DrawProgressBar extends Thread
+        class DrawProgressBar extends Thread implements Serializable
         {
             @Override
             public void run()
@@ -86,7 +90,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
 
-        class RunExchangeInThread implements Runnable
+        class RunExchangeInThread implements Runnable, Serializable
         {
             private int keythread;
             public void run()
@@ -164,7 +168,7 @@ public class MainFrame extends javax.swing.JFrame {
             UIManager.put("FileChooser.listViewButtonAccessibleName", "Список");
         }
         catch (Exception err){}
-
+        
         jFileChooserPlatformSource = new JFileChooser();
         jFileChooserPlatformSource.setDialogTitle("Диалог выбора папки 1С:Предприятие");
         jFileChooserBaseSource = new JFileChooser();
@@ -177,7 +181,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButtonRunSynch.setVisible(false);
         checkingOptionFile();
         getDateAndTime();
-        
+        schedURBD = new LinkedList<schedulerURBD>();
         MenuItem exitpopup = new MenuItem("Выход");
         MenuItem allExchange = new MenuItem("Выполнить полный обмен");
         MenuItem inExchange = new MenuItem("Выполнить загрузку");
@@ -229,7 +233,7 @@ public class MainFrame extends javax.swing.JFrame {
                                              }
         });
 
-        image = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("icon.gif"));
+        image = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("arrow_refresh.png"));
         setIconImage(image);
         if (SystemTray.isSupported())
         {
@@ -246,32 +250,6 @@ public class MainFrame extends javax.swing.JFrame {
                                            }
                                        });
         }
-
-//  java.util.Timer timer2 = new java.util.Timer();
-//  TimerTask task = new TimerTask() {
-//      public void run()
-//      {
-//            jButtonRunAll.doClick();
-//            jTextAreaSystemLog.append("\nБЛЯЯЯЯЯЯЯЯЯЯЯЯЯЯЯЯЯ");
-//      }
-//  };
-//  Date date = new Date(110, 3, 2, 12, 5);
-//timer2.schedule(task, date, 120000);
-
-//    javax.swing.Timer tmptimer=new javax.swing.Timer(1000,new ActionListener()
-//                                                       {
-//                                                            public void actionPerformed(ActionEvent ev)
-//                                                            {
-//                                                                Date date = new Date(System.currentTimeMillis());
-//                                                                if ((date.getHours()==11)&&(date.getMinutes()==40))
-//                                                                {
-//                                                                    jButtonRunAllActionPerformed(ev);
-//                                                                    System.out.println("БЛЯ РАБОТАЕТ!!!!!!!!!!!!");
-//                                                                }
-//                                                            }
-//                                                        }
-//                                                );
-//    tmptimer.start();
     }
 
     @SuppressWarnings("unchecked")
@@ -343,8 +321,14 @@ public class MainFrame extends javax.swing.JFrame {
         setTitle("Клиент URBD1Slib");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
             public void windowIconified(java.awt.event.WindowEvent evt) {
                 formWindowIconified(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -385,9 +369,10 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTextAreaSystemLog.setColumns(1);
         jTextAreaSystemLog.setEditable(false);
-        jTextAreaSystemLog.setFont(new java.awt.Font("Monospaced", 0, 12));
+        jTextAreaSystemLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jTextAreaSystemLog.setRows(1);
         jTextAreaSystemLog.setText("Системный лог...");
+        jTextAreaSystemLog.setToolTipText("");
         jTextAreaSystemLog.setComponentPopupMenu(jPopupMenuTextArea);
         jScrollPane2.setViewportView(jTextAreaSystemLog);
 
@@ -446,7 +431,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jComboBoxFrequency.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Один раз", "Каждый час", "Каждый день", "Каждую неделю", "Каждый месяц", "Каждый год" }));
 
-        jButtonAddJob.setText("+");
+        jButtonAddJob.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/plus.png"))); // NOI18N
         jButtonAddJob.setPreferredSize(new java.awt.Dimension(42, 23));
         jButtonAddJob.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -454,7 +439,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jButtonRemoveJob.setText("-");
+        jButtonRemoveJob.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/minus.png"))); // NOI18N
         jButtonRemoveJob.setPreferredSize(new java.awt.Dimension(41, 23));
         jButtonRemoveJob.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -846,12 +831,11 @@ private void jButtonRunOutfileActionPerformed(java.awt.event.ActionEvent evt) {/
 }//GEN-LAST:event_jButtonRunOutfileActionPerformed
 
 private void jButtonAddJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddJobActionPerformed
-    System.out.println(((Date)jSpinnerTimer.getValue()));
     schedURBD.add(new schedulerURBD(((Date)jSpinnerTimer.getValue()),jComboBoxFrequency.getSelectedIndex()));
-    schedURBD.getLast().createSCHED();
     ((DefaultTableModel)jTableListJob.getModel()).setRowCount(jTableListJob.getRowCount()+1);
     jTableListJob.setValueAt(schedURBD.getLast(),jTableListJob.getRowCount()-1,0);
     jTableListJob.setValueAt(jComboBoxFrequency.getSelectedItem(),jTableListJob.getRowCount()-1,1);
+    schedURBD.getLast().createSCHED(this.jButtonRunAll);
     schedURBD.getLast().start();
 }//GEN-LAST:event_jButtonAddJobActionPerformed
 
@@ -862,7 +846,7 @@ private void jButtonRemoveJobActionPerformed(java.awt.event.ActionEvent evt) {//
         if (schedURBD.get(_selectRow).stop()==true)
         {
             ((DefaultTableModel)jTableListJob.getModel()).removeRow(_selectRow);
-            jTextAreaSystemLog.append("\n" + getDateAndTime() +" удалено задание  "+ schedURBD.get(_selectRow).job.getFullName());
+            jTextAreaSystemLog.append("\n" + getDateAndTime() +" удалено задание "+ schedURBD.get(_selectRow).job.getFullName());
             schedURBD.remove(_selectRow);
         }
         else
@@ -875,6 +859,14 @@ private void jButtonRemoveJobActionPerformed(java.awt.event.ActionEvent evt) {//
         javax.swing.JOptionPane.showMessageDialog(null, "Выберите задание для удаления!!!","!!! В Н И М А Н И Е !!!",javax.swing.JOptionPane.WARNING_MESSAGE);
     }
 }//GEN-LAST:event_jButtonRemoveJobActionPerformed
+
+private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+//    loadScheduler();
+}//GEN-LAST:event_formWindowOpened
+
+private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+//    saveScheduler();
+}//GEN-LAST:event_formWindowClosing
 
     private void Apply() {
         //выгружаем в файл настроек и записываем его
@@ -1258,6 +1250,83 @@ private void jButtonRemoveJobActionPerformed(java.awt.event.ActionEvent evt) {//
         }
         jTextAreaSystemLog.append("\n" + getDateAndTime() + " Настройки записаны...");
         jTextAreaSystemLog.repaint();
+    }
+
+    private void saveScheduler()
+    {
+        String _str =   System.getProperty("user.dir")+
+                        System.getProperty("file.separator")+
+                        "AvtoURIB"+
+                        System.getProperty("file.separator")+
+                        "sched.bin";
+        File schedBin = new File(_str);
+
+        try 
+        {
+            if (!schedBin.getParentFile().exists())
+            {    if(schedBin.getParentFile().mkdirs())
+                    if (!schedBin.createNewFile())
+                        System.out.println("не удалось :(");
+            }
+            else
+                if (!schedBin.createNewFile())
+                    _log.error("Ошибка при сохранение файла шедулера!!! ошибка создания файла!!!");
+        }
+        catch (IOException err)
+        {
+            _log.error("Ошибка при сохранение файла шедулера!!! ошибка создания файла!!!");
+        }
+        if ((schedURBD!=null)&&(schedURBD.size()!=0))
+        {
+            try
+            {
+                ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(schedBin));
+                out.writeObject(schedURBD);
+                out.close();
+            }
+            catch(IOException err)
+            {
+                _log.error("Ошибка при сохранение файла шедулера!!!");
+                err.printStackTrace();
+            }
+        }
+    }
+
+    private void loadScheduler()
+    {
+        String _str =   System.getProperty("user.dir")+
+                        System.getProperty("file.separator")+
+                        "AvtoURIB"+
+                        System.getProperty("file.separator")+
+                        "sched.bin";
+        File schedBin = new File(_str);
+        if (schedBin.exists()){
+        try
+        {
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream(schedBin));
+            schedURBD = (LinkedList<schedulerURBD>)in.readObject();
+            in.close();
+        }
+        catch(IOException err)
+        {
+            _log.error("Ошибка при чтении сохраненного файла шедулера!!! ошибка чтения файла!!!");
+            err.printStackTrace();
+        }
+        catch (ClassNotFoundException err)
+        {
+            _log.error(err);            
+        }
+        if ((schedURBD!=null)&&(schedURBD.size()!=0))
+        {
+            for (int i=0; i<schedURBD.size();i++)
+            {
+                ((DefaultTableModel)jTableListJob.getModel()).setRowCount(jTableListJob.getRowCount()+1);
+                jTableListJob.setValueAt(schedURBD.get(i),jTableListJob.getRowCount()-1,0);
+                jTableListJob.setValueAt(jComboBoxFrequency.getItemAt(i),jTableListJob.getRowCount()-1,1);
+                schedURBD.getLast().start();
+            }
+        }
+        }
     }
 
     /**

@@ -5,7 +5,9 @@
 
 package Interface;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.swing.JButton;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.quartz.CronTrigger;
@@ -18,10 +20,10 @@ import org.quartz.SchedulerException;
  *
  * @author support
  */
-public class schedulerURBD
+public class schedulerURBD implements Serializable
 {
     public static Log _log = LogFactory.getLog(schedulerURBD.class);
-    private Class jobClass = main.class;
+    private Class jobClass = JobClass.class;
     private Date jobDate;
     private String time;
     private int Frequency;
@@ -111,7 +113,7 @@ public class schedulerURBD
                     break;
                 }
         }
-        System.out.println(this.time);
+//        System.out.println(this.time);
         this.Frequency = _Frequency;
     }
 
@@ -133,7 +135,8 @@ public class schedulerURBD
         {err.printStackTrace();}
     }
 
-    public void createSCHED()
+//    public void createSCHED(MainFrame Frame)
+    public void createSCHED(JButton Frame)
     {
         jobName = "job"+Long.toString(System.currentTimeMillis());
         triggerName = "triggerFor"+jobName;
@@ -143,17 +146,35 @@ public class schedulerURBD
             Log log = LogFactory.getLog(schedulerURBD.class);
             sched = sf.getScheduler();
             job = new JobDetail(jobName, "group1", jobClass);
+            job.getJobDataMap().put("Frame", Frame);
             trigger = new CronTrigger(triggerName, "group1", jobName, "group1", time);
             sched.addJob(job, true);
             Date ft = sched.scheduleJob(trigger);
+//            Frame.jTextAreaSystemLog.append("\n--------------------------------------------------");
+//            Frame.jTextAreaSystemLog.append("\n"+ new Date()+" Задание успешно создано. " +
+//                                            "\nВремя запуска задания "+ this.jobDate+
+//                                            "\n"+getFrequency(this.Frequency));
+
             log.info(job.getFullName() + " has been scheduled to run at: " + ft
                 + " and repeat based on expression: "
                 + trigger.getCronExpression());
-            
-            sched.start();
         }
         catch (Exception err)
         {err.printStackTrace();}
+    }
+
+    public String getFrequency(int _Frequency)
+    {
+        switch (Frequency)
+        {
+            case 0:{return "Задание выполниться один раз";}
+            case 1:{return "Задание будет выполняться каждый час";}
+            case 2:{return "Задание будет выполняться каждый день";}
+            case 3:{return "Задание будет выполняться каждую неделю";}
+            case 4:{return "Задание будет выполняться каждый месяц";}
+            case 5:{return "Задание будет выполняться каждый год";}
+            default:{return "Задание запускаться не будет";}
+        }
     }
 
     @Override
