@@ -10,7 +10,6 @@ import URBD1SLib.ftp.*;
 import java.awt.AWTException;
 import java.awt.Desktop;
 import java.awt.MenuItem;
-import java.awt.MenuShortcut;
 import java.awt.PopupMenu;
 import java.awt.SystemTray;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -777,12 +776,22 @@ private void jButtonSelPlatformSourceActionPerformed(java.awt.event.ActionEvent 
     int result = jFileChooserPlatformSource.showOpenDialog(null);   //объявляем, в след.строке присваиваем
     if (result == jFileChooserPlatformSource.APPROVE_OPTION) {
         jTextFieldPlatformSource.setText(jFileChooserPlatformSource.getSelectedFile().getAbsolutePath());
-        jTextAreaSystemLog.repaint();
     }
 }//GEN-LAST:event_jButtonSelPlatformSourceActionPerformed
 
 private void jButtonApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApplyActionPerformed
-    Apply();
+    if (jTextFieldPlatformSource.getText().equals("") || jTextFieldBaseSource.getText().equals("") 
+            || jTextFieldBaseUser.getText().equals("") || jTextFieldBasePass.getText().equals("")
+            || jTextFieldFTPSource.getText().equals("") || jTextFieldFTPUser.getText().equals("")
+            || jTextFieldFTPPass.getText().equals("") || jTextFieldInfileOnLocalhost.getText().equals("")
+            || jTextFieldInfileOnServer.getText().equals("") || jTextFieldOutfileOnLocalhost.getText().equals("")
+            || jTextFieldOutfileOnServer.getText().equals("")) {
+                jTextAreaSystemLog.append("\n" + getDateAndTime() + " Заполнены не все поля настроек!");
+                javax.swing.JOptionPane.showMessageDialog(null, "Заполнены не все поля настроек!","Ошибка",javax.swing.JOptionPane.WARNING_MESSAGE);
+    }
+    else {
+        Apply();
+    }
 }//GEN-LAST:event_jButtonApplyActionPerformed
 
 private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
@@ -871,7 +880,6 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
     private void Apply() {
         //выгружаем в файл настроек и записываем его
         jTextAreaSystemLog.append("\n" + getDateAndTime() + " Записываю настройки в файл...");
-        jTextAreaSystemLog.repaint();
         saveOptions();
     }
 
@@ -884,7 +892,6 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
         
         jTextAreaSystemLog.append("\n--------------------------------------------------");
         jTextAreaSystemLog.append("\n" + getDateAndTime() + " Подключение к фтп-серверу...");
-        jTextAreaSystemLog.repaint();
         this.getRootPane().updateUI();
         if ((err=exchange.ftp_connect()) == consterr.NOT_ERR)
         {
@@ -920,7 +927,6 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
 
         jTextAreaSystemLog.append("\n--------------------------------------------------");
         jTextAreaSystemLog.append("\n" + getDateAndTime() + " Подключение к фтп-серверу...");
-        jTextAreaSystemLog.repaint();
         this.getRootPane().updateUI();
         if ((err=exchange.ftp_connect()) == consterr.NOT_ERR)
         {
@@ -960,7 +966,6 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
         if (err==consterr.NOT_ERR)
         {
             jTextAreaSystemLog.append("\n" + getDateAndTime() + " Запускаем 1С");
-            jTextAreaSystemLog.repaint();
             err=run1s.start();
             if (err==consterr.NOT_ERR)
             {
@@ -970,36 +975,24 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
                     for (int i = 0; i < tmplst.size(); i++)
                     {
                         jTextAreaSystemLog.append("\n" + getDateAndTime() +" "+ tmplst.get(i));
-                        jTextAreaSystemLog.repaint();
                     }
                 }
                 else
                 {
                     jTextAreaSystemLog.append("\n" + getDateAndTime() +" "+ consterr.PrintErr((byte)err));
-                    jTextAreaSystemLog.repaint();
-//                    javax.swing.JOptionPane.showMessageDialog(null, getDateAndTime() +" "+ consterr.PrintErr((byte)err),"ОШИБКА",javax.swing.JOptionPane.ERROR_MESSAGE);
                 }
             }
             else
             {
                 jTextAreaSystemLog.append("\n" + getDateAndTime() +" "+ consterr.PrintErr((byte)err));
-                jTextAreaSystemLog.repaint();
             }
         }
         else
         {
             jTextAreaSystemLog.append("\n" + getDateAndTime() +" "+ consterr.PrintErr((byte)err));
-            jTextAreaSystemLog.repaint();
         }
     }
 
-//    /**
-//     *
-//     * @param args
-//     */
-//    public static void main(String args[]) {
-//        new MainFrame().setVisible(true);
-//    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddJob;
     private javax.swing.JButton jButtonApply;
@@ -1074,7 +1067,6 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
         dir = new File(userDir);
         if (!dir.exists()) {
             jTextAreaSystemLog.append(getDateAndTime() + " Каталог настроек не найден и будет создан...");
-            jTextAreaSystemLog.repaint();
             dir.mkdirs();
             jButtonRunAll.setEnabled(false);
             jButtonRunDownload.setEnabled(false);
@@ -1083,7 +1075,6 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
             jButtonRunUpload.setEnabled(false);
         } else {
             jTextAreaSystemLog.append(getDateAndTime() + " Каталог настроек найден...");
-            jTextAreaSystemLog.repaint();
         }
 
         //проверяем, есть ли файл настроек
@@ -1093,7 +1084,6 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
         if (!optionFile.exists()) {
             try {
                 jTextAreaSystemLog.append("\n" + getDateAndTime() + " Файл настроек не найден и будет создан...");
-                jTextAreaSystemLog.repaint();
                 optionFile.createNewFile();
 
                 jButtonRunAll.setEnabled(false);
@@ -1105,7 +1095,6 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
             }
         } else {
             jTextAreaSystemLog.append("\n" + getDateAndTime() + " Файл настроек найден...");
-            jTextAreaSystemLog.repaint();
             loadOptions();
             jButtonRunAll.setEnabled(true);
             jButtonRunInfile.setEnabled(true);
@@ -1123,11 +1112,9 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
                 StringTokenizer st = new StringTokenizer(stroka, ";");
                 if (st.countTokens() < 7) {
                     jTextAreaSystemLog.append("\n" + getDateAndTime() + " Неверный файл настроек!..");
-                    jTextAreaSystemLog.repaint();
                     break;
                 }
                 jTextAreaSystemLog.append("\n" + getDateAndTime() + " Читаю файл настроек...");
-                jTextAreaSystemLog.repaint();
                 int tokencounter = 1;
                 while (st.hasMoreTokens()) {
                     switch (tokencounter) {
@@ -1203,7 +1190,6 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
                     tokencounter++;
                 }
                 jTextAreaSystemLog.append("\n" + getDateAndTime() + " Файл настроек прочитан...");
-                jTextAreaSystemLog.repaint();
             }
         } catch (IOException e) {
         }
@@ -1249,7 +1235,6 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
         } catch (IOException e) {
         }
         jTextAreaSystemLog.append("\n" + getDateAndTime() + " Настройки записаны...");
-        jTextAreaSystemLog.repaint();
     }
 
     private void saveScheduler()
