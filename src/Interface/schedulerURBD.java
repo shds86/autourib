@@ -19,9 +19,9 @@ public class schedulerURBD implements Serializable
 {
     public static Log _log = LogFactory.getLog(schedulerURBD.class);
     private Class jobClass = JobClass.class;
-    private Date jobDate;
-    private String time;
-    private int Frequency;
+    Date jobDate;
+    String time;
+    int Frequency;
     String jobName;
     String triggerName;
     SchedulerFactory sf;
@@ -38,7 +38,10 @@ public class schedulerURBD implements Serializable
 
     public schedulerURBD(Date _date, int _Frequency)
     {
+        this.jobName = "job"+_date.getTime();
+        this.triggerName = "triggerFor"+this.jobName;
         this.jobDate = _date;
+        this.Frequency = _Frequency;
         switch (_Frequency)
         {
             case 0:     //Один раз
@@ -109,7 +112,6 @@ public class schedulerURBD implements Serializable
                 }
         }
 //        System.out.println(this.time);
-        this.Frequency = _Frequency;
     }
 
     public void createSCHED(String _time)
@@ -130,11 +132,8 @@ public class schedulerURBD implements Serializable
         {err.printStackTrace();}
     }
 
-//    public void createSCHED(MainFrame Frame)
-    public void createSCHED(JButton Frame)
+    public void createSCHED(MainFrame Frame)
     {
-        jobName = "job"+Long.toString(System.currentTimeMillis());
-        triggerName = "triggerFor"+jobName;
         try
         {
             sf = new StdSchedulerFactory();
@@ -145,10 +144,10 @@ public class schedulerURBD implements Serializable
             trigger = new CronTrigger(triggerName, "group1", jobName, "group1", time);
             sched.addJob(job, true);
             Date ft = sched.scheduleJob(trigger);
-//            Frame.jTextAreaSystemLog.append("\n--------------------------------------------------");
-//            Frame.jTextAreaSystemLog.append("\n"+ new Date()+" Задание успешно создано. " +
-//                                            "\nВремя запуска задания "+ this.jobDate+
-//                                            "\n"+getFrequency(this.Frequency));
+            Frame.jTextAreaSystemLog.append("\n--------------------------------------------------");
+            Frame.jTextAreaSystemLog.append("\n"+ new Date()+" Задание успешно создано. " +
+                                            "\nВремя запуска задания "+ this.jobDate+
+                                            "\n"+getFrequency(this.Frequency));
 
             log.info(job.getFullName() + " has been scheduled to run at: " + ft
                 + " and repeat based on expression: "
@@ -224,5 +223,30 @@ public class schedulerURBD implements Serializable
         {
             return false;
         }
+    }
+
+    public void setTime(String _time)
+    {
+        this.time = _time;
+    }
+
+    public void setJobName(String _jobName)
+    {
+        this.jobName = _jobName;
+    }
+
+    public void setTriggerName(String _triggerName)
+    {
+        this.triggerName = _triggerName;
+    }
+
+    public void setJobDate(String _jobDate)
+    {
+        this.jobDate = new Date(Long.parseLong(_jobDate));
+    }
+
+    public void setFrequency(String _Freguency)
+    {
+        this.Frequency = Integer.parseInt(_Freguency);
     }
 }

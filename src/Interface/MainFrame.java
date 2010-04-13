@@ -33,7 +33,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
 //    1. Реализовать работу программы по расписанию
 //    2. Реализовать работу ФТП через прокси-сервер
 //    3. Реализовать работу с несколькими базами.
-//    4. Реализавать выполнение сервисных функций 1С.
+//    4. Реализавать выполнение сервисных функций 1С. Реализацию сделать через хэш-мап
 //    5. Автозапуск(служба или автозагрузка?)
 //    6. Сообщение пользователю о удачной или неудачной выгрузке.
 //    7. Отправка отчета на сервер о причинах неудачного обмена????
@@ -182,9 +182,9 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
         getDateAndTime();
         schedURBD = new LinkedList<schedulerURBD>();
         MenuItem exitpopup = new MenuItem("Выход");
-        MenuItem allExchange = new MenuItem("Выполнить полный обмен");
-        MenuItem inExchange = new MenuItem("Выполнить загрузку");
-        MenuItem outExchange = new MenuItem("Выполнить выгрузку");
+        MenuItem allExchange = new MenuItem("Полный обмен");
+        MenuItem inExchange = new MenuItem("Загрузка");
+        MenuItem outExchange = new MenuItem("Выгрузка");
         iconpopup = new PopupMenu("IconPopUP");
         iconpopup.add(allExchange);
         iconpopup.add(inExchange);
@@ -301,6 +301,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
         jLabelOutfileOnLocalhost = new javax.swing.JLabel();
         jTextFieldOutfileOnServer = new javax.swing.JTextField();
         jLabelOutfileOnServer = new javax.swing.JLabel();
+        jCheckBoxMinimiz = new javax.swing.JCheckBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuFileExit = new javax.swing.JMenuItem();
@@ -396,7 +397,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
                     .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8))
+                .addGap(10, 10, 10))
         );
         jPanelMainLayout.setVerticalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -550,6 +551,8 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
 
         jLabelOutfileOnServer.setText("Файл выгрузки на сервере");
 
+        jCheckBoxMinimiz.setText("Запускать минимизированной");
+
         javax.swing.GroupLayout jPanelOptionsLayout = new javax.swing.GroupLayout(jPanelOptions);
         jPanelOptions.setLayout(jPanelOptionsLayout);
         jPanelOptionsLayout.setHorizontalGroup(
@@ -562,7 +565,8 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
                             .addComponent(jLabelPlatformSource)
                             .addComponent(jLabelBaseSource)
                             .addComponent(jLabelFTPSource)
-                            .addComponent(jLabelFTPUser)))
+                            .addComponent(jLabelFTPUser)
+                            .addComponent(jCheckBoxMinimiz, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanelOptionsLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -600,18 +604,20 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
                     .addGroup(jPanelOptionsLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabelBaseUserAndPass)))
-                .addGap(173, 173, 173))
+                .addGap(180, 180, 180))
             .addGroup(jPanelOptionsLayout.createSequentialGroup()
                 .addGap(118, 118, 118)
                 .addComponent(jButtonApply)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 228, Short.MAX_VALUE)
                 .addComponent(jButtonCancel)
-                .addGap(115, 115, 115))
+                .addGap(122, 122, 122))
         );
         jPanelOptionsLayout.setVerticalGroup(
             jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelOptionsLayout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addContainerGap()
+                .addComponent(jCheckBoxMinimiz)
+                .addGap(3, 3, 3)
                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelOptionsLayout.createSequentialGroup()
                         .addComponent(jLabelPlatformSource)
@@ -844,7 +850,7 @@ private void jButtonAddJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     ((DefaultTableModel)jTableListJob.getModel()).setRowCount(jTableListJob.getRowCount()+1);
     jTableListJob.setValueAt(schedURBD.getLast(),jTableListJob.getRowCount()-1,0);
     jTableListJob.setValueAt(jComboBoxFrequency.getSelectedItem(),jTableListJob.getRowCount()-1,1);
-    schedURBD.getLast().createSCHED(this.jButtonRunAll);
+    schedURBD.getLast().createSCHED(this);
     schedURBD.getLast().start();
 }//GEN-LAST:event_jButtonAddJobActionPerformed
 
@@ -870,11 +876,11 @@ private void jButtonRemoveJobActionPerformed(java.awt.event.ActionEvent evt) {//
 }//GEN-LAST:event_jButtonRemoveJobActionPerformed
 
 private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-//    loadScheduler();
+    loadScheduler(evt);
 }//GEN-LAST:event_formWindowOpened
 
 private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-//    saveScheduler();
+    saveScheduler();
 }//GEN-LAST:event_formWindowClosing
 
     private void Apply() {
@@ -1006,6 +1012,7 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
     private javax.swing.JButton jButtonRunUpload;
     private javax.swing.JButton jButtonSelBaseSource;
     private javax.swing.JButton jButtonSelPlatformSource;
+    private javax.swing.JCheckBox jCheckBoxMinimiz;
     private javax.swing.JComboBox jComboBoxFrequency;
     private javax.swing.JLabel jLabelBaseSource;
     private javax.swing.JLabel jLabelBaseUserAndPass;
@@ -1212,7 +1219,7 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
                     + jTextFieldInfileOnLocalhost.getText() + ";"
                     + jTextFieldOutfileOnLocalhost.getText() + ";"
                     + jTextFieldOutfileOnServer.getText();
-            System.out.println(optionString);
+//            System.out.println(optionString);
             outoptionfile.write(optionString);
             outoptionfile.close();
 
@@ -1239,11 +1246,12 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
 
     private void saveScheduler()
     {
+        java.util.Properties properties = new java.util.Properties();
         String _str =   System.getProperty("user.dir")+
                         System.getProperty("file.separator")+
                         "AvtoURIB"+
                         System.getProperty("file.separator")+
-                        "sched.bin";
+                        "sched.conf";
         File schedBin = new File(_str);
 
         try 
@@ -1251,66 +1259,114 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
             if (!schedBin.getParentFile().exists())
             {    if(schedBin.getParentFile().mkdirs())
                     if (!schedBin.createNewFile())
-                        System.out.println("не удалось :(");
+                    {
+//                        System.out.println("не удалось :(");
+                        return;
+                    }
             }
             else
-                if (!schedBin.createNewFile())
-                    _log.error("Ошибка при сохранение файла шедулера!!! ошибка создания файла!!!");
+                if (!schedBin.exists())
+                {
+                    if (!schedBin.createNewFile())
+                    {
+                        _log.error("Ошибка при сохранение файла шедулера!!! ошибка создания файла!!!");
+                        return;
+                    }
+                }
+                else
+                {
+                    if(schedBin.delete())
+                        if (!schedBin.createNewFile())
+                        {
+                            _log.error("Ошибка при сохранение файла шедулера!!! ошибка создания файла!!!");
+                            return;
+                        }
+                }
         }
         catch (IOException err)
         {
             _log.error("Ошибка при сохранение файла шедулера!!! ошибка создания файла!!!");
+            return;
         }
-        if ((schedURBD!=null)&&(schedURBD.size()!=0))
+        try
         {
-            try
+            InputStream is = new FileInputStream(schedBin);
+            properties.load(is);
+            properties.setProperty("countjobs",Integer.toString(schedURBD.size()));
+            if (jCheckBoxMinimiz.isSelected())
+                properties.setProperty("mini","1");
+            else
+                properties.setProperty("mini","0");
+            for (int ind = 0;ind<schedURBD.size();ind++)
             {
-                ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(schedBin));
-                out.writeObject(schedURBD);
-                out.close();
+                properties.setProperty("jobName"+ind,schedURBD.get(ind).jobName);
+                properties.setProperty("triggerName"+ind,schedURBD.get(ind).triggerName);
+                properties.setProperty("time"+ind,schedURBD.get(ind).time);
+                properties.setProperty("frequency"+ind,Integer.toString(schedURBD.get(ind).Frequency));
+                properties.setProperty("date"+ind,Long.toString(schedURBD.get(ind).jobDate.getTime()));
             }
-            catch(IOException err)
-            {
-                _log.error("Ошибка при сохранение файла шедулера!!!");
-                err.printStackTrace();
-            }
+            properties.store(new FileOutputStream(schedBin),"");
+            is.close();
+        }
+        catch (FileNotFoundException err)
+        {
+            _log.error("Не найден файл для сохранения расписания");
+            return;
+        }
+        catch (IOException err)
+        {
+            _log.error("Ошибка при сохранении расписания!!!");
+            return;
         }
     }
 
-    private void loadScheduler()
+    private void loadScheduler(java.awt.event.WindowEvent evt)
     {
+        java.util.Properties properties = new java.util.Properties();
         String _str =   System.getProperty("user.dir")+
                         System.getProperty("file.separator")+
                         "AvtoURIB"+
                         System.getProperty("file.separator")+
-                        "sched.bin";
+                        "sched.conf";
         File schedBin = new File(_str);
-        if (schedBin.exists()){
-        try
+        if (schedBin.exists())
         {
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream(schedBin));
-            schedURBD = (LinkedList<schedulerURBD>)in.readObject();
-            in.close();
-        }
-        catch(IOException err)
-        {
-            _log.error("Ошибка при чтении сохраненного файла шедулера!!! ошибка чтения файла!!!");
-            err.printStackTrace();
-        }
-        catch (ClassNotFoundException err)
-        {
-            _log.error(err);            
-        }
-        if ((schedURBD!=null)&&(schedURBD.size()!=0))
-        {
-            for (int i=0; i<schedURBD.size();i++)
+            try
             {
-                ((DefaultTableModel)jTableListJob.getModel()).setRowCount(jTableListJob.getRowCount()+1);
-                jTableListJob.setValueAt(schedURBD.get(i),jTableListJob.getRowCount()-1,0);
-                jTableListJob.setValueAt(jComboBoxFrequency.getItemAt(i),jTableListJob.getRowCount()-1,1);
-                schedURBD.getLast().start();
+                properties.load(new FileInputStream(schedBin));
+                int countjobs = Integer.parseInt(properties.getProperty("countjobs"));
+                try
+                {
+                    if(properties.getProperty("mini").equals("1"))
+                    {
+                        jCheckBoxMinimiz.setSelected(true);
+                        formWindowIconified(evt);
+                    }
+                    else
+                        jCheckBoxMinimiz.setSelected(false);
+                }
+                catch (NullPointerException err){}
+                schedURBD = new LinkedList<schedulerURBD>();
+                for (int ind = 0;ind<countjobs;ind++)
+                {
+                    schedURBD.add(new schedulerURBD());
+                    schedURBD.getLast().setFrequency(properties.getProperty("frequency"+ind));
+                    schedURBD.getLast().setJobDate(properties.getProperty("date"+ind));
+                    schedURBD.getLast().setJobName(properties.getProperty("jobName"+ind));
+                    schedURBD.getLast().setTriggerName(properties.getProperty("triggerName"+ind));
+                    schedURBD.getLast().setTime(properties.getProperty("time"+ind));
+                    ((DefaultTableModel)jTableListJob.getModel()).setRowCount(jTableListJob.getRowCount()+1);
+                    jTableListJob.setValueAt(schedURBD.getLast(),jTableListJob.getRowCount()-1,0);
+                    jTableListJob.setValueAt(jComboBoxFrequency.getItemAt(ind),jTableListJob.getRowCount()-1,1);
+                    schedURBD.getLast().createSCHED(this);
+                    schedURBD.getLast().start();
+                }
             }
-        }
+            catch (IOException err)
+            {
+                _log.error("Ошибка при загрузки расписания!!!");
+                return;
+            }
         }
     }
 
