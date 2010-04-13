@@ -31,6 +31,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
 
 //    Здесь будут писаться заметки, предложения, дальнейшие пожелания для дальнейшей реализации в программе
 //    1. Реализовать работу программы по расписанию
+//    1.1. Переход на xml-формат хранения настроек программы, расписания и списка баз
 //    2. Реализовать работу ФТП через прокси-сервер
 //    3. Реализовать работу с несколькими базами.
 //    4. Реализавать выполнение сервисных функций 1С. Реализацию сделать через хэш-мап
@@ -268,7 +269,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
         jTextAreaSystemLog = new javax.swing.JTextArea();
         jButtonRunSynch = new javax.swing.JButton();
         jProgressBar1 = new javax.swing.JProgressBar();
-        jPanel1 = new javax.swing.JPanel();
+        jPanelSchedule = new javax.swing.JPanel();
         jSpinnerTimer = new javax.swing.JSpinner();
         jComboBoxFrequency = new javax.swing.JComboBox();
         jButtonAddJob = new javax.swing.JButton();
@@ -301,6 +302,17 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
         jLabelOutfileOnLocalhost = new javax.swing.JLabel();
         jTextFieldOutfileOnServer = new javax.swing.JTextField();
         jLabelOutfileOnServer = new javax.swing.JLabel();
+        jPanelSync = new javax.swing.JPanel();
+        jLabelSyncBaseSource = new javax.swing.JLabel();
+        jLabelSyncFTPdir = new javax.swing.JLabel();
+        jLabelSyncFTP = new javax.swing.JLabel();
+        jTextFieldSyncFTP = new javax.swing.JTextField();
+        jTextFieldSyncBaseSource = new javax.swing.JTextField();
+        jTextFieldSyncFTPdir = new javax.swing.JTextField();
+        jLabelSyncFTPUser = new javax.swing.JLabel();
+        jTextFieldSyncFTPUser = new javax.swing.JTextField();
+        jTextFieldSyncFTPPass = new javax.swing.JPasswordField();
+        jLabelSyncFTPPass = new javax.swing.JLabel();
         jCheckBoxMinimiz = new javax.swing.JCheckBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
@@ -369,7 +381,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
 
         jTextAreaSystemLog.setColumns(1);
         jTextAreaSystemLog.setEditable(false);
-        jTextAreaSystemLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jTextAreaSystemLog.setFont(new java.awt.Font("Monospaced", 0, 12));
         jTextAreaSystemLog.setRows(1);
         jTextAreaSystemLog.setText("Системный лог...");
         jTextAreaSystemLog.setToolTipText("");
@@ -458,42 +470,42 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
         jTableListJob.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jTableListJob);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelScheduleLayout = new javax.swing.GroupLayout(jPanelSchedule);
+        jPanelSchedule.setLayout(jPanelScheduleLayout);
+        jPanelScheduleLayout.setHorizontalGroup(
+            jPanelScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelScheduleLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(jPanelScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jComboBoxFrequency, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jSpinnerTimer, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanelScheduleLayout.createSequentialGroup()
                         .addComponent(jButtonAddJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonRemoveJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(185, 185, 185))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jPanelScheduleLayout.setVerticalGroup(
+            jPanelScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelScheduleLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanelScheduleLayout.createSequentialGroup()
                         .addComponent(jSpinnerTimer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBoxFrequency, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanelScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonAddJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonRemoveJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Расписание", jPanel1);
+        jTabbedPane1.addTab("Расписание", jPanelSchedule);
 
         jTextFieldBaseSource.setPreferredSize(new java.awt.Dimension(6, 23));
 
@@ -512,6 +524,14 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
         });
 
         jLabelFTPUser.setText("FTP-пользователь");
+
+        jTextFieldFTPSource.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jTextFieldFTPSourceInputMethodTextChanged(evt);
+            }
+        });
 
         jLabelFTPSource.setText("FTP-хост");
 
@@ -677,6 +697,80 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
 
         jTabbedPane1.addTab("Настройки", jPanelOptions);
 
+        jLabelSyncBaseSource.setText("Папка базы локально");
+
+        jLabelSyncFTPdir.setText("Папка на сервере");
+
+        jLabelSyncFTP.setText("FTP-хост");
+
+        jTextFieldSyncFTP.setEnabled(false);
+
+        jTextFieldSyncBaseSource.setEnabled(false);
+
+        jLabelSyncFTPUser.setText("FTP-пользователь");
+
+        jTextFieldSyncFTPPass.setText("jPasswordField1");
+
+        jLabelSyncFTPPass.setText("FTP-пароль");
+
+        javax.swing.GroupLayout jPanelSyncLayout = new javax.swing.GroupLayout(jPanelSync);
+        jPanelSync.setLayout(jPanelSyncLayout);
+        jPanelSyncLayout.setHorizontalGroup(
+            jPanelSyncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSyncLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jPanelSyncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelSyncLayout.createSequentialGroup()
+                        .addComponent(jLabelSyncBaseSource)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextFieldSyncBaseSource, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelSyncLayout.createSequentialGroup()
+                        .addComponent(jLabelSyncFTP)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                        .addComponent(jTextFieldSyncFTP, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSyncLayout.createSequentialGroup()
+                        .addGroup(jPanelSyncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelSyncFTPdir)
+                            .addComponent(jLabelSyncFTPUser)
+                            .addComponent(jLabelSyncFTPPass))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                        .addGroup(jPanelSyncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldSyncFTPPass)
+                            .addComponent(jTextFieldSyncFTPUser)
+                            .addComponent(jTextFieldSyncFTPdir, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))))
+                .addContainerGap(347, Short.MAX_VALUE))
+        );
+        jPanelSyncLayout.setVerticalGroup(
+            jPanelSyncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSyncLayout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addGroup(jPanelSyncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelSyncFTP)
+                    .addComponent(jTextFieldSyncFTP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelSyncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelSyncBaseSource)
+                    .addComponent(jTextFieldSyncBaseSource, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelSyncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelSyncFTPdir)
+                    .addComponent(jTextFieldSyncFTPdir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelSyncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelSyncLayout.createSequentialGroup()
+                        .addComponent(jLabelSyncFTPUser)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelSyncFTPPass)
+                        .addGap(7, 7, 7))
+                    .addGroup(jPanelSyncLayout.createSequentialGroup()
+                        .addComponent(jTextFieldSyncFTPUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextFieldSyncFTPPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(194, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Синхронизация", jPanelSync);
+
         jMenuFile.setText("Файл");
 
         jMenuFileExit.setText("Выход");
@@ -770,6 +864,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
         int result = jFileChooserBaseSource.showOpenDialog(null);   //объявляем, в след.строке присваиваем
         if (result == jFileChooserBaseSource.APPROVE_OPTION) {
             jTextFieldBaseSource.setText(jFileChooserBaseSource.getSelectedFile().getParent());
+            jTextFieldSyncBaseSource.setText(jFileChooserBaseSource.getSelectedFile().getParent());
         }
 }//GEN-LAST:event_jButtonSelBaseSourceActionPerformed
 
@@ -882,6 +977,11 @@ private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event
 private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
     saveScheduler();
 }//GEN-LAST:event_formWindowClosing
+
+private void jTextFieldFTPSourceInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTextFieldFTPSourceInputMethodTextChanged
+    // TODO add your handling code here:
+    jTextFieldSyncFTP.setText(jTextFieldFTPSource.getText());
+}//GEN-LAST:event_jTextFieldFTPSourceInputMethodTextChanged
 
     private void Apply() {
         //выгружаем в файл настроек и записываем его
@@ -1024,6 +1124,11 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
     private javax.swing.JLabel jLabelOutfileOnLocalhost;
     private javax.swing.JLabel jLabelOutfileOnServer;
     private javax.swing.JLabel jLabelPlatformSource;
+    private javax.swing.JLabel jLabelSyncBaseSource;
+    private javax.swing.JLabel jLabelSyncFTP;
+    private javax.swing.JLabel jLabelSyncFTPPass;
+    private javax.swing.JLabel jLabelSyncFTPUser;
+    private javax.swing.JLabel jLabelSyncFTPdir;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenuItem jMenuFileExit;
@@ -1031,9 +1136,10 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
     private javax.swing.JMenu jMenuQuestion;
     private javax.swing.JMenuItem jMenuQuestionHelp;
     private javax.swing.JMenuItem jMenuQustionAbout;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelOptions;
+    private javax.swing.JPanel jPanelSchedule;
+    private javax.swing.JPanel jPanelSync;
     private javax.swing.JPopupMenu jPopupMenuTextArea;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1053,6 +1159,11 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
     private javax.swing.JTextField jTextFieldOutfileOnLocalhost;
     private javax.swing.JTextField jTextFieldOutfileOnServer;
     private javax.swing.JTextField jTextFieldPlatformSource;
+    private javax.swing.JTextField jTextFieldSyncBaseSource;
+    private javax.swing.JTextField jTextFieldSyncFTP;
+    private javax.swing.JPasswordField jTextFieldSyncFTPPass;
+    private javax.swing.JTextField jTextFieldSyncFTPUser;
+    private javax.swing.JTextField jTextFieldSyncFTPdir;
     // End of variables declaration//GEN-END:variables
 
     javax.swing.JButton getjButtonRunAll()
@@ -1117,7 +1228,7 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
             while (inoptionfile.ready()) {
                 String stroka = inoptionfile.readLine();
                 StringTokenizer st = new StringTokenizer(stroka, ";");
-                if (st.countTokens() < 7) {
+                if (st.countTokens() < 14) {
                     jTextAreaSystemLog.append("\n" + getDateAndTime() + " Неверный файл настроек!..");
                     break;
                 }
@@ -1135,6 +1246,7 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
                             tmp = st.nextToken();
                             TmpOptions.set_PATH_BASE(tmp);
                             jTextFieldBaseSource.setText(tmp);
+                            jTextFieldSyncBaseSource.setText(tmp);
                             break;
                         }
                         case 3: {
@@ -1153,6 +1265,7 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
                             tmp = st.nextToken();
                             TmpOptions.set_FTP_SERVER_NAME(tmp);
                             jTextFieldFTPSource.setText(tmp);
+                            jTextFieldSyncFTP.setText(tmp);
                             break;
                         }
                         case 6: {
@@ -1193,6 +1306,27 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
                             jTextFieldOutfileOnServer.setText(tmp);
                             break;
                         }
+                        case 12:
+                        {
+                            tmp = st.nextToken();
+                            TmpOptions.set_sync_ftp_dir(tmp);
+                            jTextFieldSyncFTPdir.setText(tmp);
+                            break;
+                        }
+                        case 13:
+                        {
+                            tmp = st.nextToken();
+                            TmpOptions.set_sync_ftp_user(tmp);
+                            jTextFieldSyncFTPUser.setText(tmp);
+                            break;
+                        }
+                        case 14:
+                        {
+                            tmp = st.nextToken();
+                            TmpOptions.set_sync_ftp_pass(tmp.toCharArray());
+                            jTextFieldSyncFTPPass.setText(tmp);
+                            break;
+                        }
                     }
                     tokencounter++;
                 }
@@ -1218,7 +1352,10 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
                     + jTextFieldInfileOnServer.getText() + ";"
                     + jTextFieldInfileOnLocalhost.getText() + ";"
                     + jTextFieldOutfileOnLocalhost.getText() + ";"
-                    + jTextFieldOutfileOnServer.getText();
+                    + jTextFieldOutfileOnServer.getText() + ";"
+                    + jTextFieldSyncFTPdir.getText() + ";"
+                    + jTextFieldSyncFTPUser.getText() + ";"
+                    + new String(jTextFieldSyncFTPPass.getPassword());
 //            System.out.println(optionString);
             outoptionfile.write(optionString);
             outoptionfile.close();
@@ -1234,6 +1371,9 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
             TmpOptions.set_cp_file_on_localhost(jTextFieldInfileOnLocalhost.getText());
             TmpOptions.set_pc_file_on_localhost(jTextFieldOutfileOnLocalhost.getText());
             TmpOptions.set_pc_file_on_ftp(jTextFieldOutfileOnServer.getText());
+            TmpOptions.set_sync_ftp_dir(jTextFieldSyncFTPdir.getText());
+            TmpOptions.set_sync_ftp_user(jTextFieldSyncFTPUser.getText());
+            TmpOptions.set_sync_ftp_pass(jTextFieldSyncFTPPass.getPassword());
 
             jButtonRunAll.setEnabled(true);
             jButtonRunInfile.setEnabled(true);
