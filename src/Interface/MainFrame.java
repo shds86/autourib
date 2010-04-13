@@ -302,6 +302,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
         jLabelOutfileOnLocalhost = new javax.swing.JLabel();
         jTextFieldOutfileOnServer = new javax.swing.JTextField();
         jLabelOutfileOnServer = new javax.swing.JLabel();
+        jCheckBoxMinimiz = new javax.swing.JCheckBox();
         jPanelSync = new javax.swing.JPanel();
         jLabelSyncBaseSource = new javax.swing.JLabel();
         jLabelSyncFTPdir = new javax.swing.JLabel();
@@ -313,7 +314,6 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
         jTextFieldSyncFTPUser = new javax.swing.JTextField();
         jTextFieldSyncFTPPass = new javax.swing.JPasswordField();
         jLabelSyncFTPPass = new javax.swing.JLabel();
-        jCheckBoxMinimiz = new javax.swing.JCheckBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuFileExit = new javax.swing.JMenuItem();
@@ -525,11 +525,9 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
 
         jLabelFTPUser.setText("FTP-пользователь");
 
-        jTextFieldFTPSource.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                jTextFieldFTPSourceInputMethodTextChanged(evt);
+        jTextFieldFTPSource.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldFTPSourceKeyReleased(evt);
             }
         });
 
@@ -978,10 +976,9 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
     saveScheduler();
 }//GEN-LAST:event_formWindowClosing
 
-private void jTextFieldFTPSourceInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTextFieldFTPSourceInputMethodTextChanged
-    // TODO add your handling code here:
+private void jTextFieldFTPSourceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldFTPSourceKeyReleased
     jTextFieldSyncFTP.setText(jTextFieldFTPSource.getText());
-}//GEN-LAST:event_jTextFieldFTPSourceInputMethodTextChanged
+}//GEN-LAST:event_jTextFieldFTPSourceKeyReleased
 
     private void Apply() {
         //выгружаем в файл настроек и записываем его
