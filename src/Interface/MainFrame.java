@@ -267,7 +267,6 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
         jButtonRunAll = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextAreaSystemLog = new javax.swing.JTextArea();
-        jButtonRunSynch = new javax.swing.JButton();
         jProgressBar1 = new javax.swing.JProgressBar();
         jPanelSchedule = new javax.swing.JPanel();
         jSpinnerTimer = new javax.swing.JSpinner();
@@ -314,6 +313,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
         jTextFieldSyncFTPUser = new javax.swing.JTextField();
         jTextFieldSyncFTPPass = new javax.swing.JPasswordField();
         jLabelSyncFTPPass = new javax.swing.JLabel();
+        jButtonRunSynch = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuFileExit = new javax.swing.JMenuItem();
@@ -344,6 +344,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
             }
         });
 
+        jButtonRunOutfile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/upload.png"))); // NOI18N
         jButtonRunOutfile.setText("Отправить на сервер");
         jButtonRunOutfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -351,6 +352,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
             }
         });
 
+        jButtonRunUpload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/database-export.png"))); // NOI18N
         jButtonRunUpload.setText("Выгрузить из базы");
         jButtonRunUpload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -358,6 +360,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
             }
         });
 
+        jButtonRunDownload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/database-import.png"))); // NOI18N
         jButtonRunDownload.setText("Загрузить в базу");
         jButtonRunDownload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -365,6 +368,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
             }
         });
 
+        jButtonRunInfile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/download.png"))); // NOI18N
         jButtonRunInfile.setText("Принять с сервера");
         jButtonRunInfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -372,6 +376,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
             }
         });
 
+        jButtonRunAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/arrow_refresh.png"))); // NOI18N
         jButtonRunAll.setText("Запустить обмен");
         jButtonRunAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -388,8 +393,6 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
         jTextAreaSystemLog.setComponentPopupMenu(jPopupMenuTextArea);
         jScrollPane2.setViewportView(jTextAreaSystemLog);
 
-        jButtonRunSynch.setText("Синхронизация");
-
         jProgressBar1.setForeground(new java.awt.Color(0, 102, 255));
 
         javax.swing.GroupLayout jPanelMainLayout = new javax.swing.GroupLayout(jPanelMain);
@@ -400,12 +403,11 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
                 .addContainerGap()
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButtonRunOutfile, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                        .addComponent(jButtonRunUpload, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                        .addComponent(jButtonRunOutfile, javax.swing.GroupLayout.PREFERRED_SIZE, 146, Short.MAX_VALUE)
+                        .addComponent(jButtonRunUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 146, Short.MAX_VALUE)
                         .addComponent(jButtonRunDownload, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
                         .addComponent(jButtonRunAll, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                        .addComponent(jButtonRunInfile, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                        .addComponent(jButtonRunSynch, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
+                        .addComponent(jButtonRunInfile, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -417,7 +419,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelMainLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE))
                     .addGroup(jPanelMainLayout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(jButtonRunAll)
@@ -429,14 +431,12 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
                         .addComponent(jButtonRunUpload)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonRunOutfile)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
-                        .addComponent(jButtonRunSynch)
-                        .addGap(11, 11, 11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
                         .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Главная", jPanelMain);
+        jTabbedPane1.addTab("Главная", new javax.swing.ImageIcon(getClass().getResource("/Interface/home.png")), jPanelMain); // NOI18N
 
         jSpinnerTimer.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), new java.util.Date(1262293200000L), null, java.util.Calendar.HOUR_OF_DAY));
         jSpinnerTimer.setPreferredSize(new java.awt.Dimension(124, 22));
@@ -493,7 +493,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
             .addGroup(jPanelScheduleLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
                     .addGroup(jPanelScheduleLayout.createSequentialGroup()
                         .addComponent(jSpinnerTimer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -505,10 +505,11 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Расписание", jPanelSchedule);
+        jTabbedPane1.addTab("Расписание", new javax.swing.ImageIcon(getClass().getResource("/Interface/clock.png")), jPanelSchedule); // NOI18N
 
         jTextFieldBaseSource.setPreferredSize(new java.awt.Dimension(6, 23));
 
+        jButtonCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/cancel.png"))); // NOI18N
         jButtonCancel.setText("Отмена");
         jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -516,6 +517,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
             }
         });
 
+        jButtonApply.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/accept.png"))); // NOI18N
         jButtonApply.setText("Применить");
         jButtonApply.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -693,7 +695,9 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Настройки", jPanelOptions);
+        jTabbedPane1.addTab("Настройки", new javax.swing.ImageIcon(getClass().getResource("/Interface/property.png")), jPanelOptions); // NOI18N
+
+        jPanelSync.setVerifyInputWhenFocusTarget(false);
 
         jLabelSyncBaseSource.setText("Папка базы локально");
 
@@ -711,6 +715,8 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
 
         jLabelSyncFTPPass.setText("FTP-пароль");
 
+        jButtonRunSynch.setText("Синхронизация");
+
         javax.swing.GroupLayout jPanelSyncLayout = new javax.swing.GroupLayout(jPanelSync);
         jPanelSync.setLayout(jPanelSyncLayout);
         jPanelSyncLayout.setHorizontalGroup(
@@ -719,24 +725,29 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
                 .addGap(28, 28, 28)
                 .addGroup(jPanelSyncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelSyncLayout.createSequentialGroup()
-                        .addComponent(jLabelSyncBaseSource)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextFieldSyncBaseSource, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButtonRunSynch)
+                        .addContainerGap())
                     .addGroup(jPanelSyncLayout.createSequentialGroup()
-                        .addComponent(jLabelSyncFTP)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
-                        .addComponent(jTextFieldSyncFTP, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSyncLayout.createSequentialGroup()
                         .addGroup(jPanelSyncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelSyncFTPdir)
-                            .addComponent(jLabelSyncFTPUser)
-                            .addComponent(jLabelSyncFTPPass))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                        .addGroup(jPanelSyncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldSyncFTPPass)
-                            .addComponent(jTextFieldSyncFTPUser)
-                            .addComponent(jTextFieldSyncFTPdir, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))))
-                .addContainerGap(347, Short.MAX_VALUE))
+                            .addGroup(jPanelSyncLayout.createSequentialGroup()
+                                .addComponent(jLabelSyncBaseSource)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextFieldSyncBaseSource, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelSyncLayout.createSequentialGroup()
+                                .addComponent(jLabelSyncFTP)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                                .addComponent(jTextFieldSyncFTP, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSyncLayout.createSequentialGroup()
+                                .addGroup(jPanelSyncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelSyncFTPdir)
+                                    .addComponent(jLabelSyncFTPUser)
+                                    .addComponent(jLabelSyncFTPPass))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                                .addGroup(jPanelSyncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextFieldSyncFTPPass)
+                                    .addComponent(jTextFieldSyncFTPUser)
+                                    .addComponent(jTextFieldSyncFTPdir, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))))
+                        .addContainerGap(347, Short.MAX_VALUE))))
         );
         jPanelSyncLayout.setVerticalGroup(
             jPanelSyncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -764,8 +775,12 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
                         .addComponent(jTextFieldSyncFTPUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextFieldSyncFTPPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonRunSynch)
+                .addContainerGap(167, Short.MAX_VALUE))
         );
+
+        jButtonRunSynch.getAccessibleContext().setAccessibleParent(jPanelSync);
 
         jTabbedPane1.addTab("Синхронизация", jPanelSync);
 
@@ -783,6 +798,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
 
         jMenuQuestion.setText("?");
 
+        jMenuQuestionHelp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/question-frame.png"))); // NOI18N
         jMenuQuestionHelp.setText("Помощь");
         jMenuQuestionHelp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -811,7 +827,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
         );
 
         pack();
@@ -897,13 +913,6 @@ private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     dispose();
 }//GEN-LAST:event_jButtonCancelActionPerformed
 
-private void jButtonRunAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunAllActionPerformed
-    key = 0;
-    Thread thr = (new Thread(new RunExchangeInThread(0)));
-    thr.start();
-    (new Thread(new DrawProgressBar(thr))).start();
-}//GEN-LAST:event_jButtonRunAllActionPerformed
-
 private void jButtonRunInfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunInfileActionPerformed
     jButtonRunInfile.setEnabled(false);
     Thread thr = (new Thread(new RunExchangeInThread(1)));
@@ -979,6 +988,13 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
 private void jTextFieldFTPSourceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldFTPSourceKeyReleased
     jTextFieldSyncFTP.setText(jTextFieldFTPSource.getText());
 }//GEN-LAST:event_jTextFieldFTPSourceKeyReleased
+
+private void jButtonRunAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunAllActionPerformed
+    key = 0;
+    Thread thr = (new Thread(new RunExchangeInThread(0)));
+    thr.start();
+    (new Thread(new DrawProgressBar(thr))).start();
+}//GEN-LAST:event_jButtonRunAllActionPerformed
 
     private void Apply() {
         //выгружаем в файл настроек и записываем его
@@ -1101,7 +1117,7 @@ private void jTextFieldFTPSourceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-
     private javax.swing.JButton jButtonApply;
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonRemoveJob;
-    public javax.swing.JButton jButtonRunAll;
+    private javax.swing.JButton jButtonRunAll;
     private javax.swing.JButton jButtonRunDownload;
     private javax.swing.JButton jButtonRunInfile;
     private javax.swing.JButton jButtonRunOutfile;

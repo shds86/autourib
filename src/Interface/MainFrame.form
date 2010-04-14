@@ -42,6 +42,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuQuestionHelp">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Interface/question-frame.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="&#x41f;&#x43e;&#x43c;&#x43e;&#x449;&#x44c;"/>
               </Properties>
               <Events>
@@ -95,7 +98,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jTabbedPane1" alignment="1" pref="419" max="32767" attributes="0"/>
+          <Component id="jTabbedPane1" alignment="1" pref="423" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -109,6 +112,9 @@
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="&#x413;&#x43b;&#x430;&#x432;&#x43d;&#x430;&#x44f;">
                 <Property name="tabTitle" type="java.lang.String" value="&#x413;&#x43b;&#x430;&#x432;&#x43d;&#x430;&#x44f;"/>
+                <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Interface/home.png"/>
+                </Property>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -124,8 +130,7 @@
                               <Component id="jButtonRunUpload" alignment="0" pref="146" max="32767" attributes="1"/>
                               <Component id="jButtonRunDownload" alignment="0" pref="146" max="32767" attributes="1"/>
                               <Component id="jButtonRunAll" alignment="0" pref="146" max="32767" attributes="1"/>
-                              <Component id="jButtonRunInfile" alignment="0" pref="146" max="32767" attributes="1"/>
-                              <Component id="jButtonRunSynch" alignment="0" pref="146" max="32767" attributes="1"/>
+                              <Component id="jButtonRunInfile" alignment="0" min="-2" pref="164" max="-2" attributes="1"/>
                           </Group>
                           <Component id="jProgressBar1" alignment="1" pref="0" max="32767" attributes="1"/>
                       </Group>
@@ -141,7 +146,7 @@
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane2" pref="372" max="32767" attributes="0"/>
+                              <Component id="jScrollPane2" pref="374" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
@@ -154,9 +159,7 @@
                               <Component id="jButtonRunUpload" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jButtonRunOutfile" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="146" max="32767" attributes="0"/>
-                              <Component id="jButtonRunSynch" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                              <EmptySpace pref="172" max="32767" attributes="0"/>
                               <Component id="jProgressBar1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -168,6 +171,9 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="jButtonRunOutfile">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Interface/upload.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="&#x41e;&#x442;&#x43f;&#x440;&#x430;&#x432;&#x438;&#x442;&#x44c; &#x43d;&#x430; &#x441;&#x435;&#x440;&#x432;&#x435;&#x440;"/>
               </Properties>
               <Events>
@@ -176,6 +182,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButtonRunUpload">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Interface/database-export.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="&#x412;&#x44b;&#x433;&#x440;&#x443;&#x437;&#x438;&#x442;&#x44c; &#x438;&#x437; &#x431;&#x430;&#x437;&#x44b;"/>
               </Properties>
               <Events>
@@ -184,6 +193,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButtonRunDownload">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Interface/database-import.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="&#x417;&#x430;&#x433;&#x440;&#x443;&#x437;&#x438;&#x442;&#x44c; &#x432; &#x431;&#x430;&#x437;&#x443;"/>
               </Properties>
               <Events>
@@ -192,6 +204,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButtonRunInfile">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Interface/download.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="&#x41f;&#x440;&#x438;&#x43d;&#x44f;&#x442;&#x44c; &#x441; &#x441;&#x435;&#x440;&#x432;&#x435;&#x440;&#x430;"/>
               </Properties>
               <Events>
@@ -200,6 +215,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButtonRunAll">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Interface/arrow_refresh.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="&#x417;&#x430;&#x43f;&#x443;&#x441;&#x442;&#x438;&#x442;&#x44c; &#x43e;&#x431;&#x43c;&#x435;&#x43d;"/>
               </Properties>
               <Events>
@@ -236,11 +254,6 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="jButtonRunSynch">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="&#x421;&#x438;&#x43d;&#x445;&#x440;&#x43e;&#x43d;&#x438;&#x437;&#x430;&#x446;&#x438;&#x44f;"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JProgressBar" name="jProgressBar1">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -255,6 +268,9 @@
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="&#x420;&#x430;&#x441;&#x43f;&#x438;&#x441;&#x430;&#x43d;&#x438;&#x435;">
                 <Property name="tabTitle" type="java.lang.String" value="&#x420;&#x430;&#x441;&#x43f;&#x438;&#x441;&#x430;&#x43d;&#x438;&#x435;"/>
+                <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Interface/clock.png"/>
+                </Property>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -286,7 +302,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane1" alignment="0" pref="372" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" alignment="0" pref="374" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jSpinnerTimer" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -383,6 +399,9 @@
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="&#x41d;&#x430;&#x441;&#x442;&#x440;&#x43e;&#x439;&#x43a;&#x438;">
                 <Property name="tabTitle" type="java.lang.String" value="&#x41d;&#x430;&#x441;&#x442;&#x440;&#x43e;&#x439;&#x43a;&#x438;"/>
+                <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Interface/property.png"/>
+                </Property>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -550,6 +569,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButtonCancel">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Interface/cancel.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="&#x41e;&#x442;&#x43c;&#x435;&#x43d;&#x430;"/>
               </Properties>
               <Events>
@@ -558,6 +580,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButtonApply">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Interface/accept.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="&#x41f;&#x440;&#x438;&#x43c;&#x435;&#x43d;&#x438;&#x442;&#x44c;"/>
               </Properties>
               <Events>
@@ -675,6 +700,9 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanelSync">
+          <Properties>
+            <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="&#x421;&#x438;&#x43d;&#x445;&#x440;&#x43e;&#x43d;&#x438;&#x437;&#x430;&#x446;&#x438;&#x44f;">
@@ -689,31 +717,39 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="1">
-                              <Component id="jLabelSyncBaseSource" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jTextFieldSyncBaseSource" min="-2" pref="134" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jButtonRunSynch" min="-2" max="-2" attributes="1"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="1">
-                              <Component id="jLabelSyncFTP" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="69" max="32767" attributes="0"/>
-                              <Component id="jTextFieldSyncFTP" min="-2" pref="134" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabelSyncFTPdir" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabelSyncFTPUser" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabelSyncFTPPass" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="1">
+                                      <Component id="jLabelSyncBaseSource" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="jTextFieldSyncBaseSource" min="-2" pref="134" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="1">
+                                      <Component id="jLabelSyncFTP" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="69" max="32767" attributes="0"/>
+                                      <Component id="jTextFieldSyncFTP" min="-2" pref="134" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabelSyncFTPdir" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabelSyncFTPUser" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabelSyncFTPPass" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace pref="21" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jTextFieldSyncFTPPass" alignment="0" max="32767" attributes="1"/>
+                                          <Component id="jTextFieldSyncFTPUser" alignment="0" max="32767" attributes="1"/>
+                                          <Component id="jTextFieldSyncFTPdir" alignment="0" pref="134" max="32767" attributes="1"/>
+                                      </Group>
+                                  </Group>
                               </Group>
-                              <EmptySpace pref="21" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jTextFieldSyncFTPPass" alignment="0" max="32767" attributes="1"/>
-                                  <Component id="jTextFieldSyncFTPUser" alignment="0" max="32767" attributes="1"/>
-                                  <Component id="jTextFieldSyncFTPdir" alignment="0" pref="134" max="32767" attributes="1"/>
-                              </Group>
+                              <EmptySpace pref="347" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="347" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -749,7 +785,9 @@
                               <Component id="jTextFieldSyncFTPPass" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="194" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jButtonRunSynch" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="167" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -798,6 +836,16 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="FTP-&#x43f;&#x430;&#x440;&#x43e;&#x43b;&#x44c;"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonRunSynch">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x421;&#x438;&#x43d;&#x445;&#x440;&#x43e;&#x43d;&#x438;&#x437;&#x430;&#x446;&#x438;&#x44f;"/>
+              </Properties>
+              <AccessibilityProperties>
+                <Property name="AccessibleContext.accessibleParent" type="javax.accessibility.Accessible" editor="org.netbeans.modules.form.RADVisualComponent$AccessibleParentEditor">
+                  <ComponentRef name="jPanelSync"/>
+                </Property>
+              </AccessibilityProperties>
             </Component>
           </SubComponents>
         </Container>
