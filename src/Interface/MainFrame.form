@@ -244,6 +244,7 @@
                     <Property name="rows" type="int" value="1"/>
                     <Property name="text" type="java.lang.String" value="&#x421;&#x438;&#x441;&#x442;&#x435;&#x43c;&#x43d;&#x44b;&#x439; &#x43b;&#x43e;&#x433;..."/>
                     <Property name="toolTipText" type="java.lang.String" value=""/>
+                    <Property name="autoscrolls" type="boolean" value="false"/>
                     <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                       <ComponentRef name="jPopupMenuTextArea"/>
                     </Property>
@@ -647,14 +648,8 @@
               </Events>
             </Component>
             <Component class="javax.swing.JPasswordField" name="jTextFieldBasePass">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="jPasswordField1"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JPasswordField" name="jTextFieldFTPPass">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="jPasswordField1"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldInfileOnServer">
             </Component>
@@ -701,8 +696,12 @@
         </Container>
         <Container class="javax.swing.JPanel" name="jPanelSync">
           <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="MainFrame_jPanelSync"/>
+          </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="&#x421;&#x438;&#x43d;&#x445;&#x440;&#x43e;&#x43d;&#x438;&#x437;&#x430;&#x446;&#x438;&#x44f;">

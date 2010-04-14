@@ -385,10 +385,11 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
 
         jTextAreaSystemLog.setColumns(1);
         jTextAreaSystemLog.setEditable(false);
-        jTextAreaSystemLog.setFont(new java.awt.Font("Monospaced", 0, 12));
+        jTextAreaSystemLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jTextAreaSystemLog.setRows(1);
         jTextAreaSystemLog.setText("Системный лог...");
         jTextAreaSystemLog.setToolTipText("");
+        jTextAreaSystemLog.setAutoscrolls(false);
         jTextAreaSystemLog.setComponentPopupMenu(jPopupMenuTextArea);
         jScrollPane2.setViewportView(jTextAreaSystemLog);
 
@@ -556,10 +557,6 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
             }
         });
 
-        jTextFieldBasePass.setText("jPasswordField1");
-
-        jTextFieldFTPPass.setText("jPasswordField1");
-
         jLabelInfileOnServer.setText("Файл загрузки на сервере");
 
         jLabelInfileOnLocalhost.setText("Файл загрузки локально");
@@ -696,6 +693,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
 
         jTabbedPane1.addTab("Настройки", new javax.swing.ImageIcon(getClass().getResource("/Interface/property.png")), jPanelOptions); // NOI18N
 
+        jPanelSync.setEnabled(false);
         jPanelSync.setVerifyInputWhenFocusTarget(false);
 
         jLabelSyncBaseSource.setText("Папка базы локально");
@@ -1240,7 +1238,7 @@ private void jButtonRunAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN
             while (inoptionfile.ready()) {
                 String stroka = inoptionfile.readLine();
                 StringTokenizer st = new StringTokenizer(stroka, ";");
-                if (st.countTokens() < 14) {
+                if (st.countTokens() < 11) {
                     jTextAreaSystemLog.append("\n" + getDateAndTime() + " Неверный файл настроек!..");
                     break;
                 }
@@ -1509,7 +1507,7 @@ private void jButtonRunAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                     schedURBD.getLast().setTime(properties.getProperty("time"+ind));
                     ((DefaultTableModel)jTableListJob.getModel()).setRowCount(jTableListJob.getRowCount()+1);
                     jTableListJob.setValueAt(schedURBD.getLast(),jTableListJob.getRowCount()-1,0);
-                    jTableListJob.setValueAt(jComboBoxFrequency.getItemAt(ind),jTableListJob.getRowCount()-1,1);
+                    jTableListJob.setValueAt(jComboBoxFrequency.getItemAt(schedURBD.getLast().getFrequency()),jTableListJob.getRowCount()-1,1);
                     schedURBD.getLast().createSCHED(this);
                     schedURBD.getLast().start();
                 }
