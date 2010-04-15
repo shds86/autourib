@@ -50,13 +50,12 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
     java.awt.Image image;
     TrayIcon icon = null;
     PopupMenu iconpopup;
-    java.util.TimerTask juTT;
     byte key;
-    boolean key_stop = false;
     LinkedList<schedulerURBD> schedURBD;
     
         class DrawProgressBar extends Thread implements Serializable
         {
+            int ind=1;
             @Override
             public void run()
             {
@@ -68,6 +67,14 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
                         if (jProgressBar1.getValue()<jProgressBar1.getMaximum())
                         {
                             jProgressBar1.setValue(jProgressBar1.getValue()+jProgressBar1.getMaximum()/10);
+                            if (SystemTray.isSupported())
+                            {
+                                icon.setImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("arrow-circle-"+ind+".png")));
+                            }
+                            if (ind > 3)
+                                ind = 1;
+                            else
+                                ind++;
                         }
                         else jProgressBar1.setValue(jProgressBar1.getMinimum());
                     }
@@ -76,16 +83,27 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
                         if (jProgressBar1.getValue()<jProgressBar1.getMaximum())
                         {
                             jProgressBar1.setValue(jProgressBar1.getValue()+jProgressBar1.getMaximum()/10);
+                            {
+                                icon.setImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("arrow-circle-"+ind+".png")));
+                                System.out.println("arrow-circle-"+ind+".png");
+                            }
+                            if (ind > 3)
+                                ind = 1;
+                            else
+                                ind++;
+                            jProgressBar1.setValue(jProgressBar1.getValue()+jProgressBar1.getMaximum()/10);
                         }
                         else jProgressBar1.setValue(jProgressBar1.getMinimum());
                     }
                 }
                 jProgressBar1.setValue(jProgressBar1.getMaximum());
+                icon.setImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("arrow_refresh.png")));
             }
             public Thread thr;
             public DrawProgressBar(Thread tmp)
             {
                 this.thr = tmp;
+                ind=1;
             }
         }
 
@@ -174,9 +192,6 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
         jFileChooserBaseSource.setDialogTitle("Диалог выбора папки базы");
         initComponents();
         setLocationRelativeTo(null);
-        jButtonRunDownload.setEnabled(false);
-        jButtonRunUpload.setEnabled(true);
-        jButtonRunOutfile.setEnabled(false);
         jButtonRunSynch.setVisible(false);
         checkingOptionFile();
         getDateAndTime();
@@ -385,7 +400,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
 
         jTextAreaSystemLog.setColumns(1);
         jTextAreaSystemLog.setEditable(false);
-        jTextAreaSystemLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jTextAreaSystemLog.setFont(new java.awt.Font("Monospaced", 0, 12));
         jTextAreaSystemLog.setRows(1);
         jTextAreaSystemLog.setText("Системный лог...");
         jTextAreaSystemLog.setToolTipText("");
@@ -410,8 +425,8 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
                         .addComponent(jButtonRunInfile, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanelMainLayout.setVerticalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -568,6 +583,11 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
         jLabelOutfileOnServer.setText("Файл выгрузки на сервере");
 
         jCheckBoxMinimiz.setText("Запускать минимизированной");
+        jCheckBoxMinimiz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMinimizActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelOptionsLayout = new javax.swing.GroupLayout(jPanelOptions);
         jPanelOptions.setLayout(jPanelOptionsLayout);
@@ -620,13 +640,13 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
                     .addGroup(jPanelOptionsLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabelBaseUserAndPass)))
-                .addGap(180, 180, 180))
+                .addGap(216, 216, 216))
             .addGroup(jPanelOptionsLayout.createSequentialGroup()
                 .addGap(118, 118, 118)
                 .addComponent(jButtonApply)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 228, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
                 .addComponent(jButtonCancel)
-                .addGap(122, 122, 122))
+                .addGap(158, 158, 158))
         );
         jPanelOptionsLayout.setVerticalGroup(
             jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -719,7 +739,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
         jPanelSyncLayout.setHorizontalGroup(
             jPanelSyncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelSyncLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(71, 71, 71)
                 .addGroup(jPanelSyncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelSyncLayout.createSequentialGroup()
                         .addComponent(jButtonRunSynch)
@@ -820,7 +840,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 671, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -911,37 +931,29 @@ private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 }//GEN-LAST:event_jButtonCancelActionPerformed
 
 private void jButtonRunInfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunInfileActionPerformed
-    jButtonRunInfile.setEnabled(false);
     Thread thr = (new Thread(new RunExchangeInThread(1)));
     thr.start();
     (new Thread(new DrawProgressBar(thr))).start();
-    jButtonRunDownload.setEnabled(true);
 }//GEN-LAST:event_jButtonRunInfileActionPerformed
 
 private void jButtonRunDownloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunDownloadActionPerformed
     key = 1;
-    jButtonRunDownload.setEnabled(false);
     Thread thr = (new Thread(new RunExchangeInThread(2)));
     thr.start();
     (new Thread(new DrawProgressBar(thr))).start();
-    jButtonRunInfile.setEnabled(true);
 }//GEN-LAST:event_jButtonRunDownloadActionPerformed
 
 private void jButtonRunUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunUploadActionPerformed
     key = 2;
-    jButtonRunUpload.setEnabled(false);
     Thread thr = (new Thread(new RunExchangeInThread(2)));
     thr.start();
     (new Thread(new DrawProgressBar(thr))).start();
-    jButtonRunOutfile.setEnabled(true);
 }//GEN-LAST:event_jButtonRunUploadActionPerformed
 
 private void jButtonRunOutfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunOutfileActionPerformed
-    jButtonRunOutfile.setEnabled(false);
     Thread thr = (new Thread(new RunExchangeInThread(3)));
     thr.start();
     (new Thread(new DrawProgressBar(thr))).start();
-    jButtonRunUpload.setEnabled(true);
 }//GEN-LAST:event_jButtonRunOutfileActionPerformed
 
 private void jButtonAddJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddJobActionPerformed
@@ -951,6 +963,7 @@ private void jButtonAddJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     jTableListJob.setValueAt(jComboBoxFrequency.getSelectedItem(),jTableListJob.getRowCount()-1,1);
     schedURBD.getLast().createSCHED(this);
     schedURBD.getLast().start();
+    saveScheduler();
 }//GEN-LAST:event_jButtonAddJobActionPerformed
 
 private void jButtonRemoveJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveJobActionPerformed
@@ -962,6 +975,7 @@ private void jButtonRemoveJobActionPerformed(java.awt.event.ActionEvent evt) {//
             ((DefaultTableModel)jTableListJob.getModel()).removeRow(_selectRow);
             jTextAreaSystemLog.append("\n" + getDateAndTime() +" удалено задание "+ schedURBD.get(_selectRow).job.getFullName());
             schedURBD.remove(_selectRow);
+            saveScheduler();
         }
         else
         {
@@ -992,6 +1006,10 @@ private void jButtonRunAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     thr.start();
     (new Thread(new DrawProgressBar(thr))).start();
 }//GEN-LAST:event_jButtonRunAllActionPerformed
+
+private void jCheckBoxMinimizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMinimizActionPerformed
+    saveScheduler();
+}//GEN-LAST:event_jCheckBoxMinimizActionPerformed
 
     private void Apply() {
         //выгружаем в файл настроек и записываем его
@@ -1114,7 +1132,7 @@ private void jButtonRunAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     private javax.swing.JButton jButtonApply;
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonRemoveJob;
-    private javax.swing.JButton jButtonRunAll;
+    public javax.swing.JButton jButtonRunAll;
     private javax.swing.JButton jButtonRunDownload;
     private javax.swing.JButton jButtonRunInfile;
     private javax.swing.JButton jButtonRunOutfile;
@@ -1175,11 +1193,6 @@ private void jButtonRunAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     private javax.swing.JTextField jTextFieldSyncFTPUser;
     private javax.swing.JTextField jTextFieldSyncFTPdir;
     // End of variables declaration//GEN-END:variables
-
-    javax.swing.JButton getjButtonRunAll()
-    {
-        return jButtonRunAll;
-    }
 
     private void checkingOptionFile() {
         //очищаем информационные поля
@@ -1366,7 +1379,6 @@ private void jButtonRunAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                     + jTextFieldSyncFTPdir.getText() + ";"
                     + jTextFieldSyncFTPUser.getText() + ";"
                     + new String(jTextFieldSyncFTPPass.getPassword());
-//            System.out.println(optionString);
             outoptionfile.write(optionString);
             outoptionfile.close();
 
@@ -1499,17 +1511,25 @@ private void jButtonRunAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                 schedURBD = new LinkedList<schedulerURBD>();
                 for (int ind = 0;ind<countjobs;ind++)
                 {
-                    schedURBD.add(new schedulerURBD());
-                    schedURBD.getLast().setFrequency(properties.getProperty("frequency"+ind));
-                    schedURBD.getLast().setJobDate(properties.getProperty("date"+ind));
-                    schedURBD.getLast().setJobName(properties.getProperty("jobName"+ind));
-                    schedURBD.getLast().setTriggerName(properties.getProperty("triggerName"+ind));
-                    schedURBD.getLast().setTime(properties.getProperty("time"+ind));
-                    ((DefaultTableModel)jTableListJob.getModel()).setRowCount(jTableListJob.getRowCount()+1);
-                    jTableListJob.setValueAt(schedURBD.getLast(),jTableListJob.getRowCount()-1,0);
-                    jTableListJob.setValueAt(jComboBoxFrequency.getItemAt(schedURBD.getLast().getFrequency()),jTableListJob.getRowCount()-1,1);
-                    schedURBD.getLast().createSCHED(this);
-                    schedURBD.getLast().start();
+                    if (!((Long.parseLong(properties.getProperty("date"+ind))<System.currentTimeMillis())
+                      &&(Integer.parseInt(properties.getProperty("frequency"+ind))==0)))
+                    {
+                        schedURBD.add(new schedulerURBD());
+                        schedURBD.getLast().setFrequency(properties.getProperty("frequency"+ind));
+                        schedURBD.getLast().setJobDate(properties.getProperty("date"+ind));
+                        schedURBD.getLast().setJobName(properties.getProperty("jobName"+ind));
+                        schedURBD.getLast().setTriggerName(properties.getProperty("triggerName"+ind));
+                        schedURBD.getLast().setTime(properties.getProperty("time"+ind));
+                        ((DefaultTableModel)jTableListJob.getModel()).setRowCount(jTableListJob.getRowCount()+1);
+                        jTableListJob.setValueAt(schedURBD.getLast(),jTableListJob.getRowCount()-1,0);
+                        jTableListJob.setValueAt(jComboBoxFrequency.getItemAt(schedURBD.getLast().getFrequency()),jTableListJob.getRowCount()-1,1);
+                        schedURBD.getLast().createSCHED(this);
+                        schedURBD.getLast().start();
+                    }
+                    else
+                    {
+                        System.out.println("!!!!ЗАДАНИЕ ПРОПУЩЕНО, ВРЕМЯ ВЫПОЛНЕНИЯ ПРОШЛО!!!!");
+                    }
                 }
             }
             catch (IOException err)

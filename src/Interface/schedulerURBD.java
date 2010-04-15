@@ -2,7 +2,6 @@ package Interface;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.swing.JButton;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.quartz.CronTrigger;
@@ -82,7 +81,7 @@ public class schedulerURBD implements Serializable
                     this.time = "0"+                                //сек
                                 " "+this.jobDate.getMinutes()+      //минуты
                                 " "+this.jobDate.getHours()+        //часы
-                                " "+"*"+                            //число
+                                " "+"?"+                            //число
                                 " "+"*"+                            //месяц
                                 " "+(this.jobDate.getDay()+1)+      //день недели
                                 " "+"*";                            //год
@@ -111,7 +110,6 @@ public class schedulerURBD implements Serializable
                     break;
                 }
         }
-//        System.out.println(this.time);
     }
 
     public void createSCHED(String _time)

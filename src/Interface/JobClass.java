@@ -2,7 +2,6 @@ package Interface;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.swing.JButton;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.quartz.Job;
@@ -27,7 +26,7 @@ public class JobClass implements Job,Serializable
         Frame = (MainFrame)dataMap.get("Frame");
         Frame.jTextAreaSystemLog.append("\n-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
         Frame.jTextAreaSystemLog.append("\n"+ new Date()+" Запуск задания по расписанию");
-        Frame.getjButtonRunAll().doClick();
+        Frame.jButtonRunAll.doClick();
         String jobName = context.getJobDetail().getFullName();
         _log.info("JobClass says: " + jobName + " executing at " + new Date());
     }
