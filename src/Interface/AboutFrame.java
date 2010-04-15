@@ -1,5 +1,7 @@
 package Interface;
 
+import java.awt.Toolkit;
+
 public class AboutFrame extends javax.swing.JFrame {
 
     public AboutFrame() {
@@ -16,6 +18,7 @@ public class AboutFrame extends javax.swing.JFrame {
         jLabelProjectName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("arrow_refresh.png")));
 
         jButtonClose.setText("Закрыть");
         jButtonClose.addActionListener(new java.awt.event.ActionListener() {

@@ -66,7 +66,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="&#x41a;&#x43b;&#x438;&#x435;&#x43d;&#x442; URBD1Slib"/>
+    <Property name="title" type="java.lang.String" value="&#x41a;&#x43b;&#x438;&#x435;&#x43d;&#x442; AvtoURIB"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>

@@ -15,7 +15,6 @@ import java.awt.SystemTray;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.SystemTray.*;
 import java.awt.Toolkit;
-import java.awt.Toolkit.*;
 import java.awt.TrayIcon;
 import java.awt.TrayIcon.*;
 import java.awt.event.ActionListener;
@@ -344,7 +343,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
         jPopupMenuTextArea.add(jMenuItemTextAreaClear);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Клиент URBD1Slib");
+        setTitle("Клиент AvtoURIB");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
