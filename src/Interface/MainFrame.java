@@ -68,7 +68,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
                             jProgressBar1.setValue(jProgressBar1.getValue()+jProgressBar1.getMaximum()/10);
                             if (SystemTray.isSupported())
                             {
-                                icon.setImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("arrow-circle-"+ind+".png")));
+                                icon.setImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/image/arrow-circle-"+ind+".png")));
                             }
                             if (ind > 3)
                                 ind = 1;
@@ -83,8 +83,8 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
                         {
                             jProgressBar1.setValue(jProgressBar1.getValue()+jProgressBar1.getMaximum()/10);
                             {
-                                icon.setImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("arrow-circle-"+ind+".png")));
-                                System.out.println("arrow-circle-"+ind+".png");
+                                icon.setImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/image/arrow-circle-"+ind+".png")));
+                                System.out.println("/image/arrow-circle-"+ind+".png");
                             }
                             if (ind > 3)
                                 ind = 1;
@@ -96,7 +96,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
                     }
                 }
                 jProgressBar1.setValue(jProgressBar1.getMaximum());
-                icon.setImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("arrow_refresh.png")));
+                icon.setImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/image/arrow_refresh.png")));
             }
             public Thread thr;
             public DrawProgressBar(Thread tmp)
@@ -246,7 +246,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
                                              }
         });
 
-        image = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("arrow_refresh.png"));
+        image = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/image/arrow_refresh.png"));
         setIconImage(image);
         if (SystemTray.isSupported())
         {
@@ -357,7 +357,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
             }
         });
 
-        jButtonRunOutfile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/upload.png"))); // NOI18N
+        jButtonRunOutfile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/upload.png"))); // NOI18N
         jButtonRunOutfile.setText("Отправить на сервер");
         jButtonRunOutfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -365,7 +365,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
             }
         });
 
-        jButtonRunUpload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/database-export.png"))); // NOI18N
+        jButtonRunUpload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/database-export.png"))); // NOI18N
         jButtonRunUpload.setText("Выгрузить из базы");
         jButtonRunUpload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -373,7 +373,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
             }
         });
 
-        jButtonRunDownload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/database-import.png"))); // NOI18N
+        jButtonRunDownload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/database-import.png"))); // NOI18N
         jButtonRunDownload.setText("Загрузить в базу");
         jButtonRunDownload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -381,7 +381,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
             }
         });
 
-        jButtonRunInfile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/download.png"))); // NOI18N
+        jButtonRunInfile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/download.png"))); // NOI18N
         jButtonRunInfile.setText("Принять с сервера");
         jButtonRunInfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -389,7 +389,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
             }
         });
 
-        jButtonRunAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/arrow_refresh.png"))); // NOI18N
+        jButtonRunAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/arrow_refresh.png"))); // NOI18N
         jButtonRunAll.setText("Запустить обмен");
         jButtonRunAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -450,14 +450,14 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Главная", new javax.swing.ImageIcon(getClass().getResource("/Interface/home.png")), jPanelMain); // NOI18N
+        jTabbedPane1.addTab("Главная", new javax.swing.ImageIcon(getClass().getResource("/image/home.png")), jPanelMain); // NOI18N
 
         jSpinnerTimer.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), new java.util.Date(1262293200000L), null, java.util.Calendar.HOUR_OF_DAY));
         jSpinnerTimer.setPreferredSize(new java.awt.Dimension(124, 22));
 
         jComboBoxFrequency.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Один раз", "Каждый час", "Каждый день", "Каждую неделю", "Каждый месяц", "Каждый год" }));
 
-        jButtonAddJob.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/plus.png"))); // NOI18N
+        jButtonAddJob.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/plus.png"))); // NOI18N
         jButtonAddJob.setPreferredSize(new java.awt.Dimension(42, 23));
         jButtonAddJob.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -465,7 +465,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
             }
         });
 
-        jButtonRemoveJob.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/minus.png"))); // NOI18N
+        jButtonRemoveJob.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/minus.png"))); // NOI18N
         jButtonRemoveJob.setPreferredSize(new java.awt.Dimension(41, 23));
         jButtonRemoveJob.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -519,11 +519,11 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Расписание", new javax.swing.ImageIcon(getClass().getResource("/Interface/clock.png")), jPanelSchedule); // NOI18N
+        jTabbedPane1.addTab("Расписание", new javax.swing.ImageIcon(getClass().getResource("/image/clock.png")), jPanelSchedule); // NOI18N
 
         jTextFieldBaseSource.setPreferredSize(new java.awt.Dimension(6, 23));
 
-        jButtonCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/cancel.png"))); // NOI18N
+        jButtonCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/cancel.png"))); // NOI18N
         jButtonCancel.setText("Отмена");
         jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -531,7 +531,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
             }
         });
 
-        jButtonApply.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/accept.png"))); // NOI18N
+        jButtonApply.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/accept.png"))); // NOI18N
         jButtonApply.setText("Применить");
         jButtonApply.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -710,7 +710,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Настройки", new javax.swing.ImageIcon(getClass().getResource("/Interface/property.png")), jPanelOptions); // NOI18N
+        jTabbedPane1.addTab("Настройки", new javax.swing.ImageIcon(getClass().getResource("/image/property.png")), jPanelOptions); // NOI18N
 
         jPanelSync.setEnabled(false);
         jPanelSync.setVerifyInputWhenFocusTarget(false);
@@ -798,7 +798,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
 
         jButtonRunSynch.getAccessibleContext().setAccessibleParent(jPanelSync);
 
-        jTabbedPane1.addTab("Синхронизация", jPanelSync);
+        jTabbedPane1.addTab("Синхронизация", new javax.swing.ImageIcon(getClass().getResource("/image/sync.png")), jPanelSync); // NOI18N
 
         jMenuFile.setText("Файл");
 
@@ -814,7 +814,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
 
         jMenuQuestion.setText("?");
 
-        jMenuQuestionHelp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/question-frame.png"))); // NOI18N
+        jMenuQuestionHelp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/question-frame.png"))); // NOI18N
         jMenuQuestionHelp.setText("Помощь");
         jMenuQuestionHelp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
