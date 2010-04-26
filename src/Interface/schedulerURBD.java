@@ -14,7 +14,7 @@ import org.quartz.SchedulerException;
  *
  * @author support
  */
-public class schedulerURBD implements Serializable
+public class schedulerURBD
 {
     public static Log _log = LogFactory.getLog(schedulerURBD.class);
     private Class jobClass = JobClass.class;

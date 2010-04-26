@@ -26,7 +26,8 @@ import org.apache.commons.logging.Log;
  *
  * @author support
  */
-public class MainFrame extends javax.swing.JFrame implements Serializable{
+public class MainFrame extends javax.swing.JFrame
+{
 
 //    Здесь будут писаться заметки, предложения, дальнейшие пожелания для дальнейшей реализации в программе
 //    1. Реализавать выполнение сервисных функций 1С. Реализацию сделать через хэш-мап
@@ -52,7 +53,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
     byte key;
     LinkedList<schedulerURBD> schedURBD;
     
-        class DrawProgressBar extends Thread implements Serializable
+        class DrawProgressBar extends Thread
         {
             int ind=1;
             @Override
@@ -106,7 +107,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
             }
         }
 
-        class RunExchangeInThread implements Runnable, Serializable
+        class RunExchangeInThread implements Runnable
         {
             private int keythread;
             public void run()

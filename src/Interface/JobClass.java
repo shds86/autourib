@@ -13,9 +13,8 @@ import org.quartz.JobExecutionException;
  *
  * @author support
  */
-public class JobClass implements Job,Serializable
+public class JobClass
 {
-
     public static Log _log = LogFactory.getLog(JobClass.class);
     static MainFrame Frame;
 

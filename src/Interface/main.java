@@ -1,8 +1,6 @@
 package Interface;
 
-import java.io.Serializable;
-
-public class main implements Serializable{
+public class main{
 static MainFrame Frame;
     /**
      *
