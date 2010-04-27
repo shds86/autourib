@@ -192,7 +192,6 @@ public class MainFrame extends javax.swing.JFrame
         jFileChooserBaseSource.setDialogTitle("Диалог выбора папки базы");
         initComponents();
         setLocationRelativeTo(null);
-        jButtonRunSynch.setVisible(false);
         checkingOptionFile();
         getDateAndTime();
         schedURBD = new LinkedList<schedulerURBD>();
@@ -733,6 +732,11 @@ public class MainFrame extends javax.swing.JFrame
         jLabelSyncFTPPass.setText("FTP-пароль");
 
         jButtonRunSynch.setText("Синхронизация");
+        jButtonRunSynch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRunSynchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelSyncLayout = new javax.swing.GroupLayout(jPanelSync);
         jPanelSync.setLayout(jPanelSyncLayout);
@@ -792,9 +796,9 @@ public class MainFrame extends javax.swing.JFrame
                         .addComponent(jTextFieldSyncFTPUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextFieldSyncFTPPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(35, 35, 35)
                 .addComponent(jButtonRunSynch)
-                .addContainerGap(167, Short.MAX_VALUE))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
 
         jButtonRunSynch.getAccessibleContext().setAccessibleParent(jPanelSync);
@@ -1010,6 +1014,17 @@ private void jButtonRunAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 private void jCheckBoxMinimizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMinimizActionPerformed
     saveScheduler();
 }//GEN-LAST:event_jCheckBoxMinimizActionPerformed
+
+private void jButtonRunSynchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunSynchActionPerformed
+    // проверка заполненности полей
+    if(jTextFieldSyncBaseSource.getText().equals("")|jTextFieldSyncFTP.getText().equals("")
+            |jTextFieldSyncFTPUser.getText().equals("")|jTextFieldSyncFTPdir.getText().equals("")
+            |new String(jTextFieldSyncFTPPass.getPassword()).equals("")){
+        jTextAreaSystemLog.append("\n" + getDateAndTime() + " Заполнены не все поля настроек для синхронизации!");
+    }
+    //синхронизация
+    
+}//GEN-LAST:event_jButtonRunSynchActionPerformed
 
     private void Apply() {
         //выгружаем в файл настроек и записываем его
