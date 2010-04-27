@@ -1,6 +1,5 @@
 package Interface;
 
-import java.io.Serializable;
 import java.util.Date;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -10,6 +9,7 @@ import org.quartz.SchedulerFactory;
 import org.quartz.impl.StdSchedulerFactory;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
+
 /**
  *
  * @author support

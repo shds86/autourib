@@ -117,37 +117,95 @@ public class MainFrame extends javax.swing.JFrame
                     case 0:
                         {
                             jButtonRunAll.setEnabled(false);
+                            jButtonRunDownload.setEnabled(false);
+                            jButtonRunInfile.setEnabled(false);
+                            jButtonRunOutfile.setEnabled(false);
+                            jButtonRunUpload.setEnabled(false);
                             GetFileOnFTP();
                             RunWith1S();
                             PutFileOnFTP();
                             jButtonRunAll.setEnabled(true);
+                            jButtonRunDownload.setEnabled(true);
+                            jButtonRunInfile.setEnabled(true);
+                            jButtonRunOutfile.setEnabled(true);
+                            jButtonRunUpload.setEnabled(true);
                             break;
                         }
                     case 1:
                         {
+                            jButtonRunAll.setEnabled(false);
+                            jButtonRunDownload.setEnabled(false);
+                            jButtonRunInfile.setEnabled(false);
+                            jButtonRunOutfile.setEnabled(false);
+                            jButtonRunUpload.setEnabled(false);
                             GetFileOnFTP();
+                            jButtonRunAll.setEnabled(true);
+                            jButtonRunDownload.setEnabled(true);
+                            jButtonRunInfile.setEnabled(true);
+                            jButtonRunOutfile.setEnabled(true);
+                            jButtonRunUpload.setEnabled(true);
                             break;
                         }
                     case 2:
                         {
+                            jButtonRunAll.setEnabled(false);
+                            jButtonRunDownload.setEnabled(false);
+                            jButtonRunInfile.setEnabled(false);
+                            jButtonRunOutfile.setEnabled(false);
+                            jButtonRunUpload.setEnabled(false);
                             RunWith1S();
+                            jButtonRunAll.setEnabled(true);
+                            jButtonRunDownload.setEnabled(true);
+                            jButtonRunInfile.setEnabled(true);
+                            jButtonRunOutfile.setEnabled(true);
+                            jButtonRunUpload.setEnabled(true);
                             break;
                         }
                     case 3:
                         {
+                            jButtonRunAll.setEnabled(false);
+                            jButtonRunDownload.setEnabled(false);
+                            jButtonRunInfile.setEnabled(false);
+                            jButtonRunOutfile.setEnabled(false);
+                            jButtonRunUpload.setEnabled(false);
                             PutFileOnFTP();
+                            jButtonRunAll.setEnabled(true);
+                            jButtonRunDownload.setEnabled(true);
+                            jButtonRunInfile.setEnabled(true);
+                            jButtonRunOutfile.setEnabled(true);
+                            jButtonRunUpload.setEnabled(true);
                             break;
                         }
                     case 4:
                         {
+                            jButtonRunAll.setEnabled(false);
+                            jButtonRunDownload.setEnabled(false);
+                            jButtonRunInfile.setEnabled(false);
+                            jButtonRunOutfile.setEnabled(false);
+                            jButtonRunUpload.setEnabled(false);
                             GetFileOnFTP();
                             RunWith1S();
+                            jButtonRunAll.setEnabled(true);
+                            jButtonRunDownload.setEnabled(true);
+                            jButtonRunInfile.setEnabled(true);
+                            jButtonRunOutfile.setEnabled(true);
+                            jButtonRunUpload.setEnabled(true);
                             break;
                         }
                     case 5:
                         {
+                            jButtonRunAll.setEnabled(false);
+                            jButtonRunDownload.setEnabled(false);
+                            jButtonRunInfile.setEnabled(false);
+                            jButtonRunOutfile.setEnabled(false);
+                            jButtonRunUpload.setEnabled(false);
                             RunWith1S();
                             PutFileOnFTP();
+                            jButtonRunAll.setEnabled(true);
+                            jButtonRunDownload.setEnabled(true);
+                            jButtonRunInfile.setEnabled(true);
+                            jButtonRunOutfile.setEnabled(true);
+                            jButtonRunUpload.setEnabled(true);
                             break;
                         }
                 }
@@ -228,10 +286,11 @@ public class MainFrame extends javax.swing.JFrame
                                          {
                                              public void actionPerformed(ActionEvent e)
                                              {
-                                                 key = 1;
-                                                 Thread thr = (new Thread(new RunExchangeInThread(4)));
-                                                 thr.start();
-                                                 (new Thread(new DrawProgressBar(thr))).start();
+                                                 RunIn();
+//                                                 key = 1;
+//                                                 Thread thr = (new Thread(new RunExchangeInThread(4)));
+//                                                 thr.start();
+//                                                 (new Thread(new DrawProgressBar(thr))).start();
                                              }
                                          });
 
@@ -239,10 +298,11 @@ public class MainFrame extends javax.swing.JFrame
                                           {
                                              public void actionPerformed(ActionEvent e)
                                              {
-                                                 key = 2;
-                                                 Thread thr = (new Thread(new RunExchangeInThread(5)));
-                                                 thr.start();
-                                                 (new Thread(new DrawProgressBar(thr))).start();
+                                                 RunOut();
+//                                                 key = 2;
+//                                                 Thread thr = (new Thread(new RunExchangeInThread(5)));
+//                                                 thr.start();
+//                                                 (new Thread(new DrawProgressBar(thr))).start();
                                              }
         });
 
@@ -315,6 +375,7 @@ public class MainFrame extends javax.swing.JFrame
         jTextFieldOutfileOnServer = new javax.swing.JTextField();
         jLabelOutfileOnServer = new javax.swing.JLabel();
         jCheckBoxMinimiz = new javax.swing.JCheckBox();
+        jCheckBoxExpert = new javax.swing.JCheckBox();
         jPanelSync = new javax.swing.JPanel();
         jLabelSyncBaseSource = new javax.swing.JLabel();
         jLabelSyncFTPdir = new javax.swing.JLabel();
@@ -326,7 +387,6 @@ public class MainFrame extends javax.swing.JFrame
         jTextFieldSyncFTPUser = new javax.swing.JTextField();
         jTextFieldSyncFTPPass = new javax.swing.JPasswordField();
         jLabelSyncFTPPass = new javax.swing.JLabel();
-        jButtonRunSynch = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuFileExit = new javax.swing.JMenuItem();
@@ -359,6 +419,7 @@ public class MainFrame extends javax.swing.JFrame
 
         jButtonRunOutfile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/upload.png"))); // NOI18N
         jButtonRunOutfile.setText("Отправить на сервер");
+        jButtonRunOutfile.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButtonRunOutfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonRunOutfileActionPerformed(evt);
@@ -367,6 +428,7 @@ public class MainFrame extends javax.swing.JFrame
 
         jButtonRunUpload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/database-export.png"))); // NOI18N
         jButtonRunUpload.setText("Выгрузить из базы");
+        jButtonRunUpload.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButtonRunUpload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonRunUploadActionPerformed(evt);
@@ -375,6 +437,7 @@ public class MainFrame extends javax.swing.JFrame
 
         jButtonRunDownload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/database-import.png"))); // NOI18N
         jButtonRunDownload.setText("Загрузить в базу");
+        jButtonRunDownload.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButtonRunDownload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonRunDownloadActionPerformed(evt);
@@ -383,6 +446,7 @@ public class MainFrame extends javax.swing.JFrame
 
         jButtonRunInfile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/download.png"))); // NOI18N
         jButtonRunInfile.setText("Принять с сервера");
+        jButtonRunInfile.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButtonRunInfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonRunInfileActionPerformed(evt);
@@ -390,7 +454,8 @@ public class MainFrame extends javax.swing.JFrame
         });
 
         jButtonRunAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/arrow_refresh.png"))); // NOI18N
-        jButtonRunAll.setText("Запустить обмен");
+        jButtonRunAll.setText("Полный обмен");
+        jButtonRunAll.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButtonRunAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonRunAllActionPerformed(evt);
@@ -400,10 +465,10 @@ public class MainFrame extends javax.swing.JFrame
         jTextAreaSystemLog.setColumns(1);
         jTextAreaSystemLog.setEditable(false);
         jTextAreaSystemLog.setFont(new java.awt.Font("Monospaced", 0, 12));
+        jTextAreaSystemLog.setLineWrap(true);
         jTextAreaSystemLog.setRows(1);
         jTextAreaSystemLog.setText("Системный лог...");
         jTextAreaSystemLog.setToolTipText("");
-        jTextAreaSystemLog.setAutoscrolls(false);
         jTextAreaSystemLog.setComponentPopupMenu(jPopupMenuTextArea);
         jScrollPane2.setViewportView(jTextAreaSystemLog);
 
@@ -525,6 +590,9 @@ public class MainFrame extends javax.swing.JFrame
 
         jButtonCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/cancel.png"))); // NOI18N
         jButtonCancel.setText("Отмена");
+        jButtonCancel.setMaximumSize(new java.awt.Dimension(109, 25));
+        jButtonCancel.setMinimumSize(new java.awt.Dimension(109, 25));
+        jButtonCancel.setPreferredSize(new java.awt.Dimension(109, 25));
         jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelActionPerformed(evt);
@@ -557,14 +625,15 @@ public class MainFrame extends javax.swing.JFrame
 
         jLabelPlatformSource.setText("Путь до папки 1С");
 
-        jButtonSelPlatformSource.setText("...");
+        jButtonSelPlatformSource.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/folder-horizontal-open.png"))); // NOI18N
+        jButtonSelPlatformSource.setPreferredSize(new java.awt.Dimension(51, 30));
         jButtonSelPlatformSource.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSelPlatformSourceActionPerformed(evt);
             }
         });
 
-        jButtonSelBaseSource.setText("...");
+        jButtonSelBaseSource.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/folder-horizontal-open.png"))); // NOI18N
         jButtonSelBaseSource.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSelBaseSourceActionPerformed(evt);
@@ -588,6 +657,13 @@ public class MainFrame extends javax.swing.JFrame
             }
         });
 
+        jCheckBoxExpert.setText("Эксперт-режим");
+        jCheckBoxExpert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxExpertActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelOptionsLayout = new javax.swing.GroupLayout(jPanelOptions);
         jPanelOptions.setLayout(jPanelOptionsLayout);
         jPanelOptionsLayout.setHorizontalGroup(
@@ -601,7 +677,10 @@ public class MainFrame extends javax.swing.JFrame
                             .addComponent(jLabelBaseSource)
                             .addComponent(jLabelFTPSource)
                             .addComponent(jLabelFTPUser)
-                            .addComponent(jCheckBoxMinimiz, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanelOptionsLayout.createSequentialGroup()
+                                .addComponent(jCheckBoxMinimiz, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCheckBoxExpert))))
                     .addGroup(jPanelOptionsLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -643,15 +722,17 @@ public class MainFrame extends javax.swing.JFrame
             .addGroup(jPanelOptionsLayout.createSequentialGroup()
                 .addGap(118, 118, 118)
                 .addComponent(jButtonApply)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
-                .addComponent(jButtonCancel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
+                .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(158, 158, 158))
         );
         jPanelOptionsLayout.setVerticalGroup(
             jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelOptionsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jCheckBoxMinimiz)
+                .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxMinimiz)
+                    .addComponent(jCheckBoxExpert))
                 .addGap(3, 3, 3)
                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelOptionsLayout.createSequentialGroup()
@@ -706,7 +787,7 @@ public class MainFrame extends javax.swing.JFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonApply)
-                    .addComponent(jButtonCancel))
+                    .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -725,18 +806,16 @@ public class MainFrame extends javax.swing.JFrame
 
         jTextFieldSyncBaseSource.setEnabled(false);
 
+        jTextFieldSyncFTPdir.setEnabled(false);
+
         jLabelSyncFTPUser.setText("FTP-пользователь");
 
+        jTextFieldSyncFTPUser.setEnabled(false);
+
         jTextFieldSyncFTPPass.setText("jPasswordField1");
+        jTextFieldSyncFTPPass.setEnabled(false);
 
         jLabelSyncFTPPass.setText("FTP-пароль");
-
-        jButtonRunSynch.setText("Синхронизация");
-        jButtonRunSynch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonRunSynchActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanelSyncLayout = new javax.swing.GroupLayout(jPanelSync);
         jPanelSync.setLayout(jPanelSyncLayout);
@@ -746,29 +825,24 @@ public class MainFrame extends javax.swing.JFrame
                 .addGap(71, 71, 71)
                 .addGroup(jPanelSyncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelSyncLayout.createSequentialGroup()
-                        .addComponent(jButtonRunSynch)
-                        .addContainerGap())
+                        .addComponent(jLabelSyncBaseSource)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextFieldSyncBaseSource, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelSyncLayout.createSequentialGroup()
+                        .addComponent(jLabelSyncFTP)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                        .addComponent(jTextFieldSyncFTP, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSyncLayout.createSequentialGroup()
                         .addGroup(jPanelSyncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelSyncLayout.createSequentialGroup()
-                                .addComponent(jLabelSyncBaseSource)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextFieldSyncBaseSource, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelSyncLayout.createSequentialGroup()
-                                .addComponent(jLabelSyncFTP)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
-                                .addComponent(jTextFieldSyncFTP, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSyncLayout.createSequentialGroup()
-                                .addGroup(jPanelSyncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelSyncFTPdir)
-                                    .addComponent(jLabelSyncFTPUser)
-                                    .addComponent(jLabelSyncFTPPass))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                                .addGroup(jPanelSyncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextFieldSyncFTPPass)
-                                    .addComponent(jTextFieldSyncFTPUser)
-                                    .addComponent(jTextFieldSyncFTPdir, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))))
-                        .addContainerGap(347, Short.MAX_VALUE))))
+                            .addComponent(jLabelSyncFTPdir)
+                            .addComponent(jLabelSyncFTPUser)
+                            .addComponent(jLabelSyncFTPPass))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                        .addGroup(jPanelSyncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldSyncFTPPass)
+                            .addComponent(jTextFieldSyncFTPUser)
+                            .addComponent(jTextFieldSyncFTPdir, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))))
+                .addContainerGap(347, Short.MAX_VALUE))
         );
         jPanelSyncLayout.setVerticalGroup(
             jPanelSyncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -796,17 +870,14 @@ public class MainFrame extends javax.swing.JFrame
                         .addComponent(jTextFieldSyncFTPUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextFieldSyncFTPPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(35, 35, 35)
-                .addComponent(jButtonRunSynch)
-                .addContainerGap(138, Short.MAX_VALUE))
+                .addContainerGap(196, Short.MAX_VALUE))
         );
 
-        jButtonRunSynch.getAccessibleContext().setAccessibleParent(jPanelSync);
-
-        jTabbedPane1.addTab("Синхронизация", new javax.swing.ImageIcon(getClass().getResource("/image/sync.png")), jPanelSync); // NOI18N
+        jTabbedPane1.addTab("Синхронизация", new javax.swing.ImageIcon(getClass().getResource("/image/arrow-retweet.png")), jPanelSync); // NOI18N
 
         jMenuFile.setText("Файл");
 
+        jMenuFileExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/door_in.png"))); // NOI18N
         jMenuFileExit.setText("Выход");
         jMenuFileExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -828,6 +899,7 @@ public class MainFrame extends javax.swing.JFrame
         });
         jMenuQuestion.add(jMenuQuestionHelp);
 
+        jMenuQustionAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/information-frame.png"))); // NOI18N
         jMenuQustionAbout.setText("О программе");
         jMenuQustionAbout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -871,7 +943,7 @@ public class MainFrame extends javax.swing.JFrame
     }//GEN-LAST:event_jMenuQuestionHelpActionPerformed
 
     private void jMenuQustionAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuQustionAboutActionPerformed
-        new AboutFrame().setVisible(true);
+        (new AboutFrame()).setVisible(true);
     }//GEN-LAST:event_jMenuQustionAboutActionPerformed
 
     private void formWindowIconified(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowIconified
@@ -935,29 +1007,25 @@ private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 }//GEN-LAST:event_jButtonCancelActionPerformed
 
 private void jButtonRunInfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunInfileActionPerformed
-    Thread thr = (new Thread(new RunExchangeInThread(1)));
-    thr.start();
-    (new Thread(new DrawProgressBar(thr))).start();
+    if (!jCheckBoxExpert.isSelected())
+        RunIn();
+    else
+        RunInfile();
 }//GEN-LAST:event_jButtonRunInfileActionPerformed
 
 private void jButtonRunDownloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunDownloadActionPerformed
-    key = 1;
-    Thread thr = (new Thread(new RunExchangeInThread(2)));
-    thr.start();
-    (new Thread(new DrawProgressBar(thr))).start();
+    if (!jCheckBoxExpert.isSelected())
+        RunOut();
+    else
+        RunDownload();
 }//GEN-LAST:event_jButtonRunDownloadActionPerformed
 
 private void jButtonRunUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunUploadActionPerformed
-    key = 2;
-    Thread thr = (new Thread(new RunExchangeInThread(2)));
-    thr.start();
-    (new Thread(new DrawProgressBar(thr))).start();
+    RunUpload();
 }//GEN-LAST:event_jButtonRunUploadActionPerformed
 
 private void jButtonRunOutfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunOutfileActionPerformed
-    Thread thr = (new Thread(new RunExchangeInThread(3)));
-    thr.start();
-    (new Thread(new DrawProgressBar(thr))).start();
+    RunOutfile();
 }//GEN-LAST:event_jButtonRunOutfileActionPerformed
 
 private void jButtonAddJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddJobActionPerformed
@@ -1005,26 +1073,95 @@ private void jTextFieldFTPSourceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-
 }//GEN-LAST:event_jTextFieldFTPSourceKeyReleased
 
 private void jButtonRunAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunAllActionPerformed
-    key = 0;
-    Thread thr = (new Thread(new RunExchangeInThread(0)));
-    thr.start();
-    (new Thread(new DrawProgressBar(thr))).start();
+    RunAll();
 }//GEN-LAST:event_jButtonRunAllActionPerformed
 
 private void jCheckBoxMinimizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMinimizActionPerformed
     saveScheduler();
 }//GEN-LAST:event_jCheckBoxMinimizActionPerformed
 
-private void jButtonRunSynchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunSynchActionPerformed
-    // проверка заполненности полей
-    if(jTextFieldSyncBaseSource.getText().equals("")|jTextFieldSyncFTP.getText().equals("")
-            |jTextFieldSyncFTPUser.getText().equals("")|jTextFieldSyncFTPdir.getText().equals("")
-            |new String(jTextFieldSyncFTPPass.getPassword()).equals("")){
-        jTextAreaSystemLog.append("\n" + getDateAndTime() + " Заполнены не все поля настроек для синхронизации!");
+private void jCheckBoxExpertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxExpertActionPerformed
+    CheckBoxExpertRun();
+    saveScheduler();
+}//GEN-LAST:event_jCheckBoxExpertActionPerformed
+
+    public void CheckBoxExpertRun()
+    {
+        if (!jCheckBoxExpert.isSelected())
+        {
+            jButtonRunInfile.setText("Загрузка");
+            jButtonRunDownload.setText("Выгрузка");
+            jButtonRunDownload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/upload.png")));
+            jButtonRunOutfile.setVisible(false);
+            jButtonRunOutfile.setEnabled(false);
+            jButtonRunUpload.setVisible(false);
+            jButtonRunUpload.setEnabled(false);
+        }
+        else
+        {
+            jButtonRunInfile.setText("Принять с сервера");
+            jButtonRunDownload.setText("Загрузить в базу");
+            jButtonRunDownload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/database-import.png")));
+            jButtonRunOutfile.setVisible(true);
+            jButtonRunOutfile.setEnabled(true);
+            jButtonRunUpload.setVisible(true);
+            jButtonRunUpload.setEnabled(true);
+        }
     }
-    //синхронизация
-    
-}//GEN-LAST:event_jButtonRunSynchActionPerformed
+
+    public void RunAll()
+    {
+        key = 0;
+        Thread thr = (new Thread(new RunExchangeInThread(0)));
+        thr.start();
+        (new Thread(new DrawProgressBar(thr))).start();        
+    }
+
+    public void RunInfile()
+    {
+        Thread thr = (new Thread(new RunExchangeInThread(1)));
+        thr.start();
+        (new Thread(new DrawProgressBar(thr))).start();
+    }
+
+    public void RunDownload()
+    {
+        key = 1;
+        Thread thr = (new Thread(new RunExchangeInThread(2)));
+        thr.start();
+        (new Thread(new DrawProgressBar(thr))).start();
+    }
+
+    public void RunUpload()
+    {
+        key = 2;
+        Thread thr = (new Thread(new RunExchangeInThread(2)));
+        thr.start();
+        (new Thread(new DrawProgressBar(thr))).start();
+    }
+
+    public void RunOutfile()
+    {
+        Thread thr = (new Thread(new RunExchangeInThread(3)));
+        thr.start();
+        (new Thread(new DrawProgressBar(thr))).start();
+    }
+
+    public void RunIn()
+    {
+        key = 1;
+        Thread thr = (new Thread(new RunExchangeInThread(4)));
+        thr.start();
+        (new Thread(new DrawProgressBar(thr))).start();
+    }
+
+    public void RunOut()
+    {
+        key = 2;
+        Thread thr = (new Thread(new RunExchangeInThread(5)));
+        thr.start();
+        (new Thread(new DrawProgressBar(thr))).start();
+    }
 
     private void Apply() {
         //выгружаем в файл настроек и записываем его
@@ -1114,6 +1251,7 @@ private void jButtonRunSynchActionPerformed(java.awt.event.ActionEvent evt) {//G
         err=run1s.create_prm(key);
         if (err==consterr.NOT_ERR)
         {
+            jTextAreaSystemLog.append("\n--------------------------------------------------");
             jTextAreaSystemLog.append("\n" + getDateAndTime() + " Запускаем 1С");
             err=run1s.start();
             if (err==consterr.NOT_ERR)
@@ -1151,10 +1289,10 @@ private void jButtonRunSynchActionPerformed(java.awt.event.ActionEvent evt) {//G
     private javax.swing.JButton jButtonRunDownload;
     private javax.swing.JButton jButtonRunInfile;
     private javax.swing.JButton jButtonRunOutfile;
-    private javax.swing.JButton jButtonRunSynch;
     private javax.swing.JButton jButtonRunUpload;
     private javax.swing.JButton jButtonSelBaseSource;
     private javax.swing.JButton jButtonSelPlatformSource;
+    private javax.swing.JCheckBox jCheckBoxExpert;
     private javax.swing.JCheckBox jCheckBoxMinimiz;
     private javax.swing.JComboBox jComboBoxFrequency;
     private javax.swing.JLabel jLabelBaseSource;
@@ -1437,7 +1575,6 @@ private void jButtonRunSynchActionPerformed(java.awt.event.ActionEvent evt) {//G
             {    if(schedBin.getParentFile().mkdirs())
                     if (!schedBin.createNewFile())
                     {
-//                        System.out.println("не удалось :(");
                         return;
                     }
             }
@@ -1474,6 +1611,11 @@ private void jButtonRunSynchActionPerformed(java.awt.event.ActionEvent evt) {//G
                 properties.setProperty("mini","1");
             else
                 properties.setProperty("mini","0");
+            if (jCheckBoxExpert.isSelected())
+                properties.setProperty("expert","1");
+            else
+                properties.setProperty("expert","0");
+
             for (int ind = 0;ind<schedURBD.size();ind++)
             {
                 properties.setProperty("jobName"+ind,schedURBD.get(ind).jobName);
@@ -1514,13 +1656,26 @@ private void jButtonRunSynchActionPerformed(java.awt.event.ActionEvent evt) {//G
                 int countjobs = Integer.parseInt(properties.getProperty("countjobs"));
                 try
                 {
-                    if(properties.getProperty("mini").equals("1"))
+                    if((properties.getProperty("mini")!=null)&(properties.getProperty("mini").equals("1")))
                     {
                         jCheckBoxMinimiz.setSelected(true);
                         formWindowIconified(evt);
                     }
                     else
                         jCheckBoxMinimiz.setSelected(false);
+                    if (properties.getProperty("expert")!=null)
+                    {
+                        if (properties.getProperty("expert").equals("0"))
+                        {
+                            jCheckBoxExpert.setSelected(false);
+                            CheckBoxExpertRun();
+                        }
+                        if (properties.getProperty("expert").equals("1"))
+                        {
+                            jCheckBoxExpert.setSelected(true);
+                            CheckBoxExpertRun();
+                        }
+                    }
                 }
                 catch (NullPointerException err){}
                 schedURBD = new LinkedList<schedulerURBD>();
@@ -1541,10 +1696,10 @@ private void jButtonRunSynchActionPerformed(java.awt.event.ActionEvent evt) {//G
                         schedURBD.getLast().createSCHED(this);
                         schedURBD.getLast().start();
                     }
-                    else
-                    {
-                        System.out.println("!!!!ЗАДАНИЕ ПРОПУЩЕНО, ВРЕМЯ ВЫПОЛНЕНИЯ ПРОШЛО!!!!");
-                    }
+//                    else
+//                    {
+//                        System.out.println("!!!!ЗАДАНИЕ ПРОПУЩЕНО, ВРЕМЯ ВЫПОЛНЕНИЯ ПРОШЛО!!!!");
+//                    }
                 }
             }
             catch (IOException err)

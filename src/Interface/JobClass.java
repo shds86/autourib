@@ -1,10 +1,8 @@
 package Interface;
 
-import java.io.Serializable;
 import java.util.Date;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -25,7 +23,7 @@ public class JobClass
         Frame = (MainFrame)dataMap.get("Frame");
         Frame.jTextAreaSystemLog.append("\n-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
         Frame.jTextAreaSystemLog.append("\n"+ new Date()+" Запуск задания по расписанию");
-        Frame.jButtonRunAll.doClick();
+        Frame.RunAll();
         String jobName = context.getJobDetail().getFullName();
         _log.info("JobClass says: " + jobName + " executing at " + new Date());
     }

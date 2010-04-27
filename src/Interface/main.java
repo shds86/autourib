@@ -1,7 +1,9 @@
 package Interface;
 
-public class main{
-static MainFrame Frame;
+public class main
+{
+    static MainFrame Frame;
+
     /**
      *
      * @param args

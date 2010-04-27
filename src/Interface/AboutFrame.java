@@ -18,7 +18,7 @@ public class AboutFrame extends javax.swing.JFrame {
         jLabelProjectName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("arrow_refresh.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/image/arrow_refresh.png")));
 
         jButtonClose.setText("Закрыть");
         jButtonClose.addActionListener(new java.awt.event.ActionListener() {
@@ -27,7 +27,7 @@ public class AboutFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabelCthulhu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/cthulhu.jpg"))); // NOI18N
+        jLabelCthulhu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/cthulhu.jpg"))); // NOI18N
         jLabelCthulhu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabelProjectName.setText("AvtoURIB");
@@ -37,8 +37,9 @@ public class AboutFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addContainerGap()
                 .addComponent(jLabelCthulhu)
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
@@ -50,16 +51,16 @@ public class AboutFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(jLabelProjectName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonClose))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabelCthulhu)))
+                        .addComponent(jLabelCthulhu))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(jLabelProjectName)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
+                        .addComponent(jButtonClose)))
                 .addContainerGap())
         );
 
