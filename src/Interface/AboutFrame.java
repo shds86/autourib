@@ -18,6 +18,7 @@ public class AboutFrame extends javax.swing.JFrame {
         jLabelProjectName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("О программе");
         setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/image/arrow_refresh.png")));
 
         jButtonClose.setText("Закрыть");
@@ -39,14 +40,10 @@ public class AboutFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelCthulhu)
-                .addGap(21, 21, 21)
+                .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jButtonClose))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(jLabelProjectName)))
+                    .addComponent(jButtonClose)
+                    .addComponent(jLabelProjectName))
                 .addGap(35, 35, 35))
         );
         layout.setVerticalGroup(
@@ -57,9 +54,9 @@ public class AboutFrame extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabelCthulhu))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
+                        .addGap(31, 31, 31)
                         .addComponent(jLabelProjectName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
                         .addComponent(jButtonClose)))
                 .addContainerGap())
         );
