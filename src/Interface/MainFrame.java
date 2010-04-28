@@ -1163,7 +1163,8 @@ private void jCheckBoxExpertActionPerformed(java.awt.event.ActionEvent evt) {//G
         (new Thread(new DrawProgressBar(thr))).start();
     }
 
-    private void Apply() {
+    private void Apply()
+    {
         //выгружаем в файл настроек и записываем его
         jTextAreaSystemLog.append("\n" + getDateAndTime() + " Записываю настройки в файл...");
         saveOptions();
@@ -1347,7 +1348,8 @@ private void jCheckBoxExpertActionPerformed(java.awt.event.ActionEvent evt) {//G
     private javax.swing.JTextField jTextFieldSyncFTPdir;
     // End of variables declaration//GEN-END:variables
 
-    private void checkingOptionFile() {
+    private void checkingOptionFile()
+    {
         //очищаем информационные поля
         jTextAreaSystemLog.setText("");
 
@@ -1396,7 +1398,8 @@ private void jCheckBoxExpertActionPerformed(java.awt.event.ActionEvent evt) {//G
         }
     }
 
-    private void loadOptions() {
+    private void loadOptions()
+    {
         BufferedReader inoptionfile;
         String tmp;
         try {
@@ -1512,7 +1515,8 @@ private void jCheckBoxExpertActionPerformed(java.awt.event.ActionEvent evt) {//G
         }
     }
 
-    private void saveOptions() {
+    private void saveOptions()
+    {
         //записываем настройки в файл
         BufferedWriter outoptionfile;
         try {
@@ -1714,7 +1718,8 @@ private void jCheckBoxExpertActionPerformed(java.awt.event.ActionEvent evt) {//G
      *
      * @return
      */
-    public String getDateAndTime() {
+    public String getDateAndTime()
+    {
         Date date = new Date(System.currentTimeMillis());
         String customerDate = (1900 + date.getYear()) + "-"
                 + (1 + date.getMonth()) + "-" + date.getDate()
