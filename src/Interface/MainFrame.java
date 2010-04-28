@@ -348,6 +348,7 @@ public class MainFrame extends javax.swing.JFrame
         jButtonRemoveJob = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableListJob = new javax.swing.JTable();
+        jButtonAddTest = new javax.swing.JButton();
         jPanelOptions = new javax.swing.JPanel();
         jTextFieldBaseSource = new javax.swing.JTextField();
         jButtonCancel = new javax.swing.JButton();
@@ -549,6 +550,13 @@ public class MainFrame extends javax.swing.JFrame
         jTableListJob.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jTableListJob);
 
+        jButtonAddTest.setText("ADD");
+        jButtonAddTest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddTestActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelScheduleLayout = new javax.swing.GroupLayout(jPanelSchedule);
         jPanelSchedule.setLayout(jPanelScheduleLayout);
         jPanelScheduleLayout.setHorizontalGroup(
@@ -564,8 +572,10 @@ public class MainFrame extends javax.swing.JFrame
                     .addGroup(jPanelScheduleLayout.createSequentialGroup()
                         .addComponent(jButtonAddJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonRemoveJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(185, 185, 185))
+                        .addGroup(jPanelScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonAddTest, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonRemoveJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(175, 175, 175))
         );
         jPanelScheduleLayout.setVerticalGroup(
             jPanelScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -580,7 +590,9 @@ public class MainFrame extends javax.swing.JFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonAddJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonRemoveJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jButtonRemoveJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(81, 81, 81)
+                        .addComponent(jButtonAddTest)))
                 .addContainerGap())
         );
 
@@ -1085,6 +1097,10 @@ private void jCheckBoxExpertActionPerformed(java.awt.event.ActionEvent evt) {//G
     saveScheduler();
 }//GEN-LAST:event_jCheckBoxExpertActionPerformed
 
+private void jButtonAddTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddTestActionPerformed
+    (new SchedulerFrame()).setVisible(true);
+}//GEN-LAST:event_jButtonAddTestActionPerformed
+
     public void CheckBoxExpertRun()
     {
         if (!jCheckBoxExpert.isSelected())
@@ -1283,6 +1299,7 @@ private void jCheckBoxExpertActionPerformed(java.awt.event.ActionEvent evt) {//G
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddJob;
+    private javax.swing.JButton jButtonAddTest;
     private javax.swing.JButton jButtonApply;
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonRemoveJob;
