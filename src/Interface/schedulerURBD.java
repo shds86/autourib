@@ -124,7 +124,6 @@ public class schedulerURBD
             trigger = new CronTrigger(triggerName, "group1", jobName, "group1", _time);
             sched.addJob(job, true);
             Date ft = sched.scheduleJob(trigger);
-
         }
         catch (Exception err)
         {err.printStackTrace();}

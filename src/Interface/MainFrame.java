@@ -50,11 +50,16 @@ public class MainFrame extends javax.swing.JFrame
     java.awt.Image image;
     TrayIcon icon = null;
     PopupMenu iconpopup;
+    MenuItem exitpopup = new MenuItem("Выход");
+    MenuItem allExchange = new MenuItem("Полный обмен");
+    MenuItem inExchange = new MenuItem("Загрузка");
+    MenuItem outExchange = new MenuItem("Выгрузка");
     byte key;
     LinkedList<schedulerURBD> schedURBD;
     
         class DrawProgressBar extends Thread
         {
+            byte count_image = 3;
             int ind=1;
             @Override
             public void run()
@@ -63,7 +68,7 @@ public class MainFrame extends javax.swing.JFrame
                 {
                     try
                     {
-                        DrawProgressBar.sleep(500);
+                        DrawProgressBar.sleep(100);
                         if (jProgressBar1.getValue()<jProgressBar1.getMaximum())
                         {
                             jProgressBar1.setValue(jProgressBar1.getValue()+jProgressBar1.getMaximum()/10);
@@ -71,7 +76,7 @@ public class MainFrame extends javax.swing.JFrame
                             {
                                 icon.setImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/image/arrow-circle-"+ind+".png")));
                             }
-                            if (ind > 3)
+                            if (ind > count_image)
                                 ind = 1;
                             else
                                 ind++;
@@ -87,7 +92,7 @@ public class MainFrame extends javax.swing.JFrame
                                 icon.setImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/image/arrow-circle-"+ind+".png")));
                                 System.out.println("/image/arrow-circle-"+ind+".png");
                             }
-                            if (ind > 3)
+                            if (ind > count_image)
                                 ind = 1;
                             else
                                 ind++;
@@ -121,9 +126,15 @@ public class MainFrame extends javax.swing.JFrame
                             jButtonRunInfile.setEnabled(false);
                             jButtonRunOutfile.setEnabled(false);
                             jButtonRunUpload.setEnabled(false);
+                            allExchange.setEnabled(false);
+                            inExchange.setEnabled(false);
+                            outExchange.setEnabled(false);
                             GetFileOnFTP();
                             RunWith1S();
                             PutFileOnFTP();
+                            allExchange.setEnabled(true);
+                            inExchange.setEnabled(true);
+                            outExchange.setEnabled(true);
                             jButtonRunAll.setEnabled(true);
                             jButtonRunDownload.setEnabled(true);
                             jButtonRunInfile.setEnabled(true);
@@ -138,7 +149,13 @@ public class MainFrame extends javax.swing.JFrame
                             jButtonRunInfile.setEnabled(false);
                             jButtonRunOutfile.setEnabled(false);
                             jButtonRunUpload.setEnabled(false);
+                            allExchange.setEnabled(false);
+                            inExchange.setEnabled(false);
+                            outExchange.setEnabled(false);
                             GetFileOnFTP();
+                            allExchange.setEnabled(true);
+                            inExchange.setEnabled(true);
+                            outExchange.setEnabled(true);
                             jButtonRunAll.setEnabled(true);
                             jButtonRunDownload.setEnabled(true);
                             jButtonRunInfile.setEnabled(true);
@@ -153,7 +170,13 @@ public class MainFrame extends javax.swing.JFrame
                             jButtonRunInfile.setEnabled(false);
                             jButtonRunOutfile.setEnabled(false);
                             jButtonRunUpload.setEnabled(false);
+                            allExchange.setEnabled(false);
+                            inExchange.setEnabled(false);
+                            outExchange.setEnabled(false);
                             RunWith1S();
+                            allExchange.setEnabled(true);
+                            inExchange.setEnabled(true);
+                            outExchange.setEnabled(true);
                             jButtonRunAll.setEnabled(true);
                             jButtonRunDownload.setEnabled(true);
                             jButtonRunInfile.setEnabled(true);
@@ -168,7 +191,13 @@ public class MainFrame extends javax.swing.JFrame
                             jButtonRunInfile.setEnabled(false);
                             jButtonRunOutfile.setEnabled(false);
                             jButtonRunUpload.setEnabled(false);
+                            allExchange.setEnabled(false);
+                            inExchange.setEnabled(false);
+                            outExchange.setEnabled(false);
                             PutFileOnFTP();
+                            allExchange.setEnabled(true);
+                            inExchange.setEnabled(true);
+                            outExchange.setEnabled(true);
                             jButtonRunAll.setEnabled(true);
                             jButtonRunDownload.setEnabled(true);
                             jButtonRunInfile.setEnabled(true);
@@ -183,8 +212,14 @@ public class MainFrame extends javax.swing.JFrame
                             jButtonRunInfile.setEnabled(false);
                             jButtonRunOutfile.setEnabled(false);
                             jButtonRunUpload.setEnabled(false);
+                            allExchange.setEnabled(false);
+                            inExchange.setEnabled(false);
+                            outExchange.setEnabled(false);
                             GetFileOnFTP();
                             RunWith1S();
+                            allExchange.setEnabled(true);
+                            inExchange.setEnabled(true);
+                            outExchange.setEnabled(true);
                             jButtonRunAll.setEnabled(true);
                             jButtonRunDownload.setEnabled(true);
                             jButtonRunInfile.setEnabled(true);
@@ -199,8 +234,14 @@ public class MainFrame extends javax.swing.JFrame
                             jButtonRunInfile.setEnabled(false);
                             jButtonRunOutfile.setEnabled(false);
                             jButtonRunUpload.setEnabled(false);
+                            allExchange.setEnabled(false);
+                            inExchange.setEnabled(false);
+                            outExchange.setEnabled(false);
                             RunWith1S();
                             PutFileOnFTP();
+                            allExchange.setEnabled(true);
+                            inExchange.setEnabled(true);
+                            outExchange.setEnabled(true);
                             jButtonRunAll.setEnabled(true);
                             jButtonRunDownload.setEnabled(true);
                             jButtonRunInfile.setEnabled(true);
@@ -253,10 +294,7 @@ public class MainFrame extends javax.swing.JFrame
         checkingOptionFile();
         getDateAndTime();
         schedURBD = new LinkedList<schedulerURBD>();
-        MenuItem exitpopup = new MenuItem("Выход");
-        MenuItem allExchange = new MenuItem("Полный обмен");
-        MenuItem inExchange = new MenuItem("Загрузка");
-        MenuItem outExchange = new MenuItem("Выгрузка");
+        
         iconpopup = new PopupMenu("IconPopUP");
         iconpopup.add(allExchange);
         iconpopup.add(inExchange);
@@ -278,7 +316,7 @@ public class MainFrame extends javax.swing.JFrame
                                           {
                                               public void actionPerformed(ActionEvent e)
                                               {
-                                                  jButtonRunAllActionPerformed(e);
+                                                  RunAll();
                                               }
                                           });
 
@@ -287,10 +325,6 @@ public class MainFrame extends javax.swing.JFrame
                                              public void actionPerformed(ActionEvent e)
                                              {
                                                  RunIn();
-//                                                 key = 1;
-//                                                 Thread thr = (new Thread(new RunExchangeInThread(4)));
-//                                                 thr.start();
-//                                                 (new Thread(new DrawProgressBar(thr))).start();
                                              }
                                          });
 
@@ -299,10 +333,6 @@ public class MainFrame extends javax.swing.JFrame
                                              public void actionPerformed(ActionEvent e)
                                              {
                                                  RunOut();
-//                                                 key = 2;
-//                                                 Thread thr = (new Thread(new RunExchangeInThread(5)));
-//                                                 thr.start();
-//                                                 (new Thread(new DrawProgressBar(thr))).start();
                                              }
         });
 
@@ -569,13 +599,13 @@ public class MainFrame extends javax.swing.JFrame
                     .addGroup(jPanelScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jComboBoxFrequency, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jSpinnerTimer, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanelScheduleLayout.createSequentialGroup()
-                        .addComponent(jButtonAddJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonAddTest, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jButtonAddTest, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelScheduleLayout.createSequentialGroup()
+                            .addComponent(jButtonAddJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jButtonRemoveJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(175, 175, 175))
+                .addGap(185, 185, 185))
         );
         jPanelScheduleLayout.setVerticalGroup(
             jPanelScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -591,7 +621,7 @@ public class MainFrame extends javax.swing.JFrame
                         .addGroup(jPanelScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonAddJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonRemoveJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(81, 81, 81)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonAddTest)))
                 .addContainerGap())
         );

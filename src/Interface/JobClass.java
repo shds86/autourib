@@ -3,6 +3,7 @@ package Interface;
 import java.util.Date;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -11,7 +12,7 @@ import org.quartz.JobExecutionException;
  *
  * @author support
  */
-public class JobClass
+public class JobClass implements Job
 {
     public static Log _log = LogFactory.getLog(JobClass.class);
     static MainFrame Frame;
