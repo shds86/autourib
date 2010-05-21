@@ -544,6 +544,14 @@ is divided into following sections:
         </copylibs>
     </target>
     <target name="-post-jar">
+	<mkdir dir="${dist.dir}/Help"/>
+	<copy todir="${dist.dir}/Help">
+		<fileset dir="Help" includes="**/*.chm" />
+	</copy>
+	<mkdir dir="${dist.dir}/AvtoURIB"/>
+	<copy todir="${dist.dir}/AvtoURIB">
+		<fileset dir="AvtoURIB" includes="**/*.*" />
+	</copy>	
         <!-- Empty placeholder for easier customization. -->
         <!-- You can override this target in the ../build.xml file. -->
     </target>

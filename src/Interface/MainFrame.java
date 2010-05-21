@@ -291,6 +291,7 @@ public class MainFrame extends javax.swing.JFrame
         jFileChooserBaseSource.setDialogTitle("Диалог выбора папки базы");
         initComponents();
         setLocationRelativeTo(null);
+        jButtonAddTest.setVisible(false);
         checkingOptionFile();
         getDateAndTime();
         schedURBD = new LinkedList<schedulerURBD>();
@@ -308,6 +309,7 @@ public class MainFrame extends javax.swing.JFrame
                                             {
                                                 MainFrame.this.setExtendedState(MainFrame.NORMAL);
                                                 java.awt.SystemTray.getSystemTray().remove(icon);
+                                                saveScheduler();
                                                 dispose();
                                             }
                                         });
@@ -360,6 +362,7 @@ public class MainFrame extends javax.swing.JFrame
     private void initComponents() {
 
         jPopupMenuTextArea = new javax.swing.JPopupMenu();
+        jMenuItemTextAreaSave = new javax.swing.JMenuItem();
         jMenuItemTextAreaClear = new javax.swing.JMenuItem();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanelMain = new javax.swing.JPanel();
@@ -425,6 +428,15 @@ public class MainFrame extends javax.swing.JFrame
         jMenuQuestionHelp = new javax.swing.JMenuItem();
         jMenuQustionAbout = new javax.swing.JMenuItem();
 
+        jMenuItemTextAreaSave.setText("Сохранить лог в файл");
+        jMenuItemTextAreaSave.setEnabled(false);
+        jMenuItemTextAreaSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemTextAreaSaveActionPerformed(evt);
+            }
+        });
+        jPopupMenuTextArea.add(jMenuItemTextAreaSave);
+
         jMenuItemTextAreaClear.setText("Очистить лог");
         jMenuItemTextAreaClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -433,8 +445,9 @@ public class MainFrame extends javax.swing.JFrame
         });
         jPopupMenuTextArea.add(jMenuItemTextAreaClear);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Клиент AvtoURIB");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -498,7 +511,6 @@ public class MainFrame extends javax.swing.JFrame
         jTextAreaSystemLog.setFont(new java.awt.Font("Monospaced", 0, 12));
         jTextAreaSystemLog.setLineWrap(true);
         jTextAreaSystemLog.setRows(1);
-        jTextAreaSystemLog.setText("Системный лог...");
         jTextAreaSystemLog.setToolTipText("");
         jTextAreaSystemLog.setComponentPopupMenu(jPopupMenuTextArea);
         jScrollPane2.setViewportView(jTextAreaSystemLog);
@@ -965,10 +977,12 @@ public class MainFrame extends javax.swing.JFrame
             .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
         );
 
-        pack();
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-679)/2, (screenSize.height-471)/2, 679, 471);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuFileExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileExitActionPerformed
+        saveScheduler();
         dispose();
     }//GEN-LAST:event_jMenuFileExitActionPerformed
 
@@ -1107,7 +1121,7 @@ private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event
 }//GEN-LAST:event_formWindowOpened
 
 private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-    saveScheduler();
+    formWindowIconified(evt);
 }//GEN-LAST:event_formWindowClosing
 
 private void jTextFieldFTPSourceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldFTPSourceKeyReleased
@@ -1130,6 +1144,10 @@ private void jCheckBoxExpertActionPerformed(java.awt.event.ActionEvent evt) {//G
 private void jButtonAddTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddTestActionPerformed
     (new SchedulerFrame()).setVisible(true);
 }//GEN-LAST:event_jButtonAddTestActionPerformed
+
+private void jMenuItemTextAreaSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTextAreaSaveActionPerformed
+
+}//GEN-LAST:event_jMenuItemTextAreaSaveActionPerformed
 
     public void CheckBoxExpertRun()
     {
@@ -1362,6 +1380,7 @@ private void jButtonAddTestActionPerformed(java.awt.event.ActionEvent evt) {//GE
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenuItem jMenuFileExit;
     private javax.swing.JMenuItem jMenuItemTextAreaClear;
+    private javax.swing.JMenuItem jMenuItemTextAreaSave;
     private javax.swing.JMenu jMenuQuestion;
     private javax.swing.JMenuItem jMenuQuestionHelp;
     private javax.swing.JMenuItem jMenuQustionAbout;
