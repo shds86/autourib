@@ -7,6 +7,8 @@ import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import java.util.logging.Level;
+
 
 /**
  *
@@ -24,6 +26,7 @@ public class JobClass implements Job
         Frame = (MainFrame)dataMap.get("Frame");
         Frame.jTextAreaSystemLog.append("\n-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
         Frame.jTextAreaSystemLog.append("\n"+ new Date()+" Запуск задания по расписанию");
+        Frame.logger.log(Level.INFO, new Date()+" Запуск задания по расписанию");
         Frame.RunAll();
         String jobName = context.getJobDetail().getFullName();
         _log.info("JobClass says: " + jobName + " executing at " + new Date());

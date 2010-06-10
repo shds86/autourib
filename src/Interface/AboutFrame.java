@@ -31,7 +31,7 @@ public class AboutFrame extends javax.swing.JFrame {
         jLabelCthulhu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/cthulhu.jpg"))); // NOI18N
         jLabelCthulhu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabelProjectName.setText("AvtoURIB");
+        jLabelProjectName.setText(MainFrame.ver());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

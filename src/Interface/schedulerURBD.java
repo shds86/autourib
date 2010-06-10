@@ -1,6 +1,7 @@
 package Interface;
 
 import java.util.Date;
+import java.util.logging.Level;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.quartz.CronTrigger;
@@ -145,6 +146,12 @@ public class schedulerURBD
             Frame.jTextAreaSystemLog.append("\n"+ new Date()+" Задание успешно создано. " +
                                             "\nВремя запуска задания "+ this.jobDate+
                                             "\n"+getFrequency(this.Frequency));
+            Frame.logger.log(Level.INFO, new Date()
+                                        +" Задание успешно создано."
+                                        +" Время запуска задания "
+                                        +this.jobDate
+                                        +" "
+                                        +getFrequency(this.Frequency));
 
             log.info(job.getFullName() + " has been scheduled to run at: " + ft
                 + " and repeat based on expression: "

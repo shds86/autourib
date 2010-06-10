@@ -18,6 +18,7 @@ import java.awt.Toolkit;
 import java.awt.TrayIcon;
 import java.awt.TrayIcon.*;
 import java.awt.event.ActionListener;
+import java.util.logging.FileHandler;
 import javax.swing.table.DefaultTableModel;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.logging.Log;
@@ -40,6 +41,9 @@ public class MainFrame extends javax.swing.JFrame
 
     //объявляем глобальные переменные
     public static Log _log = LogFactory.getLog(MainFrame.class);
+    Logger logger;
+    FileHandler fh;
+
     File optionFile;            //файл с настройками (путь)
     File helpFile;              //файл с помощью
     options TmpOptions = new options();
@@ -56,11 +60,13 @@ public class MainFrame extends javax.swing.JFrame
     MenuItem outExchange = new MenuItem("Выгрузка");
     byte key;
     LinkedList<schedulerURBD> schedURBD;
+    String log;
+    Level _level;
     
         class DrawProgressBar extends Thread
         {
-            byte count_image = 3;
-            int ind=1;
+            byte count_image = 13;
+            int ind=0;
             @Override
             public void run()
             {
@@ -68,16 +74,16 @@ public class MainFrame extends javax.swing.JFrame
                 {
                     try
                     {
-                        DrawProgressBar.sleep(100);
+                        DrawProgressBar.sleep(200);
                         if (jProgressBar1.getValue()<jProgressBar1.getMaximum())
                         {
                             jProgressBar1.setValue(jProgressBar1.getValue()+jProgressBar1.getMaximum()/10);
                             if (SystemTray.isSupported())
                             {
-                                icon.setImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/image/arrow-circle-"+ind+".png")));
+                                icon.setImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/image/busy-icon"+ind+".png")));
                             }
                             if (ind > count_image)
-                                ind = 1;
+                                ind = 0;
                             else
                                 ind++;
                         }
@@ -88,12 +94,12 @@ public class MainFrame extends javax.swing.JFrame
                         if (jProgressBar1.getValue()<jProgressBar1.getMaximum())
                         {
                             jProgressBar1.setValue(jProgressBar1.getValue()+jProgressBar1.getMaximum()/10);
+                            if (SystemTray.isSupported())
                             {
-                                icon.setImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/image/arrow-circle-"+ind+".png")));
-                                System.out.println("/image/arrow-circle-"+ind+".png");
+                                icon.setImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/image/busy-icon"+ind+".png")));
                             }
                             if (ind > count_image)
-                                ind = 1;
+                                ind = 0;
                             else
                                 ind++;
                             jProgressBar1.setValue(jProgressBar1.getValue()+jProgressBar1.getMaximum()/10);
@@ -102,13 +108,16 @@ public class MainFrame extends javax.swing.JFrame
                     }
                 }
                 jProgressBar1.setValue(jProgressBar1.getMaximum());
-                icon.setImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/image/arrow_refresh.png")));
+                if (SystemTray.isSupported())
+                {
+                    icon.setImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/image/arrow_refresh.png")));
+                }
             }
             public Thread thr;
             public DrawProgressBar(Thread tmp)
             {
                 this.thr = tmp;
-                ind=1;
+                ind=0;
             }
         }
 
@@ -121,6 +130,7 @@ public class MainFrame extends javax.swing.JFrame
                 {
                     case 0:
                         {
+                            log="";
                             jButtonRunAll.setEnabled(false);
                             jButtonRunDownload.setEnabled(false);
                             jButtonRunInfile.setEnabled(false);
@@ -140,10 +150,12 @@ public class MainFrame extends javax.swing.JFrame
                             jButtonRunInfile.setEnabled(true);
                             jButtonRunOutfile.setEnabled(true);
                             jButtonRunUpload.setEnabled(true);
+                            logger.log(_level, log);
                             break;
                         }
                     case 1:
                         {
+                            log="";
                             jButtonRunAll.setEnabled(false);
                             jButtonRunDownload.setEnabled(false);
                             jButtonRunInfile.setEnabled(false);
@@ -161,10 +173,12 @@ public class MainFrame extends javax.swing.JFrame
                             jButtonRunInfile.setEnabled(true);
                             jButtonRunOutfile.setEnabled(true);
                             jButtonRunUpload.setEnabled(true);
+                            logger.log(_level, log);
                             break;
                         }
                     case 2:
                         {
+                            log="";
                             jButtonRunAll.setEnabled(false);
                             jButtonRunDownload.setEnabled(false);
                             jButtonRunInfile.setEnabled(false);
@@ -182,10 +196,12 @@ public class MainFrame extends javax.swing.JFrame
                             jButtonRunInfile.setEnabled(true);
                             jButtonRunOutfile.setEnabled(true);
                             jButtonRunUpload.setEnabled(true);
+                            logger.log(_level, log);
                             break;
                         }
                     case 3:
                         {
+                            log="";
                             jButtonRunAll.setEnabled(false);
                             jButtonRunDownload.setEnabled(false);
                             jButtonRunInfile.setEnabled(false);
@@ -203,10 +219,12 @@ public class MainFrame extends javax.swing.JFrame
                             jButtonRunInfile.setEnabled(true);
                             jButtonRunOutfile.setEnabled(true);
                             jButtonRunUpload.setEnabled(true);
+                            logger.log(_level, log);
                             break;
                         }
                     case 4:
                         {
+                            log="";
                             jButtonRunAll.setEnabled(false);
                             jButtonRunDownload.setEnabled(false);
                             jButtonRunInfile.setEnabled(false);
@@ -225,10 +243,12 @@ public class MainFrame extends javax.swing.JFrame
                             jButtonRunInfile.setEnabled(true);
                             jButtonRunOutfile.setEnabled(true);
                             jButtonRunUpload.setEnabled(true);
+                            logger.log(_level, log);
                             break;
                         }
                     case 5:
                         {
+                            log="";
                             jButtonRunAll.setEnabled(false);
                             jButtonRunDownload.setEnabled(false);
                             jButtonRunInfile.setEnabled(false);
@@ -247,6 +267,7 @@ public class MainFrame extends javax.swing.JFrame
                             jButtonRunInfile.setEnabled(true);
                             jButtonRunOutfile.setEnabled(true);
                             jButtonRunUpload.setEnabled(true);
+                            logger.log(_level, log);
                             break;
                         }
                 }
@@ -284,7 +305,21 @@ public class MainFrame extends javax.swing.JFrame
             UIManager.put("FileChooser.listViewButtonAccessibleName", "Список");
         }
         catch (Exception err){}
-        
+        logger = logger.getLogger("testlogger");
+        try
+        {
+            fh = new FileHandler(System.getProperty("user.dir")+
+                                 System.getProperty("file.separator")+
+                                 "AvtoURIB"+
+                                 System.getProperty("file.separator")+
+                                 "log.txt");
+        }
+        catch(IOException err){}
+
+        logger.addHandler(fh);
+        logger.setLevel(Level.ALL);
+        logger.info("!!!okay!!!!");
+
         jFileChooserPlatformSource = new JFileChooser();
         jFileChooserPlatformSource.setDialogTitle("Диалог выбора папки 1С:Предприятие");
         jFileChooserBaseSource = new JFileChooser();
@@ -307,10 +342,10 @@ public class MainFrame extends javax.swing.JFrame
                                         {
                                             public void actionPerformed(ActionEvent e)
                                             {
-                                                MainFrame.this.setExtendedState(MainFrame.NORMAL);
-                                                java.awt.SystemTray.getSystemTray().remove(icon);
+//                                                MainFrame.this.setExtendedState(MainFrame.NORMAL);
                                                 saveScheduler();
-                                                dispose();
+                                                java.awt.SystemTray.getSystemTray().remove(icon);
+                                                System.exit(0);
                                             }
                                         });
 
@@ -446,7 +481,7 @@ public class MainFrame extends javax.swing.JFrame
         jPopupMenuTextArea.add(jMenuItemTextAreaClear);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Клиент AvtoURIB");
+        setTitle(ver());
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -541,7 +576,7 @@ public class MainFrame extends javax.swing.JFrame
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelMainLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelMainLayout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(jButtonRunAll)
@@ -983,7 +1018,8 @@ public class MainFrame extends javax.swing.JFrame
 
     private void jMenuFileExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileExitActionPerformed
         saveScheduler();
-        dispose();
+//        this.setVisible(false);
+        System.exit(0);
     }//GEN-LAST:event_jMenuFileExitActionPerformed
 
     private void jMenuQuestionHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuQuestionHelpActionPerformed
@@ -991,9 +1027,12 @@ public class MainFrame extends javax.swing.JFrame
         String userDir = new String();
         userDir = System.getProperty("user.dir") + System.getProperty("file.separator") + "Help" + System.getProperty("file.separator") + "AvtoURIB.chm";
         helpFile = new File(userDir);
-        try {
+        try
+        {
             Desktop.getDesktop().open(helpFile);
-        } catch (IOException ex) {
+        } 
+        catch (IOException ex)
+        {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMenuQuestionHelpActionPerformed
@@ -1049,11 +1088,14 @@ private void jButtonApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
             || jTextFieldFTPSource.getText().equals("") || jTextFieldFTPUser.getText().equals("")
             || jTextFieldFTPPass.getText().equals("") || jTextFieldInfileOnLocalhost.getText().equals("")
             || jTextFieldInfileOnServer.getText().equals("") || jTextFieldOutfileOnLocalhost.getText().equals("")
-            || jTextFieldOutfileOnServer.getText().equals("")) {
-                jTextAreaSystemLog.append("\n" + getDateAndTime() + " Заполнены не все поля настроек!");
-                javax.swing.JOptionPane.showMessageDialog(null, "Заполнены не все поля настроек!","Ошибка",javax.swing.JOptionPane.WARNING_MESSAGE);
+            || jTextFieldOutfileOnServer.getText().equals(""))
+    {
+        jTextAreaSystemLog.append("\n" + getDateAndTime() + " Заполнены не все поля настроек!");
+        logger.log(Level.WARNING,"Заполнены не все поля настроек!");
+        javax.swing.JOptionPane.showMessageDialog(null, "Заполнены не все поля настроек!","Ошибка",javax.swing.JOptionPane.WARNING_MESSAGE);
     }
-    else {
+    else
+    {
         Apply();
     }
 }//GEN-LAST:event_jButtonApplyActionPerformed
@@ -1063,25 +1105,33 @@ private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 }//GEN-LAST:event_jButtonCancelActionPerformed
 
 private void jButtonRunInfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunInfileActionPerformed
+    log="";
     if (!jCheckBoxExpert.isSelected())
         RunIn();
     else
         RunInfile();
+    jTextAreaSystemLog.append(log);
 }//GEN-LAST:event_jButtonRunInfileActionPerformed
 
 private void jButtonRunDownloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunDownloadActionPerformed
+    log="";
     if (!jCheckBoxExpert.isSelected())
         RunOut();
     else
         RunDownload();
+    jTextAreaSystemLog.append(log);
 }//GEN-LAST:event_jButtonRunDownloadActionPerformed
 
 private void jButtonRunUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunUploadActionPerformed
+    log="";
     RunUpload();
+    jTextAreaSystemLog.append(log);
 }//GEN-LAST:event_jButtonRunUploadActionPerformed
 
 private void jButtonRunOutfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunOutfileActionPerformed
+    log="";
     RunOutfile();
+    jTextAreaSystemLog.append(log);
 }//GEN-LAST:event_jButtonRunOutfileActionPerformed
 
 private void jButtonAddJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddJobActionPerformed
@@ -1102,12 +1152,14 @@ private void jButtonRemoveJobActionPerformed(java.awt.event.ActionEvent evt) {//
         {
             ((DefaultTableModel)jTableListJob.getModel()).removeRow(_selectRow);
             jTextAreaSystemLog.append("\n" + getDateAndTime() +" удалено задание "+ schedURBD.get(_selectRow).job.getFullName());
+            logger.log(Level.INFO,getDateAndTime() +" удалено задание "+ schedURBD.get(_selectRow).job.getFullName());
             schedURBD.remove(_selectRow);
             saveScheduler();
         }
         else
         {
             jTextAreaSystemLog.append("\n" + getDateAndTime() +" Не могу удалить задание "+ schedURBD.get(_selectRow).job.getFullName());
+            logger.log(Level.WARNING,getDateAndTime() +" Не могу удалить задание "+ schedURBD.get(_selectRow).job.getFullName());
         }
     }
     else
@@ -1178,7 +1230,7 @@ private void jMenuItemTextAreaSaveActionPerformed(java.awt.event.ActionEvent evt
         key = 0;
         Thread thr = (new Thread(new RunExchangeInThread(0)));
         thr.start();
-        (new Thread(new DrawProgressBar(thr))).start();        
+        (new Thread(new DrawProgressBar(thr))).start();
     }
 
     public void RunInfile()
@@ -1231,6 +1283,7 @@ private void jMenuItemTextAreaSaveActionPerformed(java.awt.event.ActionEvent evt
     {
         //выгружаем в файл настроек и записываем его
         jTextAreaSystemLog.append("\n" + getDateAndTime() + " Записываю настройки в файл...");
+        logger.log(Level.INFO,getDateAndTime() + " Записываю настройки в файл...");
         saveOptions();
     }
 
@@ -1240,24 +1293,26 @@ private void jMenuItemTextAreaSaveActionPerformed(java.awt.event.ActionEvent evt
         exchange = new ftp_work(TmpOptions.get_FTP_SERVER_NAME(),
                                 TmpOptions.get_FTP_SERVER_LOGIN(),
                                 TmpOptions.get_FTP_SERVER_PASS());
-        
-        jTextAreaSystemLog.append("\n--------------------------------------------------");
-        jTextAreaSystemLog.append("\n" + getDateAndTime() + " Подключение к фтп-серверу...");
+
+        log="--------------------------------------------------\n"+getDateAndTime() + " Подключение к фтп-серверу...\n";
+        jTextAreaSystemLog.append("\n--------------------------------------------------\n"+getDateAndTime() + " Подключение к фтп-серверу...");
+        _level=Level.INFO;
         this.getRootPane().updateUI();
         if ((err=exchange.ftp_connect()) == consterr.NOT_ERR)
         {
-            jTextAreaSystemLog.append("\n" + getDateAndTime() + " Подключение прошло успешно...");
-            jTextAreaSystemLog.append("\n" + getDateAndTime() + " Загружаю файл...");
+            jTextAreaSystemLog.append("\n"+getDateAndTime() + " Подключение прошло успешно...\n"+getDateAndTime() + " Загружаю файл...");
+            log+=getDateAndTime() + " Подключение прошло успешно...\n"+getDateAndTime() + " Загружаю файл...\n";
             if ((err=exchange.get_file(TmpOptions.get_cp_file_on_ftp(),new File(TmpOptions.get_cp_file_on_localhos()))) == consterr.NOT_ERR)
             {
-                jTextAreaSystemLog.append("\n" + getDateAndTime() + " Получение файла прошло успешно...");
-                jTextAreaSystemLog.append("\n--------------------------------------------------");
+                jTextAreaSystemLog.append("\n" + getDateAndTime() + " Получение файла прошло успешно..."+"\n--------------------------------------------------");
+                log+=getDateAndTime() + " Получение файла прошло успешно...\n";
                 return;
             }
             else
             {
-                jTextAreaSystemLog.append("\n" + getDateAndTime() + " "+consterr.PrintErr(err));
-                jTextAreaSystemLog.append("\n--------------------------------------------------");
+                jTextAreaSystemLog.append("\n" + getDateAndTime() + " "+consterr.PrintErr(err)+"\n--------------------------------------------------");
+                _level=Level.SEVERE;
+                log+=getDateAndTime() + " "+consterr.PrintErr(err)+"\n--------------------------------------------------\n";
                 return;
             }
         }
@@ -1265,6 +1320,8 @@ private void jMenuItemTextAreaSaveActionPerformed(java.awt.event.ActionEvent evt
         {
             jTextAreaSystemLog.append("\n" + getDateAndTime() + " " + consterr.PrintErr(err));
             jTextAreaSystemLog.append("\n--------------------------------------------------");
+            _level=Level.SEVERE;
+            log+=getDateAndTime() + " "+consterr.PrintErr(err)+"\n--------------------------------------------------\n";
             return;
         }
     }
@@ -1278,22 +1335,28 @@ private void jMenuItemTextAreaSaveActionPerformed(java.awt.event.ActionEvent evt
 
         jTextAreaSystemLog.append("\n--------------------------------------------------");
         jTextAreaSystemLog.append("\n" + getDateAndTime() + " Подключение к фтп-серверу...");
+        _level=Level.INFO;
+        log+="--------------------------------------------------\n"+getDateAndTime() + " Подключение к фтп-серверу...\n";
         this.getRootPane().updateUI();
         if ((err=exchange.ftp_connect()) == consterr.NOT_ERR)
         {
             jTextAreaSystemLog.append("\n" + getDateAndTime() + " Подключение прошло успешно...");
             jTextAreaSystemLog.append("\n" + getDateAndTime() + " Отправляю файл...");
+            log+=getDateAndTime() + " Подключение прошло успешно...\n"+getDateAndTime() + " Отправляю файл...\n";
 
             if ((err=exchange.put_file(TmpOptions.get_pc_file_on_ftp(), new File(TmpOptions.get_pc_file_on_localhost()))) == consterr.NOT_ERR)
             {
                 jTextAreaSystemLog.append("\n" + getDateAndTime() + " Файл успешно отправлен...");
                 jTextAreaSystemLog.append("\n--------------------------------------------------");
+                log+=getDateAndTime() + " Файл успешно отправлен...\n--------------------------------------------------\n";
                 return;
             }
             else
             {
                 jTextAreaSystemLog.append("\n" + getDateAndTime() + " "+consterr.PrintErr(err));
                 jTextAreaSystemLog.append("\n--------------------------------------------------");
+                log+=getDateAndTime() + " "+consterr.PrintErr(err)+"\n--------------------------------------------------\n";
+                _level=Level.SEVERE;
                 return;
             }
         }
@@ -1301,6 +1364,8 @@ private void jMenuItemTextAreaSaveActionPerformed(java.awt.event.ActionEvent evt
         {
             jTextAreaSystemLog.append("\n" + getDateAndTime() + " " + consterr.PrintErr(err));
             jTextAreaSystemLog.append("\n--------------------------------------------------");
+            log+=getDateAndTime() + " "+consterr.PrintErr(err)+"\n--------------------------------------------------\n";
+            _level=Level.SEVERE;
             return;
         }
     }
@@ -1318,6 +1383,8 @@ private void jMenuItemTextAreaSaveActionPerformed(java.awt.event.ActionEvent evt
         {
             jTextAreaSystemLog.append("\n--------------------------------------------------");
             jTextAreaSystemLog.append("\n" + getDateAndTime() + " Запускаем 1С");
+            _level=Level.INFO;
+            log+="--------------------------------------------------\n"+ getDateAndTime() + " Запускаем 1С\n";
             err=run1s.start();
             if (err==consterr.NOT_ERR)
             {
@@ -1327,21 +1394,28 @@ private void jMenuItemTextAreaSaveActionPerformed(java.awt.event.ActionEvent evt
                     for (int i = 0; i < tmplst.size(); i++)
                     {
                         jTextAreaSystemLog.append("\n" + getDateAndTime() +" "+ tmplst.get(i));
+                        log+=getDateAndTime() +" "+ tmplst.get(i)+"\n";
                     }
                 }
                 else
                 {
                     jTextAreaSystemLog.append("\n" + getDateAndTime() +" "+ consterr.PrintErr((byte)err));
+                    log+=getDateAndTime() + " "+consterr.PrintErr((byte)err)+"\n--------------------------------------------------\n";
+                    _level=Level.SEVERE;
                 }
             }
             else
             {
                 jTextAreaSystemLog.append("\n" + getDateAndTime() +" "+ consterr.PrintErr((byte)err));
+                log+=getDateAndTime() + " "+consterr.PrintErr((byte)err)+"\n--------------------------------------------------\n";
+                _level=Level.SEVERE;
             }
         }
         else
         {
             jTextAreaSystemLog.append("\n" + getDateAndTime() +" "+ consterr.PrintErr((byte)err));
+            log+=getDateAndTime() + " "+consterr.PrintErr((byte)err)+"\n--------------------------------------------------\n";
+            _level=Level.SEVERE;
         }
     }
 
@@ -1429,6 +1503,7 @@ private void jMenuItemTextAreaSaveActionPerformed(java.awt.event.ActionEvent evt
         dir = new File(userDir);
         if (!dir.exists()) {
             jTextAreaSystemLog.append(getDateAndTime() + " Каталог настроек не найден и будет создан...");
+            logger.log(Level.WARNING,getDateAndTime() + " Каталог настроек не найден и будет создан...");
             dir.mkdirs();
             jButtonRunAll.setEnabled(false);
             jButtonRunDownload.setEnabled(false);
@@ -1437,6 +1512,7 @@ private void jMenuItemTextAreaSaveActionPerformed(java.awt.event.ActionEvent evt
             jButtonRunUpload.setEnabled(false);
         } else {
             jTextAreaSystemLog.append(getDateAndTime() + " Каталог настроек найден...");
+            logger.log(Level.INFO,getDateAndTime() + " Каталог настроек найден...");
         }
 
         //проверяем, есть ли файл настроек
@@ -1446,8 +1522,8 @@ private void jMenuItemTextAreaSaveActionPerformed(java.awt.event.ActionEvent evt
         if (!optionFile.exists()) {
             try {
                 jTextAreaSystemLog.append("\n" + getDateAndTime() + " Файл настроек не найден и будет создан...");
+                logger.log(Level.WARNING,getDateAndTime() + " Файл настроек не найден и будет создан...");
                 optionFile.createNewFile();
-
                 jButtonRunAll.setEnabled(false);
                 jButtonRunDownload.setEnabled(false);
                 jButtonRunInfile.setEnabled(false);
@@ -1457,6 +1533,7 @@ private void jMenuItemTextAreaSaveActionPerformed(java.awt.event.ActionEvent evt
             }
         } else {
             jTextAreaSystemLog.append("\n" + getDateAndTime() + " Файл настроек найден...");
+            logger.log(Level.INFO,getDateAndTime() + " Файл настроек найден...");
             loadOptions();
             jButtonRunAll.setEnabled(true);
             jButtonRunInfile.setEnabled(true);
@@ -1475,9 +1552,11 @@ private void jMenuItemTextAreaSaveActionPerformed(java.awt.event.ActionEvent evt
                 StringTokenizer st = new StringTokenizer(stroka, ";");
                 if (st.countTokens() < 11) {
                     jTextAreaSystemLog.append("\n" + getDateAndTime() + " Неверный файл настроек!..");
+                    logger.log(Level.SEVERE,getDateAndTime() + " Неверный файл настроек!..");
                     break;
                 }
                 jTextAreaSystemLog.append("\n" + getDateAndTime() + " Читаю файл настроек...");
+                logger.log(Level.INFO,getDateAndTime() + " Читаю файл настроек...");
                 int tokencounter = 1;
                 while (st.hasMoreTokens()) {
                     switch (tokencounter) {
@@ -1576,6 +1655,7 @@ private void jMenuItemTextAreaSaveActionPerformed(java.awt.event.ActionEvent evt
                     tokencounter++;
                 }
                 jTextAreaSystemLog.append("\n" + getDateAndTime() + " Файл настроек прочитан...");
+                logger.log(Level.INFO,getDateAndTime() + " Файл настроек прочитан...");
             }
         } catch (IOException e) {
         }
@@ -1627,6 +1707,7 @@ private void jMenuItemTextAreaSaveActionPerformed(java.awt.event.ActionEvent evt
         } catch (IOException e) {
         }
         jTextAreaSystemLog.append("\n" + getDateAndTime() + " Настройки записаны...");
+        logger.log(Level.INFO,getDateAndTime() + " Настройки записаны...");
     }
 
     private void saveScheduler()
@@ -1780,17 +1861,38 @@ private void jMenuItemTextAreaSaveActionPerformed(java.awt.event.ActionEvent evt
         }
     }
 
+    public static String ver()
+    {
+        java.util.Properties properties = new java.util.Properties();
+        String _str =   System.getProperty("user.dir")+
+                        System.getProperty("file.separator")+
+                        "AvtoURIB"+
+                        System.getProperty("file.separator")+
+                        "version.properties";
+        File versionBin = new File(_str);
+        if (versionBin.exists())
+        {
+            try
+            {
+                properties.load(new FileInputStream(versionBin));
+                return "Клиент AvtoURIB v." + properties.getProperty("VERSION") + "." + properties.getProperty("RUN")+ "." + properties.getProperty("BUILD");
+            }
+            catch (IOException err)
+            {
+                return "Клиент AvtoURIB";
+            }
+        }
+        else
+            return "Клиент AvtoURIB";
+    }
+
     /**
      *
      * @return
      */
+    
     public String getDateAndTime()
     {
-        Date date = new Date(System.currentTimeMillis());
-        String customerDate = (1900 + date.getYear()) + "-"
-                + (1 + date.getMonth()) + "-" + date.getDate()
-                + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-//        return customerDate;
-          return (new Date()).toString();
+        return (new Date()).toString();
     }
 }
