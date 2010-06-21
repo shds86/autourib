@@ -495,6 +495,11 @@ public class MainFrame extends javax.swing.JFrame
                 formWindowOpened(evt);
             }
         });
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
         jButtonRunOutfile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/upload.png"))); // NOI18N
         jButtonRunOutfile.setText("Отправить на сервер");
@@ -676,6 +681,7 @@ public class MainFrame extends javax.swing.JFrame
         jTabbedPane1.addTab("Расписание", new javax.swing.ImageIcon(getClass().getResource("/image/clock.png")), jPanelSchedule); // NOI18N
 
         jTextFieldBaseSource.setPreferredSize(new java.awt.Dimension(6, 23));
+        jPanelOptions.add(jTextFieldBaseSource);
 
         jButtonCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/cancel.png"))); // NOI18N
         jButtonCancel.setText("Отмена");
@@ -687,6 +693,7 @@ public class MainFrame extends javax.swing.JFrame
                 jButtonCancelActionPerformed(evt);
             }
         });
+        jPanelOptions.add(jButtonCancel);
 
         jButtonApply.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/accept.png"))); // NOI18N
         jButtonApply.setText("Применить");
@@ -695,24 +702,34 @@ public class MainFrame extends javax.swing.JFrame
                 jButtonApplyActionPerformed(evt);
             }
         });
+        jPanelOptions.add(jButtonApply);
+        jPanelOptions.add(jTextFieldFTPUser);
 
         jLabelFTPUser.setText("FTP-пользователь");
+        jPanelOptions.add(jLabelFTPUser);
 
         jTextFieldFTPSource.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextFieldFTPSourceKeyReleased(evt);
             }
         });
+        jPanelOptions.add(jTextFieldFTPSource);
 
         jLabelFTPSource.setText("FTP-хост");
+        jPanelOptions.add(jLabelFTPSource);
+        jPanelOptions.add(jTextFieldBaseUser);
 
         jLabelBaseUserAndPass.setText("Имя пользователя и пароль");
+        jPanelOptions.add(jLabelBaseUserAndPass);
 
         jTextFieldPlatformSource.setPreferredSize(new java.awt.Dimension(6, 23));
+        jPanelOptions.add(jTextFieldPlatformSource);
 
         jLabelBaseSource.setText("Путь до базы");
+        jPanelOptions.add(jLabelBaseSource);
 
         jLabelPlatformSource.setText("Путь до папки 1С");
+        jPanelOptions.add(jLabelPlatformSource);
 
         jButtonSelPlatformSource.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/folder-horizontal-open.png"))); // NOI18N
         jButtonSelPlatformSource.setPreferredSize(new java.awt.Dimension(51, 30));
@@ -721,6 +738,7 @@ public class MainFrame extends javax.swing.JFrame
                 jButtonSelPlatformSourceActionPerformed(evt);
             }
         });
+        jPanelOptions.add(jButtonSelPlatformSource);
 
         jButtonSelBaseSource.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/folder-horizontal-open.png"))); // NOI18N
         jButtonSelBaseSource.addActionListener(new java.awt.event.ActionListener() {
@@ -728,16 +746,28 @@ public class MainFrame extends javax.swing.JFrame
                 jButtonSelBaseSourceActionPerformed(evt);
             }
         });
+        jPanelOptions.add(jButtonSelBaseSource);
+        jPanelOptions.add(jTextFieldBasePass);
+        jPanelOptions.add(jTextFieldFTPPass);
+        jPanelOptions.add(jTextFieldInfileOnServer);
+        jPanelOptions.add(jTextFieldInfileOnLocalhost);
 
         jLabelInfileOnServer.setText("Файл загрузки на сервере");
+        jPanelOptions.add(jLabelInfileOnServer);
 
         jLabelInfileOnLocalhost.setText("Файл загрузки локально");
+        jPanelOptions.add(jLabelInfileOnLocalhost);
 
         jLabelFTPPass.setText("FTP-пароль");
+        jPanelOptions.add(jLabelFTPPass);
+        jPanelOptions.add(jTextFieldOutfileOnLocalhost);
 
         jLabelOutfileOnLocalhost.setText("Файл выгрузки локально");
+        jPanelOptions.add(jLabelOutfileOnLocalhost);
+        jPanelOptions.add(jTextFieldOutfileOnServer);
 
         jLabelOutfileOnServer.setText("Файл выгрузки на сервере");
+        jPanelOptions.add(jLabelOutfileOnServer);
 
         jCheckBoxMinimiz.setText("Запускать минимизированной");
         jCheckBoxMinimiz.addActionListener(new java.awt.event.ActionListener() {
@@ -745,6 +775,7 @@ public class MainFrame extends javax.swing.JFrame
                 jCheckBoxMinimizActionPerformed(evt);
             }
         });
+        jPanelOptions.add(jCheckBoxMinimiz);
 
         jCheckBoxExpert.setText("Эксперт-режим");
         jCheckBoxExpert.addActionListener(new java.awt.event.ActionListener() {
@@ -752,133 +783,7 @@ public class MainFrame extends javax.swing.JFrame
                 jCheckBoxExpertActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanelOptionsLayout = new javax.swing.GroupLayout(jPanelOptions);
-        jPanelOptions.setLayout(jPanelOptionsLayout);
-        jPanelOptionsLayout.setHorizontalGroup(
-            jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelOptionsLayout.createSequentialGroup()
-                .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelOptionsLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelPlatformSource)
-                            .addComponent(jLabelBaseSource)
-                            .addComponent(jLabelFTPSource)
-                            .addComponent(jLabelFTPUser)
-                            .addGroup(jPanelOptionsLayout.createSequentialGroup()
-                                .addComponent(jCheckBoxMinimiz, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBoxExpert))))
-                    .addGroup(jPanelOptionsLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelFTPPass)
-                            .addComponent(jLabelInfileOnServer)
-                            .addComponent(jLabelInfileOnLocalhost)
-                            .addComponent(jLabelOutfileOnServer)
-                            .addComponent(jLabelOutfileOnLocalhost))
-                        .addGap(23, 23, 23)
-                        .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTextFieldOutfileOnServer)
-                                .addComponent(jTextFieldInfileOnServer, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextFieldOutfileOnLocalhost)
-                                .addComponent(jTextFieldInfileOnLocalhost, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelOptionsLayout.createSequentialGroup()
-                                .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jTextFieldPlatformSource, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextFieldBaseSource, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jTextFieldFTPSource, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jTextFieldFTPPass, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jTextFieldFTPUser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanelOptionsLayout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButtonSelPlatformSource, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelOptionsLayout.createSequentialGroup()
-                                        .addGap(13, 13, 13)
-                                        .addComponent(jButtonSelBaseSource, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextFieldBasePass, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jTextFieldBaseUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanelOptionsLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabelBaseUserAndPass)))
-                .addGap(216, 216, 216))
-            .addGroup(jPanelOptionsLayout.createSequentialGroup()
-                .addGap(118, 118, 118)
-                .addComponent(jButtonApply)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
-                .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(158, 158, 158))
-        );
-        jPanelOptionsLayout.setVerticalGroup(
-            jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelOptionsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBoxMinimiz)
-                    .addComponent(jCheckBoxExpert))
-                .addGap(3, 3, 3)
-                .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanelOptionsLayout.createSequentialGroup()
-                        .addComponent(jLabelPlatformSource)
-                        .addGap(14, 14, 14)
-                        .addComponent(jLabelBaseSource)
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabelBaseUserAndPass)
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabelFTPSource)
-                        .addGap(17, 17, 17)
-                        .addComponent(jLabelFTPUser)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabelFTPPass)
-                        .addGap(7, 7, 7))
-                    .addGroup(jPanelOptionsLayout.createSequentialGroup()
-                        .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelOptionsLayout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(jTextFieldPlatformSource, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButtonSelPlatformSource, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(8, 8, 8)
-                        .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonSelBaseSource, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldBaseSource, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldBaseUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldBasePass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldFTPSource, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)
-                        .addComponent(jTextFieldFTPUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(jTextFieldFTPPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldInfileOnServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelInfileOnServer))
-                .addGap(12, 12, 12)
-                .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldInfileOnLocalhost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelInfileOnLocalhost))
-                .addGap(12, 12, 12)
-                .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldOutfileOnLocalhost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelOutfileOnLocalhost))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldOutfileOnServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelOutfileOnServer))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonApply)
-                    .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
+        jPanelOptions.add(jCheckBoxExpert);
 
         jTabbedPane1.addTab("Настройки", new javax.swing.ImageIcon(getClass().getResource("/image/property.png")), jPanelOptions); // NOI18N
 
@@ -1005,7 +910,7 @@ public class MainFrame extends javax.swing.JFrame
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 671, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 671, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1200,6 +1105,10 @@ private void jButtonAddTestActionPerformed(java.awt.event.ActionEvent evt) {//GE
 private void jMenuItemTextAreaSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTextAreaSaveActionPerformed
 
 }//GEN-LAST:event_jMenuItemTextAreaSaveActionPerformed
+
+private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+    (new AboutFrame()).setVisible(true);
+}//GEN-LAST:event_formKeyPressed
 
     public void CheckBoxExpertRun()
     {
