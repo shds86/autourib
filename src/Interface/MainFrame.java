@@ -399,6 +399,9 @@ public class MainFrame extends javax.swing.JFrame
         jPopupMenuTextArea = new javax.swing.JPopupMenu();
         jMenuItemTextAreaSave = new javax.swing.JMenuItem();
         jMenuItemTextAreaClear = new javax.swing.JMenuItem();
+        jPopupMenuListJob = new javax.swing.JPopupMenu();
+        jMenuItemChange = new javax.swing.JMenuItem();
+        jMenuItemDelete = new javax.swing.JMenuItem();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanelMain = new javax.swing.JPanel();
         jButtonRunOutfile = new javax.swing.JButton();
@@ -480,6 +483,22 @@ public class MainFrame extends javax.swing.JFrame
         });
         jPopupMenuTextArea.add(jMenuItemTextAreaClear);
 
+        jPopupMenuListJob.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                jPopupMenuListJobPopupMenuWillBecomeVisible(evt);
+            }
+        });
+
+        jMenuItemChange.setText("Изменить");
+        jPopupMenuListJob.add(jMenuItemChange);
+
+        jMenuItemDelete.setText("Удалить");
+        jPopupMenuListJob.add(jMenuItemDelete);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle(ver());
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -493,11 +512,6 @@ public class MainFrame extends javax.swing.JFrame
             }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
-            }
-        });
-        addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                formKeyPressed(evt);
             }
         });
 
@@ -548,7 +562,7 @@ public class MainFrame extends javax.swing.JFrame
 
         jTextAreaSystemLog.setColumns(1);
         jTextAreaSystemLog.setEditable(false);
-        jTextAreaSystemLog.setFont(new java.awt.Font("Monospaced", 0, 12));
+        jTextAreaSystemLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jTextAreaSystemLog.setLineWrap(true);
         jTextAreaSystemLog.setRows(1);
         jTextAreaSystemLog.setToolTipText("");
@@ -628,7 +642,16 @@ public class MainFrame extends javax.swing.JFrame
             new String [] {
                 "Время начала", "Периодичность"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableListJob.setComponentPopupMenu(jPopupMenuListJob);
         jTableListJob.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jTableListJob);
 
@@ -657,7 +680,7 @@ public class MainFrame extends javax.swing.JFrame
                             .addComponent(jButtonAddJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jButtonRemoveJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(185, 185, 185))
+                .addGap(228, 228, 228))
         );
         jPanelScheduleLayout.setVerticalGroup(
             jPanelScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -681,7 +704,6 @@ public class MainFrame extends javax.swing.JFrame
         jTabbedPane1.addTab("Расписание", new javax.swing.ImageIcon(getClass().getResource("/image/clock.png")), jPanelSchedule); // NOI18N
 
         jTextFieldBaseSource.setPreferredSize(new java.awt.Dimension(6, 23));
-        jPanelOptions.add(jTextFieldBaseSource);
 
         jButtonCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/cancel.png"))); // NOI18N
         jButtonCancel.setText("Отмена");
@@ -693,7 +715,6 @@ public class MainFrame extends javax.swing.JFrame
                 jButtonCancelActionPerformed(evt);
             }
         });
-        jPanelOptions.add(jButtonCancel);
 
         jButtonApply.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/accept.png"))); // NOI18N
         jButtonApply.setText("Применить");
@@ -702,34 +723,24 @@ public class MainFrame extends javax.swing.JFrame
                 jButtonApplyActionPerformed(evt);
             }
         });
-        jPanelOptions.add(jButtonApply);
-        jPanelOptions.add(jTextFieldFTPUser);
 
         jLabelFTPUser.setText("FTP-пользователь");
-        jPanelOptions.add(jLabelFTPUser);
 
         jTextFieldFTPSource.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextFieldFTPSourceKeyReleased(evt);
             }
         });
-        jPanelOptions.add(jTextFieldFTPSource);
 
         jLabelFTPSource.setText("FTP-хост");
-        jPanelOptions.add(jLabelFTPSource);
-        jPanelOptions.add(jTextFieldBaseUser);
 
         jLabelBaseUserAndPass.setText("Имя пользователя и пароль");
-        jPanelOptions.add(jLabelBaseUserAndPass);
 
         jTextFieldPlatformSource.setPreferredSize(new java.awt.Dimension(6, 23));
-        jPanelOptions.add(jTextFieldPlatformSource);
 
         jLabelBaseSource.setText("Путь до базы");
-        jPanelOptions.add(jLabelBaseSource);
 
         jLabelPlatformSource.setText("Путь до папки 1С");
-        jPanelOptions.add(jLabelPlatformSource);
 
         jButtonSelPlatformSource.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/folder-horizontal-open.png"))); // NOI18N
         jButtonSelPlatformSource.setPreferredSize(new java.awt.Dimension(51, 30));
@@ -738,7 +749,6 @@ public class MainFrame extends javax.swing.JFrame
                 jButtonSelPlatformSourceActionPerformed(evt);
             }
         });
-        jPanelOptions.add(jButtonSelPlatformSource);
 
         jButtonSelBaseSource.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/folder-horizontal-open.png"))); // NOI18N
         jButtonSelBaseSource.addActionListener(new java.awt.event.ActionListener() {
@@ -746,28 +756,16 @@ public class MainFrame extends javax.swing.JFrame
                 jButtonSelBaseSourceActionPerformed(evt);
             }
         });
-        jPanelOptions.add(jButtonSelBaseSource);
-        jPanelOptions.add(jTextFieldBasePass);
-        jPanelOptions.add(jTextFieldFTPPass);
-        jPanelOptions.add(jTextFieldInfileOnServer);
-        jPanelOptions.add(jTextFieldInfileOnLocalhost);
 
         jLabelInfileOnServer.setText("Файл загрузки на сервере");
-        jPanelOptions.add(jLabelInfileOnServer);
 
         jLabelInfileOnLocalhost.setText("Файл загрузки локально");
-        jPanelOptions.add(jLabelInfileOnLocalhost);
 
         jLabelFTPPass.setText("FTP-пароль");
-        jPanelOptions.add(jLabelFTPPass);
-        jPanelOptions.add(jTextFieldOutfileOnLocalhost);
 
         jLabelOutfileOnLocalhost.setText("Файл выгрузки локально");
-        jPanelOptions.add(jLabelOutfileOnLocalhost);
-        jPanelOptions.add(jTextFieldOutfileOnServer);
 
         jLabelOutfileOnServer.setText("Файл выгрузки на сервере");
-        jPanelOptions.add(jLabelOutfileOnServer);
 
         jCheckBoxMinimiz.setText("Запускать минимизированной");
         jCheckBoxMinimiz.addActionListener(new java.awt.event.ActionListener() {
@@ -775,7 +773,6 @@ public class MainFrame extends javax.swing.JFrame
                 jCheckBoxMinimizActionPerformed(evt);
             }
         });
-        jPanelOptions.add(jCheckBoxMinimiz);
 
         jCheckBoxExpert.setText("Эксперт-режим");
         jCheckBoxExpert.addActionListener(new java.awt.event.ActionListener() {
@@ -783,7 +780,133 @@ public class MainFrame extends javax.swing.JFrame
                 jCheckBoxExpertActionPerformed(evt);
             }
         });
-        jPanelOptions.add(jCheckBoxExpert);
+
+        javax.swing.GroupLayout jPanelOptionsLayout = new javax.swing.GroupLayout(jPanelOptions);
+        jPanelOptions.setLayout(jPanelOptionsLayout);
+        jPanelOptionsLayout.setHorizontalGroup(
+            jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelOptionsLayout.createSequentialGroup()
+                .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelOptionsLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelPlatformSource)
+                            .addComponent(jLabelBaseSource)
+                            .addComponent(jLabelFTPSource)
+                            .addComponent(jLabelFTPUser)
+                            .addGroup(jPanelOptionsLayout.createSequentialGroup()
+                                .addComponent(jCheckBoxMinimiz, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCheckBoxExpert))))
+                    .addGroup(jPanelOptionsLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelFTPPass)
+                            .addComponent(jLabelInfileOnServer)
+                            .addComponent(jLabelInfileOnLocalhost)
+                            .addComponent(jLabelOutfileOnServer)
+                            .addComponent(jLabelOutfileOnLocalhost))
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jTextFieldOutfileOnServer)
+                                .addComponent(jTextFieldInfileOnServer, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jTextFieldOutfileOnLocalhost)
+                                .addComponent(jTextFieldInfileOnLocalhost, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelOptionsLayout.createSequentialGroup()
+                                .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jTextFieldPlatformSource, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextFieldBaseSource, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTextFieldFTPSource, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jTextFieldFTPPass, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTextFieldFTPUser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanelOptionsLayout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButtonSelPlatformSource, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelOptionsLayout.createSequentialGroup()
+                                        .addGap(13, 13, 13)
+                                        .addComponent(jButtonSelBaseSource, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jTextFieldBasePass, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jTextFieldBaseUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanelOptionsLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabelBaseUserAndPass)))
+                .addGap(216, 216, 216))
+            .addGroup(jPanelOptionsLayout.createSequentialGroup()
+                .addGap(118, 118, 118)
+                .addComponent(jButtonApply)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
+                .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(158, 158, 158))
+        );
+        jPanelOptionsLayout.setVerticalGroup(
+            jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelOptionsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxMinimiz)
+                    .addComponent(jCheckBoxExpert))
+                .addGap(3, 3, 3)
+                .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelOptionsLayout.createSequentialGroup()
+                        .addComponent(jLabelPlatformSource)
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabelBaseSource)
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabelBaseUserAndPass)
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabelFTPSource)
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabelFTPUser)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelFTPPass)
+                        .addGap(7, 7, 7))
+                    .addGroup(jPanelOptionsLayout.createSequentialGroup()
+                        .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelOptionsLayout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(jTextFieldPlatformSource, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButtonSelPlatformSource, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(8, 8, 8)
+                        .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonSelBaseSource, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldBaseSource, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextFieldBaseUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldBasePass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextFieldFTPSource, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)
+                        .addComponent(jTextFieldFTPUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(jTextFieldFTPPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldInfileOnServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelInfileOnServer))
+                .addGap(12, 12, 12)
+                .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldInfileOnLocalhost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelInfileOnLocalhost))
+                .addGap(12, 12, 12)
+                .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldOutfileOnLocalhost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelOutfileOnLocalhost))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldOutfileOnServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelOutfileOnServer))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonApply)
+                    .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
 
         jTabbedPane1.addTab("Настройки", new javax.swing.ImageIcon(getClass().getResource("/image/property.png")), jPanelOptions); // NOI18N
 
@@ -871,6 +994,7 @@ public class MainFrame extends javax.swing.JFrame
 
         jMenuFile.setText("Файл");
 
+        jMenuFileExit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
         jMenuFileExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/door_in.png"))); // NOI18N
         jMenuFileExit.setText("Выход");
         jMenuFileExit.addActionListener(new java.awt.event.ActionListener() {
@@ -910,7 +1034,7 @@ public class MainFrame extends javax.swing.JFrame
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 671, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 671, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1050,27 +1174,7 @@ private void jButtonAddJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 }//GEN-LAST:event_jButtonAddJobActionPerformed
 
 private void jButtonRemoveJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveJobActionPerformed
-    int _selectRow = jTableListJob.getSelectedRow();
-    if (jTableListJob.getSelectedRow()!=-1)
-    {
-        if (schedURBD.get(_selectRow).stop()==true)
-        {
-            ((DefaultTableModel)jTableListJob.getModel()).removeRow(_selectRow);
-            jTextAreaSystemLog.append("\n" + getDateAndTime() +" удалено задание "+ schedURBD.get(_selectRow).job.getFullName());
-            logger.log(Level.INFO,getDateAndTime() +" удалено задание "+ schedURBD.get(_selectRow).job.getFullName());
-            schedURBD.remove(_selectRow);
-            saveScheduler();
-        }
-        else
-        {
-            jTextAreaSystemLog.append("\n" + getDateAndTime() +" Не могу удалить задание "+ schedURBD.get(_selectRow).job.getFullName());
-            logger.log(Level.WARNING,getDateAndTime() +" Не могу удалить задание "+ schedURBD.get(_selectRow).job.getFullName());
-        }
-    }
-    else
-    {
-        javax.swing.JOptionPane.showMessageDialog(null, "Выберите задание для удаления!!!","!!! В Н И М А Н И Е !!!",javax.swing.JOptionPane.WARNING_MESSAGE);
-    }
+    RemoveJob();
 }//GEN-LAST:event_jButtonRemoveJobActionPerformed
 
 private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -1109,6 +1213,16 @@ private void jMenuItemTextAreaSaveActionPerformed(java.awt.event.ActionEvent evt
 private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
     (new AboutFrame()).setVisible(true);
 }//GEN-LAST:event_formKeyPressed
+
+private void jPopupMenuListJobPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jPopupMenuListJobPopupMenuWillBecomeVisible
+    if (jTableListJob.getSelectedRow()!=-1) {
+        jMenuItemChange.setEnabled(true);
+        jMenuItemDelete.setEnabled(true);
+    } else {
+        jMenuItemChange.setEnabled(false);
+        jMenuItemDelete.setEnabled(false);
+    }
+}//GEN-LAST:event_jPopupMenuListJobPopupMenuWillBecomeVisible
 
     public void CheckBoxExpertRun()
     {
@@ -1328,6 +1442,31 @@ private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_form
         }
     }
 
+    public void RemoveJob()
+    {
+        int _selectRow = jTableListJob.getSelectedRow();
+        if (_selectRow!=-1)
+        {
+            if (schedURBD.get(_selectRow).stop()==true)
+            {
+                ((DefaultTableModel)jTableListJob.getModel()).removeRow(_selectRow);
+                jTextAreaSystemLog.append("\n" + getDateAndTime() +" удалено задание "+ schedURBD.get(_selectRow).job.getFullName());
+                logger.log(Level.INFO,getDateAndTime() +" удалено задание "+ schedURBD.get(_selectRow).job.getFullName());
+                schedURBD.remove(_selectRow);
+                saveScheduler();
+            }
+            else
+            {
+                jTextAreaSystemLog.append("\n" + getDateAndTime() +" Не могу удалить задание "+ schedURBD.get(_selectRow).job.getFullName());
+                logger.log(Level.WARNING,getDateAndTime() +" Не могу удалить задание "+ schedURBD.get(_selectRow).job.getFullName());
+            }
+        }
+        else
+        {
+            javax.swing.JOptionPane.showMessageDialog(null, "Выберите задание для удаления!!!","!!! В Н И М А Н И Е !!!",javax.swing.JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddJob;
     private javax.swing.JButton jButtonAddTest;
@@ -1362,6 +1501,8 @@ private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_form
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenuItem jMenuFileExit;
+    private javax.swing.JMenuItem jMenuItemChange;
+    private javax.swing.JMenuItem jMenuItemDelete;
     private javax.swing.JMenuItem jMenuItemTextAreaClear;
     private javax.swing.JMenuItem jMenuItemTextAreaSave;
     private javax.swing.JMenu jMenuQuestion;
@@ -1371,6 +1512,7 @@ private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_form
     private javax.swing.JPanel jPanelOptions;
     private javax.swing.JPanel jPanelSchedule;
     private javax.swing.JPanel jPanelSync;
+    private javax.swing.JPopupMenu jPopupMenuListJob;
     private javax.swing.JPopupMenu jPopupMenuTextArea;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;

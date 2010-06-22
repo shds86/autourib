@@ -141,13 +141,6 @@ public class SchedulerFrame extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SchedulerFrame().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancel;
