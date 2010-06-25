@@ -494,6 +494,11 @@ public class MainFrame extends javax.swing.JFrame
         });
 
         jMenuItemChange.setText("Изменить");
+        jMenuItemChange.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemChangeActionPerformed(evt);
+            }
+        });
         jPopupMenuListJob.add(jMenuItemChange);
 
         jMenuItemDelete.setText("Удалить");
@@ -562,7 +567,7 @@ public class MainFrame extends javax.swing.JFrame
 
         jTextAreaSystemLog.setColumns(1);
         jTextAreaSystemLog.setEditable(false);
-        jTextAreaSystemLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jTextAreaSystemLog.setFont(new java.awt.Font("Monospaced", 0, 12));
         jTextAreaSystemLog.setLineWrap(true);
         jTextAreaSystemLog.setRows(1);
         jTextAreaSystemLog.setToolTipText("");
@@ -1224,6 +1229,14 @@ private void jPopupMenuListJobPopupMenuWillBecomeVisible(javax.swing.event.Popup
     }
 }//GEN-LAST:event_jPopupMenuListJobPopupMenuWillBecomeVisible
 
+private void jMenuItemChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemChangeActionPerformed
+        int _selectRow = jTableListJob.getSelectedRow();
+        if (_selectRow!=-1)
+        {
+            (new SchedulerFrame(schedURBD.get(_selectRow))).setVisible(true);
+        }
+}//GEN-LAST:event_jMenuItemChangeActionPerformed
+
     public void CheckBoxExpertRun()
     {
         if (!jCheckBoxExpert.isSelected())
@@ -1464,6 +1477,14 @@ private void jPopupMenuListJobPopupMenuWillBecomeVisible(javax.swing.event.Popup
         else
         {
             javax.swing.JOptionPane.showMessageDialog(null, "Выберите задание для удаления!!!","!!! В Н И М А Н И Е !!!",javax.swing.JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    public static void setSchedul(schedulerURBD _tmp)
+    {
+        if (_tmp!=null)
+        {
+
         }
     }
 
@@ -1941,7 +1962,6 @@ private void jPopupMenuListJobPopupMenuWillBecomeVisible(javax.swing.event.Popup
      *
      * @return
      */
-    
     public String getDateAndTime()
     {
         return (new Date()).toString();

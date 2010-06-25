@@ -199,6 +199,19 @@ public class schedulerURBD
         return this.Frequency;
     }
 
+    public boolean pause()
+    {
+        try
+        {
+            this.sched.standby();
+            return true;
+        }
+        catch(SchedulerException err)
+        {
+            return false;
+        }
+    }
+
     public boolean start()
     {
         try
