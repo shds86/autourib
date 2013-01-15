@@ -1,22 +1,39 @@
 package Interface;
 
+import java.util.Date;
+
 public class SchedulerFrame extends javax.swing.JFrame {
 
     schedulerURBD sched=null;
-
+    MainFrame mF;
     /** Creates new form SchedulerFrame */
     public SchedulerFrame() {
         initComponents();
+        jCheckBox3.setVisible(false);
+        jRadioButtonFull.setVisible(false);
+        jRadioButtonDownload.setVisible(false);
+        jRadioButtonUpload.setVisible(false);
     }
 
-    public SchedulerFrame(schedulerURBD _sched) {
+    public SchedulerFrame(schedulerURBD _sched,MainFrame mf) {
         initComponents();
+        jCheckBox3.setVisible(false);
+        jRadioButtonFull.setVisible(false);
+        jRadioButtonDownload.setVisible(false);
+        jRadioButtonUpload.setVisible(false);
+        mF = mf;
         sched=_sched;
         if ((sched!=null)&(sched.pause()))
         {
-            this.jSpinnerTimer.setValue(sched.jobDate);
-            this.jComboBoxFrequency.setSelectedIndex(sched.getFrequency());
+            if(sched.jobDate != null)
+                this.jSpinnerTimer.setValue(sched.jobDate);
+            if(sched.getFrequency() != 0)
+                this.jComboBoxFrequency.setSelectedIndex(sched.getFrequency());
+            if(!"".equals(sched.time))
+                this.jTextFieldSchedulerFormat.setText(sched.time); 
         }
+        jCheckBoxExchange.setSelected(((Boolean)sched.job.getJobDataMap().get("exchange")));
+        jCheckBoxSync.setSelected(((Boolean)sched.job.getJobDataMap().get("sync")));
     }
 
     @SuppressWarnings("unchecked")
@@ -28,29 +45,32 @@ public class SchedulerFrame extends javax.swing.JFrame {
         jButtonCancel = new javax.swing.JButton();
         jComboBoxFrequency = new javax.swing.JComboBox();
         jSpinnerTimer = new javax.swing.JSpinner();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        jCheckBoxExchange = new javax.swing.JCheckBox();
+        jCheckBoxSync = new javax.swing.JCheckBox();
         jCheckBox3 = new javax.swing.JCheckBox();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        jRadioButtonFull = new javax.swing.JRadioButton();
+        jRadioButtonDownload = new javax.swing.JRadioButton();
+        jRadioButtonUpload = new javax.swing.JRadioButton();
         jTextFieldSchedulerFormat = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Добавить задание");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButtonОК.setText("Добавить");
+        jButtonОК.setActionCommand("Окай");
         jButtonОК.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonОКActionPerformed(evt);
             }
         });
+        getContentPane().add(jButtonОК, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 252, -1, -1));
 
         jButtonCancel.setText("Отмена");
         jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -58,178 +78,105 @@ public class SchedulerFrame extends javax.swing.JFrame {
                 jButtonCancelActionPerformed(evt);
             }
         });
+        getContentPane().add(jButtonCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(194, 252, 83, -1));
 
-        jComboBoxFrequency.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Один раз", "Каждый час", "Каждый день", "Каждую неделю", "Каждый месяц", "Каждый год", "Другое" }));
+        jComboBoxFrequency.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Один раз", "Каждый час", "Каждый день", "Каждую неделю", "Каждый месяц", "Каждый год" }));
+        jComboBoxFrequency.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxFrequencyActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jComboBoxFrequency, new org.netbeans.lib.awtextra.AbsoluteConstraints(171, 32, 124, -1));
 
-        jSpinnerTimer.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), new java.util.Date(), null, java.util.Calendar.HOUR_OF_DAY));
+        jSpinnerTimer.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), new java.util.Date(1348421512701L), null, java.util.Calendar.HOUR));
         jSpinnerTimer.setPreferredSize(new java.awt.Dimension(124, 22));
+        jSpinnerTimer.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinnerTimerStateChanged(evt);
+            }
+        });
+        getContentPane().add(jSpinnerTimer, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 31, 143, -1));
 
-        jCheckBox1.setText("Обмен");
+        jCheckBoxExchange.setSelected(true);
+        jCheckBoxExchange.setText("Обмен");
+        getContentPane().add(jCheckBoxExchange, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 126, -1, -1));
 
-        jCheckBox2.setText("Синхронизация");
+        jCheckBoxSync.setText("Синхронизация");
+        getContentPane().add(jCheckBoxSync, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 126, -1, -1));
 
         jCheckBox3.setText("jCheckBox3");
+        jCheckBox3.setEnabled(false);
+        getContentPane().add(jCheckBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 149, -1, -1));
 
-        jButtonGroupExchange.add(jRadioButton1);
-        jRadioButton1.setText("Полный обмен");
+        jButtonGroupExchange.add(jRadioButtonFull);
+        jRadioButtonFull.setText("Полный обмен");
+        getContentPane().add(jRadioButtonFull, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 149, -1, -1));
 
-        jButtonGroupExchange.add(jRadioButton2);
-        jRadioButton2.setText("Загрузка");
+        jButtonGroupExchange.add(jRadioButtonDownload);
+        jRadioButtonDownload.setText("Загрузка");
+        getContentPane().add(jRadioButtonDownload, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 172, -1, -1));
 
-        jButtonGroupExchange.add(jRadioButton3);
-        jRadioButton3.setText("Выгрузка");
+        jButtonGroupExchange.add(jRadioButtonUpload);
+        jRadioButtonUpload.setText("Выгрузка");
+        getContentPane().add(jRadioButtonUpload, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 195, -1, -1));
+
+        jTextFieldSchedulerFormat.setEditable(false);
+        jTextFieldSchedulerFormat.setEnabled(false);
+        getContentPane().add(jTextFieldSchedulerFormat, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 79, 285, -1));
 
         jLabel1.setText("Время");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         jLabel2.setText("Периодичность");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(171, 11, -1, -1));
 
         jLabel3.setText("Ручной вид задания расписания");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 59, -1, -1));
 
         jLabel4.setText("Список задач");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jCheckBox1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadioButton3)
-                                    .addComponent(jRadioButton2)
-                                    .addComponent(jRadioButton1))
-                                .addGap(158, 158, 158))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(173, 173, 173)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBox3)
-                                    .addComponent(jCheckBox2))))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextFieldSchedulerFormat, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jSpinnerTimer, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                                            .addGap(18, 18, 18))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(21, 21, 21)
-                                            .addComponent(jButtonОК)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addGap(128, 128, 128)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jComboBoxFrequency, 0, 123, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(23, 23, 23)
-                                        .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(112, 112, 112))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addContainerGap(238, Short.MAX_VALUE))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSpinnerTimer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxFrequency, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addGap(6, 6, 6)
-                .addComponent(jTextFieldSchedulerFormat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jCheckBox3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton3)
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCancel)
-                    .addComponent(jButtonОК))
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 105, -1, -1));
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         setBounds((screenSize.width-325)/2, (screenSize.height-317)/2, 325, 317);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
-        if (!sched.start())
-        {
-           javax.swing.JOptionPane.showMessageDialog(null, "Не удалось запустить задание","Внимание",javax.swing.JOptionPane.WARNING_MESSAGE);
-           dispose();
-        }
-        else
-        {
-           javax.swing.JOptionPane.showMessageDialog(null, "Задание запущено успешно","Внимание",javax.swing.JOptionPane.WARNING_MESSAGE);
-           dispose();
-        }
+        dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void jButtonОКActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonОКActionPerformed
-        if (!sched.start())
-        {
-           javax.swing.JOptionPane.showMessageDialog(null, "Не удалось запустить задание","Внимание",javax.swing.JOptionPane.WARNING_MESSAGE);
-           MainFrame.setSchedul(null);
-           dispose();
-        }
-        else
-        {
-           javax.swing.JOptionPane.showMessageDialog(null, "Задание запущено успешно","Внимание",javax.swing.JOptionPane.WARNING_MESSAGE);
-           MainFrame.setSchedul(sched);
-           dispose();
-        }
+        sched.setJobDate(((Date) jSpinnerTimer.getValue()));
+        sched.setFrequency(this.jComboBoxFrequency.getSelectedIndex());
+        sched.setTime();
+        this.jTextFieldSchedulerFormat.setText(sched.time);
+        mF.setSchedul(sched,jCheckBoxExchange.isSelected(),jCheckBoxSync.isSelected());
+        mF.tableJobEnable(true);
+        dispose();
     }//GEN-LAST:event_jButtonОКActionPerformed
+
+    private void jComboBoxFrequencyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFrequencyActionPerformed
+        this.jTextFieldSchedulerFormat.setText(sched.switchFrequency(this.jComboBoxFrequency.getSelectedIndex()));
+    }//GEN-LAST:event_jComboBoxFrequencyActionPerformed
+
+    private void jSpinnerTimerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerTimerStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jSpinnerTimerStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancel;
     private javax.swing.ButtonGroup jButtonGroupExchange;
     private javax.swing.JButton jButtonОК;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JCheckBox jCheckBoxExchange;
+    private javax.swing.JCheckBox jCheckBoxSync;
     private javax.swing.JComboBox jComboBoxFrequency;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButtonDownload;
+    private javax.swing.JRadioButton jRadioButtonFull;
+    private javax.swing.JRadioButton jRadioButtonUpload;
     private javax.swing.JSpinner jSpinnerTimer;
     private javax.swing.JTextField jTextFieldSchedulerFormat;
     // End of variables declaration//GEN-END:variables
