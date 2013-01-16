@@ -1119,7 +1119,8 @@ public class MainFrame extends javax.swing.JFrame {
 	}//GEN-LAST:event_jCheckBoxExpertActionPerformed
 
 	private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
-            schedulerURBD _sched = new schedulerURBD(new Date(((Date) jSpinnerTimer.getValue()).getTime()+600000), jComboBoxFrequency.getSelectedIndex());
+//            schedulerURBD _sched = new schedulerURBD(new Date(((Date) jSpinnerTimer.getValue()).getTime()+600000), jComboBoxFrequency.getSelectedIndex());
+            schedulerURBD _sched = new schedulerURBD(new Date(System.currentTimeMillis()), 1);
             if (_sched.createSCHED(this,GlobalJobClass.class,false)) {
                 tableJobEnable(false);
                 (new SchedulerFrame(_sched, this)).setVisible(true);

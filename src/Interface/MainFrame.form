@@ -154,7 +154,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jTabbedPane1" alignment="0" pref="448" max="32767" attributes="0"/>
+          <Component id="jTabbedPane1" alignment="0" pref="444" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -379,7 +379,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane1" alignment="0" pref="396" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" alignment="0" pref="392" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jSpinnerTimer" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -674,7 +674,7 @@
                                   <Component id="jTextFieldOutfileOnServer" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabelOutfileOnServer" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="24" max="32767" attributes="0"/>
+                              <EmptySpace pref="20" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jButtonApply" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButtonCancel" alignment="3" min="-2" max="-2" attributes="0"/>
