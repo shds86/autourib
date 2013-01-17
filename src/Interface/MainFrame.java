@@ -970,8 +970,8 @@ public class MainFrame extends javax.swing.JFrame {
     private void jMenuQuestionHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuQuestionHelpActionPerformed
         //здесь показ хелпа в формате txt или chm
         String userDir = System.getProperty("user.dir")
-                + System.getProperty("file.separator")
-                + "Help"
+//                + System.getProperty("file.separator")
+//                + "Help"
                 + System.getProperty("file.separator")
                 + "AvtoURIB.html";
         helpFile = new File(userDir);
@@ -1906,7 +1906,7 @@ public class MainFrame extends javax.swing.JFrame {
                 properties.load(new FileInputStream(versionBin));
                 return "Клиент AvtoURIB v."
                         + properties.getProperty("VERSION") + "."
-                        + properties.getProperty("RUN") + "."
+//                        + properties.getProperty("RUN") + "."
                         + properties.getProperty("BUILD");
             } catch (IOException err) {
                 return "Клиент AvtoURIB";
