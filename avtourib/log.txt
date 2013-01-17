@@ -2,49 +2,35 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2012-12-24T15:44:30</date>
-  <millis>1356349470187</millis>
+  <date>2013-01-17T11:40:44</date>
+  <millis>1358408444312</millis>
   <sequence>0</sequence>
   <logger>testlogger</logger>
   <level>INFO</level>
   <class>Interface.MainFrame</class>
   <method>checkingOptionFile</method>
-  <thread>10</thread>
-  <message>Mon Dec 24 15:44:30 GMT+04:00 2012 Каталог настроек найден...</message>
+  <thread>1</thread>
+  <message>Thu Jan 17 11:40:44 MSK 2013 Каталог настроек найден...</message>
 </record>
 <record>
-  <date>2012-12-24T15:44:30</date>
-  <millis>1356349470187</millis>
+  <date>2013-01-17T11:40:44</date>
+  <millis>1358408444312</millis>
   <sequence>1</sequence>
   <logger>testlogger</logger>
   <level>INFO</level>
   <class>Interface.MainFrame</class>
   <method>checkingOptionFile</method>
-  <thread>10</thread>
-  <message>Mon Dec 24 15:44:30 GMT+04:00 2012 Файл настроек найден...</message>
+  <thread>1</thread>
+  <message>Thu Jan 17 11:40:44 MSK 2013 Файл настроек найден...</message>
 </record>
 <record>
-  <date>2012-12-24T15:44:30</date>
-  <millis>1356349470203</millis>
+  <date>2013-01-17T11:40:44</date>
+  <millis>1358408444328</millis>
   <sequence>2</sequence>
   <logger>testlogger</logger>
   <level>INFO</level>
   <class>Interface.MainFrame</class>
   <method>loadOptions</method>
-  <thread>10</thread>
-  <message>Mon Dec 24 15:44:30 GMT+04:00 2012 Файл настроек прочитан...</message>
+  <thread>1</thread>
+  <message>Thu Jan 17 11:40:44 MSK 2013 Файл настроек прочитан...</message>
 </record>
-<record>
-  <date>2012-12-24T15:44:32</date>
-  <millis>1356349472609</millis>
-  <sequence>3</sequence>
-  <logger>testlogger</logger>
-  <level>INFO</level>
-  <class>Interface.MainFrame$RunExchangeInThread</class>
-  <method>setEnabledButtonsOn</method>
-  <thread>11</thread>
-  <message>
-Mon Dec 24 15:44:32 GMT+04:00 2012 Синхронизация завершена.
-</message>
-</record>
-</log>

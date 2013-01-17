@@ -9,7 +9,6 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
-import javax.swing.SpinnerDateModel;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
@@ -974,7 +973,7 @@ public class MainFrame extends javax.swing.JFrame {
                 + System.getProperty("file.separator")
                 + "Help"
                 + System.getProperty("file.separator")
-                + "AvtoURIB.chm";
+                + "AvtoURIB.html";
         helpFile = new File(userDir);
         try {
             Desktop.getDesktop().open(helpFile);
