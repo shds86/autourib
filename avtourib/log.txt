@@ -2,35 +2,35 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2013-01-17T11:40:44</date>
-  <millis>1358408444312</millis>
+  <date>2013-01-17T11:54:47</date>
+  <millis>1358409287500</millis>
   <sequence>0</sequence>
   <logger>testlogger</logger>
   <level>INFO</level>
   <class>Interface.MainFrame</class>
   <method>checkingOptionFile</method>
   <thread>1</thread>
-  <message>Thu Jan 17 11:40:44 MSK 2013 Каталог настроек найден...</message>
+  <message>Thu Jan 17 11:54:47 MSK 2013 Каталог настроек найден...</message>
 </record>
 <record>
-  <date>2013-01-17T11:40:44</date>
-  <millis>1358408444312</millis>
+  <date>2013-01-17T11:54:47</date>
+  <millis>1358409287515</millis>
   <sequence>1</sequence>
   <logger>testlogger</logger>
   <level>INFO</level>
   <class>Interface.MainFrame</class>
   <method>checkingOptionFile</method>
   <thread>1</thread>
-  <message>Thu Jan 17 11:40:44 MSK 2013 Файл настроек найден...</message>
+  <message>Thu Jan 17 11:54:47 MSK 2013 Файл настроек найден...</message>
 </record>
 <record>
-  <date>2013-01-17T11:40:44</date>
-  <millis>1358408444328</millis>
+  <date>2013-01-17T11:54:47</date>
+  <millis>1358409287531</millis>
   <sequence>2</sequence>
   <logger>testlogger</logger>
   <level>INFO</level>
   <class>Interface.MainFrame</class>
   <method>loadOptions</method>
   <thread>1</thread>
-  <message>Thu Jan 17 11:40:44 MSK 2013 Файл настроек прочитан...</message>
+  <message>Thu Jan 17 11:54:47 MSK 2013 Файл настроек прочитан...</message>
 </record>
